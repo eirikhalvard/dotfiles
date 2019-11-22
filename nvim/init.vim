@@ -1,51 +1,69 @@
-" Don't try to be vi compatible
+"Don't try to be vi compatible
 set nocompatible
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
-let g:python3_host_prog = '/anaconda3/bin/python3'
 
-call plug#begin('~/.vim/plugged')
 
-Plug '/usr/local/opt/fzf'
-Plug 'scrooloose/nerdtree'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  IMPORTS                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+call plug#begin('~/.config/nvim/plugged')
+
+" === Core functionality === "
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'itchyny/lightline.vim'
-Plug 'wincent/terminus'
-Plug 'masukomi/vim-markdown-folding'
-Plug 'wellle/targets.vim'
-Plug 'tommcdo/vim-exchange'
-Plug 'junegunn/fzf.vim'
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-Plug 'honza/vim-snippets'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'vim-latex/vim-latex'
-Plug 'w0rp/ale'
-" Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'jpalardy/vim-slime'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'tommcdo/vim-exchange'
+Plug 'wellle/targets.vim'
+
+" === Editor === "
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'jpalardy/vim-slime'
 Plug 'vim-scripts/paredit.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'neovimhaskell/haskell-vim'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'ervandew/supertab'
+Plug 'wincent/terminus'
 
-" Themes
+" === Completion === "
+Plug 'w0rp/ale'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" === Filetype specific === "
+Plug 'vim-latex/vim-latex'
+Plug 'masukomi/vim-markdown-folding'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'neovimhaskell/haskell-vim'
+
+" === Visual === "
+Plug 'itchyny/lightline.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'rakr/vim-one'
+Plug 'luochen1990/rainbow'
 
 call plug#end()
-"
-syntax on " Turn on syntax highlighting
 
-filetype plugin indent on " For plugins to load correctly
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  SETTINGS                                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Turn on syntax highlighting
+syntax on 
+
+" For plugins to load correctly
+filetype plugin indent on 
 
 let mapleader = ","
 
@@ -67,13 +85,14 @@ set encoding=utf-8
 
 " Whitespace
 set wrap
-set textwidth=79
+set textwidth=0 " set to 79 to autowrap after whitespace
 set formatoptions=cqrn1 "t - autowrap
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 set noshiftround
+set linebreak
 
 " Cursor motion
 set scrolloff=7
@@ -82,8 +101,8 @@ set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
 
 " Allow hidden buffers
 set hidden
@@ -98,11 +117,17 @@ set laststatus=2
 set showmode
 set showcmd
 
+set noswapfile
+set undodir=~/.config/nvim/.vimdid
+set undofile
 
 set clipboard=unnamed
 
 " === TEX === "
 let g:tex_flavor='latex'
+
+" Runs a script that cleans out tex build files whenever I close out of a .tex file.
+autocmd VimLeave *.tex !texclear %
 
 " Searching
 nnoremap / /\v
@@ -141,76 +166,68 @@ map <leader>tf :NERDTreeFocus<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" === LightLine === "
-set noshowmode " remove built in INSERT promt, lightlines takes care of this!
-" let g:lightline.active = { 
-"       \ 'left': [ ['mode', 'readonly'], ['filename_with_icon', 'modified' ] ],
-"       \ 'right': [ ['lineinfo'], ['status_diagnostic'] ]
-"       \ }
-let g:lightline = {
-   \ 'colorscheme' : 'challenger_deep',
-   \ 'active': {
-   \   'left': [ [ 'mode', 'paste' ],
-   \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-   \ },
-   \ 'component_function': {
-   \   'cocstatus': 'coc#status'
-   \ },
-   \ }
-
-
-
 " === Paredit === "
 let g:paredit_leader = 'æ'
-
+let g:paredit_electric_return = 0
 
 " === Slime === "
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
-xmap øss <Plug>SlimeRegionSend
-nmap øss <Plug>SlimeParagraphSend
-nmap øsc <Plug>SlimeConfig
-nmap øsm <Plug>SlimeMotionSend
 
-" === Goyo Limelight ==="
-function! s:goyo_enter()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  endif
-  Limelight
-endfunction
+" === Snippets === "
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
 
-function! s:goyo_leave()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  endif
-  Limelight!
-endfunction
+" === Rainbow === "
+let g:rainbow_active = 1
 
-autocmd! User GoyoEnter()
-autocmd! User GoyoLeave()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  MAPPINGS                                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " === General Mappings === "
-imap fd <Esc>
 map √ }
 map ª {
 imap √ {
 imap ª }
 imap ı \
-
-" Make Y function like D and C.
+imap ﬁ ->
+map <Left> <C-h>
+map <Right> <C-l>
+map <Down> }j
+map <Up> {k
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 nnoremap Y y$
+nnoremap S :%s//g<Left><Left>
+nnoremap gS yiw:%s/<C-r>"//g<Left><Left>
 
 " === Leader mappings === "
 map <leader>w :w<CR>
-map <silent> <leader><space> :let @/=''<CR> " clear search
-map <leader>s :%s/
-map <silent> <leader>tg :Goyo<CR>
-map <silent> <leader>tl :Limelight!!<CR>
-map <silent> <leader>tc :call ToggleFocusColor()<CR>
+map <silent> <leader>s :Snippets<CR>
 map <silent> <leader><leader> :e#<CR>
+
+" === Toggles (t) === "
+map <silent> <leader>tc  :call ToggleFocusColor()<CR>
+map <silent> <leader>tm  <Plug>MarkdownPreviewToggle<CR>
+map <silent> <leader>ta  :ALEToggle<CR>
+map <silent> <leader>tss :set spell<CR>
+map <silent> <leader>tsn :set spelllang=nb<CR>
+map <silent> <leader>tse :set spelllang=en<CR>
+
+" === Actions (a) === "
+map <leader>ai :source ~/.config/nvim/init.vim<CR>
+map <leader>as :syntax sync fromstart<CR>
+map <leader>ac :w! \| !compiler <C-r>%<CR>
+
+" === Opens (o) === "
+map <leader>os :UltiSnipsEdit<CR>
+map <leader>oi :e ~/.config/nvim/init.vim<CR>
+map <leader>ob :e ~/.bash_profile<CR>
+
+" === Help (h) === "
+map <leader>ht :Helptags<CR>
+map <leader>hm :Maps<CR>
 
 " === FZF mappings === "
 map øb :Buffers<CR>
@@ -220,82 +237,54 @@ map øf :Files<CR>
 map ør :Rg<CR>
 map øy yiw:Rg <C-r>"<CR>
 
-" === COC === "
+" === Slime mappings (øs) === "
+xmap øss <Plug>SlimeRegionSend
+nmap øss <Plug>SlimeParagraphSend
+nmap øsc <Plug>SlimeConfig
+nmap øsm <Plug>SlimeMotionSend
+nmap øsq øsmiq
+nmap øsb øsmab
 
-" set signcolumn=yes
+" === DEOPLETE === "
+let g:deoplete#enable_at_startup = 1
 
-" " confirm snippet with enter
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
-"   \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" nmap <silent> <leader>cg <Plug>(coc-definition)
-" nmap <silent> <leader>ct <Plug>(coc-type-definition)
-" nmap <silent> <leader>ci <Plug>(coc-implementation)
-" nmap <silent> <leader>co <Plug>(coc-references)
-" nnoremap <silent> <leader>cs :call <SID>show_documentation()<CR>
-" nmap <leader>cr <Plug>(coc-rename)
-" nmap <silent> <leader>ck <Plug>(coc-diagnostic-prev)
-" nmap <silent> <leader>cj <Plug>(coc-diagnostic-next)
-" xmap <leader>cf  <Plug>(coc-format-selected)
-" nmap <leader>cf  <Plug>(coc-format-selected)
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-
-" " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-" xmap <leader>ca  <Plug>(coc-codeaction-selected)
-" nmap <leader>ca  <Plug>(coc-codeaction-selected)
-
-" " Remap for do codeAction of current line
-" nmap <leader>cl  <Plug>(coc-codeaction)
-" " Fix autofix problem of current line
-" nmap <leader>cc  <Plug>(coc-fix-current)
-
-" " Use `:Format` to format current buffer
-" command! -nargs=0 Format :call CocAction('format')
-
-" " Use `:Fold` to fold current buffer
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" " use `:OR` for organize import of current buffer
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" === Language Server === "
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie-wrapper'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
-map <Leader>cm :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-map <Leader>cd :call LanguageClient#textDocument_definition()<CR>
-map <Leader>cr :call LanguageClient#textDocument_rename()<CR>
-map <Leader>cf :call LanguageClient#textDocument_formatting()<CR>
-map <Leader>cb :call LanguageClient#textDocument_references()<CR>
-map <Leader>ca :call LanguageClient#textDocument_codeAction()<CR>
-map <Leader>cs :call LanguageClient#textDocument_documentSymbol()<CR>
-
-
+" === ALE === "
 hi link ALEError Error
 hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold
 hi link ALEWarning Warning
 hi link ALEInfo SpellCap
 
-let g:deoplete#enable_at_startup = 1
-
-
-" === ALE === "
-nnoremap <leader>o :ALEToggle<CR>
 let g:ale_enabled = 0
 let g:ale_sign_column_always = 1   "keep gutter open
 let g:ale_haskell_hie_executable = 'hie-wrapper'
 let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
 let g:ale_lint_on_text_changed = 'never'
+
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+nnoremap <silent> K :ALEHover<CR>
+nnoremap <silent> gd :ALEGoToDefinition<CR>
+nnoremap <silent> gD :ALEGoToDefinitionInVSplit<CR>
+nnoremap <silent> <leader>cf :ALEFindReferences<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              LAYOUT & DESIGN                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" === LightLine === "
+set noshowmode " remove built in INSERT promt, lightlines takes care of this!
+
+let g:lightline = {
+   \ 'colorscheme' : 'challenger_deep',
+   \ 'active': {
+   \   'left': [ [ 'mode', 'paste' ],
+   \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+   \ },
+   \ }
 
 " === Colors === "
 let g:one_allow_italics = 1 " I love italic for comments
@@ -321,4 +310,3 @@ function! ToggleFocusColor()
 endfunc
 
 call ToggleFocusColor()
-

@@ -8,3 +8,8 @@ hub
 karabiner
 texstudio
 yarn
+nvim/.vimdid
+nvim/.netrwhist
+nvim/spell
+nvim/plugged
+!nvim/plugged/vim-snippets

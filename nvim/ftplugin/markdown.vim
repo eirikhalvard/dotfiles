@@ -1,6 +1,19 @@
-iabbrev -> $\rightarrow$
+" ABBREVIATIONS
+" iabbrev -> $\rightarrow$
+iabbrev hr Helt riktig!
 
-autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+map Ã¦s :e+ ~/.config/nvim/plugged/vim-snippets/UltiSnips/markdown.snippets<CR>
+map Ã¦t :SlimeSend1 (load "test2a.scm")<CR>
+
+" IN2040 rette-makroer
+let @c ="V/##kkcqj€kbkjq"
+let @d ="V/##kkjdkk//€kb###jj"
+let @h ="@ciHelt riktig!  kk/###jj"
+let @g ="wwyWbbvehhp/###wwww"
+
+
+
+set foldexpr=NestedMarkdownFolds()
 
 function! MathAndLiquid()
     "" Define certain regions
