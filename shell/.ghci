@@ -1,0 +1,6 @@
+:set prompt "\n\ESC[0;37m%s\n\ESC[1;91mλ \ESC[m"
+:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+:def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
+:set +t
+:m + Text.Show.Functions
+
