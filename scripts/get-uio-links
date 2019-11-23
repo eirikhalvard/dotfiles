@@ -1,0 +1,25 @@
+#!/anaconda3/bin/python
+import urllib.request
+import os
+import sys
+
+try:
+    from BeautifulSoup import BeautifulSoup
+except ImportError:
+    from bs4 import BeautifulSoup
+
+def main():
+  print(sys.argv)
+  if len(sys.argv) < 2:
+    raise ValueError("You need to specify a link as a command line argument")
+  url = sys.argv[1]
+  response = urllib.request.urlopen(url)
+  parsed_html = BeautifulSoup(response, 'html.parser')
+  relevant_links = parsed_html.find_all('a', class_="vrtx-title vrtx-title-link")
+
+  for link in relevant_links:
+    link_url = link.get('href')
+    os.system('wget {} -nc'.format(link_url))
+
+if __name__ == '__main__':
+  main()
