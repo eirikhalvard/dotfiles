@@ -1,3 +1,4 @@
+**/__pycache__
 Fritzing
 coc
 configstore
@@ -11,7 +12,8 @@ yarn
 nvim/.vimdid
 nvim/.netrwhist
 nvim/spell
-nvim/plugged
+/nvim/plugged/*
+!/nvim/plugged/vim-snippets
 nvim/autoload
 nvim/coc-settings.json
 screen-256color-italic.terminfo

@@ -174,8 +174,8 @@ let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
 
 " === Snippets === "
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/snips'
-let g:UltiSnipsSnippetDirectories = ['snips']
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 
 
 " === Rainbow === "
