@@ -4,7 +4,6 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  IMPORTS                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -175,7 +174,9 @@ let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
 
 " === Snippets === "
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/snips'
+let g:UltiSnipsSnippetDirectories = ['snips']
+
 
 " === Rainbow === "
 let g:rainbow_active = 1

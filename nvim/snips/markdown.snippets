@@ -1,0 +1,362 @@
+priority -50
+
+global !p
+def create_table(snip):
+    # retrieving single line from current string and treat it like tabstops count
+    placeholders_string = snip.buffer[snip.line].strip()[2:].split("x",1)
+    rows_amount = int(placeholders_string[0])
+    columns_amount = int(placeholders_string[1])
+
+    # erase current line
+    snip.buffer[snip.line] = ''
+
+    # create anonymous snippet with expected content and number of tabstops
+    anon_snippet_title = ' | '.join(['$' + str(col) for col in range(1,columns_amount+1)]) + "\n"
+    anon_snippet_delimiter = ':-|' * (columns_amount-1) + ":-\n"
+    anon_snippet_body = ""
+    for row in range(1,rows_amount+1):
+        anon_snippet_body += ' | '.join(['$' + str(row*columns_amount+col) for col in range(1,columns_amount+1)]) + "\n"
+    anon_snippet_table = anon_snippet_title + anon_snippet_delimiter + anon_snippet_body
+
+    # expand anonymous snippet
+    snip.expand_anon(anon_snippet_table)
+endglobal
+
+###########################
+# Sections and Paragraphs #
+###########################
+snippet sec "Section" b
+# ${1:Section Name} #
+$0
+endsnippet
+
+snippet ssec "Sub Section" b
+## ${1:Section Name} ##
+$0
+endsnippet
+
+snippet sssec "SubSub Section" b
+### ${1:Section Name} ###
+$0
+endsnippet
+
+snippet par "Paragraph" b
+#### ${1:Paragraph Name} ####
+$0
+endsnippet
+
+snippet spar "Paragraph" b
+##### ${1:Paragraph Name} #####
+$0
+endsnippet
+
+###################
+# Text formatting #
+###################
+
+snippet * "italics"
+*${1:${VISUAL}}*$0
+endsnippet
+
+snippet ** "bold"
+**${1:${VISUAL}}**$0
+endsnippet
+
+snippet *** "bold italics"
+***${1:${VISUAL}}***$0
+endsnippet
+
+
+################
+# Common stuff #
+################
+snippet link "Link to something"
+[${1:${VISUAL:Text}}](${3:http://${2:www.url.com}})$0
+endsnippet
+
+snippet img "Image"
+![${1:pic alt}](${2:path}${3/.+/ "/}${3:opt title}${3/.+/"/})$0
+endsnippet
+
+snippet ilc "Inline Code" i
+\`$1\`$0
+endsnippet
+
+snippet cbl "Codeblock" b
+\`\`\`
+$1
+\`\`\`
+$0
+endsnippet
+
+snippet refl "Reference Link"
+[${1:${VISUAL:Text}}][${2:id}]$0
+
+[$2]:${4:http://${3:www.url.com}} "${5:$4}"
+endsnippet
+
+snippet fnt "Footnote"
+[^${1:${VISUAL:Footnote}}]$0
+
+[^$1]:${2:Text}
+endsnippet
+
+pre_expand "create_table(snip)"
+snippet "tb(\d+x\d+)" "Customizable table" br
+endsnippet
+
+
+
+### CUSTOM SNIPPETS
+
+snippet scheme
+\`\`\`scheme
+$1
+\`\`\`
+$0
+endsnippet
+
+snippet lfintro
+Mye bra her! Men du har også fått litt trekk for enkelte ting, så se gjennom løsningsforslaget, og snakk med en gruppelærer om det er noe uklart! Lykke til videre i kurset.$0
+endsnippet
+
+snippet lfindenteringsfeil
+Her har du indentert uttrykket litt feil. Husk at i Scheme, så skal alle argumenter til funksjoner være like mye indentert hvis de er på forskjellige linjer. I dette tilfellet, så hadde du skrevet prosedyren slik:
+
+\`\`\`scheme$1
+\`\`\`
+
+Riktig indentert ser det slik ut:
+\`\`\`scheme$2
+\`\`\`
+$0
+endsnippet
+
+### SNIPPETS FOR OBLIG 1a - IN2040
+
+# snippet lf1a "lf 1a"
+# Løsningsforslag:
+# 30. Prosedyren + anvendes på 4 og 2 og evaluerer til 6; * anvendes så på 6 og 4 og returnerer 30.
+# $0
+# endsnippet
+
+# snippet lf1b "lf 1b"
+# Løsningsforslag:
+# Uttrykket (5) tolkes som ett forsøk på å kalle prosedyren 5. Vi får en feilmelding siden 5 evaluerer til seg selv, tallet fem, og ikke en prosedyre.
+# $0
+# endsnippet
+
+# snippet lf1c "lf 1c"
+# Løsningsforslag:
+# I uttrykket (4 + 2) brukes det infiks-notasjon mens Scheme er basert på prefiks-notasjon. Siden Scheme forventer at det første liste-elementet er en prosedyre får vi en feilmelding på samme måte som i oppgaven over.
+# $0
+# endsnippet
+
+# snippet lf1d "lf 1d"
+# Løsningsforslag:
+# _bar_ er bundet til 22, verdien av 44/2
+# $0
+# endsnippet
+
+
+# snippet lf1e "lf 1e"
+# Løsningsforslag:
+# 11, fordi _bar_ er bundet til 22, og 22-11=11
+# $0
+# endsnippet
+
+# snippet lf1f "lf 1f"
+# Løsningsforslag:
+# 12. Det er fortsatt slit at _bar_ er bundet til 22 (subtraksjonen over modifiserte ikke _bar_ ). 22*3*4*1=264 og 264/22=12
+# $0
+# endsnippet
+
+# snippet lf2a "lf 2a"
+# Løsningsforslag:
+# Det første -uttrykket returnerer \`"paff!"\`. Forklaring: er en *special
+# form* og har dermed en litt annen semantikk enn en vanlig prosedyre der
+# alle argumentene evalueres før vi anvender den. I stedet evalueres
+# argumentene én og én, fra venstre til høyre, og så fort vi finner et som
+# evaluerer til en verdi som ikke er \`#f\` så returneres denne og ingen flere
+# argumenter evalueres. I uttrykket over evalueres altså aldri \`(zero? (1 - 1))\`, som
+# ellers ville gitt en feilmelding.
+
+# \`and\`-uttrykket returnerer \`#f\`. Forklaring: I likhet \`or\` med evaluerer også
+# \`and\` argumentene sine én og én, fra venstre til høyre, men så fort det finner
+# et som evaluerer til  \`#f\`, slik som \`(= 1 2)\` over, så returneres altså dette og ingen
+# flere argumenter evalueres. I uttrykket over evalueres altså heller
+# aldri \`(zero? (1 - 1))\`.
+
+# I det siste uttrykket returneres \`"poff!"\`. Forklaringen er stort sett
+# lik som over: \`if\` er også en *special form* og følger dermed sin egen
+# evalueringsregel. Siden test-uttrykket i \`if\`’en evalueres til sant
+# returneres verdien av det neste konsekvens-uttrykket. Det siste
+# alternativet med den udefinerte prosedyren ville bare blitt evaluert
+# dersom testen var usann.
+
+# Evalueringsregelen som Scheme bruker for vanlige prosedyrekall går ut på
+# å først evaluere alle uttrykkene i argumentsposisjon, og deretter
+# anvendes prosedyren (prefikset) på verdiene av disse (dette kalles noen
+# ganger *applicative order evaluation*). Hvis \`or\`, \`and\` eller \`if\` i uttrykkene over
+# hadde oppført seg som vanlige prosedyrer så hadde vi altså fått
+# feilmeldinger om henholdsvis syntaksfeil eller bruk av udefinerte
+# prosedyrer. Siden de er *special forms* så har de derimot egne
+# evalueringsregler som lar oss utsette evalueringen av uttrykk i
+# argumentsposisjon til de eventuelt trengs.
+# $0
+# endsnippet
+
+# snippet lf2b "lf 2b"
+# Løsningsforslag:
+# \`\`\`scheme
+# (define (sign x)
+#   (cond ((negative? x) -1)
+#         ((positive? x) 1)
+#         (else 0)))
+
+# (define (sign x)
+#   (if (< x 0)
+#       -1
+#       (if (> x 0)
+#           1
+#           0)))
+# \`\`\`
+# $0
+# endsnippet
+
+# snippet lf2c "lf 2c"
+# Løsningsforslag:
+# \`\`\`scheme
+# (define (sign x)
+#   (or (and (< x 0) -1)
+#       (and (> x 0) 1)
+#       0))
+# \`\`\`
+# $0
+# endsnippet
+
+# snippet lf3abc "lf 3abc"
+# Løsningsforslag:
+# \`\`\`scheme
+# (define (add1 x)
+#   (+ x 1))
+
+# (define (sub1 x)
+#   (- x 1))
+
+# ;; gir en rekursiv prosess:
+
+# (define (plus x y)
+#   (if (zero? x) ;; avslutte rekursjon?
+#       y
+#       (add1 (plus (sub1 x) y))))
+
+# ;; gir en iterativ prosess:
+
+# (define (plus x y)
+#   (if (zero? x) ;; avslutte rekursjon?
+#       y
+#       (plus (sub1 x) (add1 y))))
+# \`\`\`
+# $0
+# endsnippet
+
+# snippet lf3d "lf 3d"
+# Løsningsforslag:
+# \`\`\`scheme
+# (define (power-close-to b n)
+#   (define (power-iter e)
+#     (if (> (expt b e) n)
+#         e
+#         (power-iter (+ 1 e))))
+#   (power-iter 1))
+# \`\`\`
+
+# Som man kan se, har vi fjernet argumentene b og n i den indre prosedyren. Dette er fordi det ikke er nødvendig å definere de på nytt, fordi de er tilgjengelig fra den ytre prosedyren.
+# $0
+# endsnippet
+
+# snippet lf3e "lf 3e"
+# Løsningsforslag:
+# I motsetning til deloppgave (d) over er det ikke mulig å forenkle
+# parameterlisten til , dvs. gjøre om bundne til frie variabler i
+# hjelpeprosedyren. Dette fordi alle parametrene (\`a\`, \`b\`, og \`c\`) får
+# nye verdier i hvert rekursive kall.
+# $0
+# endsnippet
+
+# snippet lf1glemtting
+# Her har du svart riktig på alle oppgavene, men en stor del av oppgaven var å forklare kort hvorfor Scheme ga det resultatet det ga, noe som ikke har blitt gjort. 
+# $0
+# endsnippet
+
+# snippet lf3rekursiviterativ
+# Ikke helt riktig. Funksjonen du har definert i oppgave b er iterativ. Dette er fordi det ikke er noen ventende kall etter det rekursive kallet. En rekursiv prosess kan av _plus_ kan se slik ut:
+
+# Løsningsforslag:
+# \`\`\`scheme
+# (define (plus x y)
+#   (if (zero? x) ;; avslutte rekursjon?
+#       y
+#       (add1 (plus (sub1 x) y))))
+# \`\`\`
+
+# Legg merke til at det som differensierer rekursive og iterative prosesser, er hvorvidt det er ventende kall etter det rekursive kallet eller ikke. I prosedyren over, så ser vi at vi kaller rekursivt på plus, og etter kallet er utført, så kaller vi på add1-prosedyren. Det at vi plus ikke er det siste kallet, gjør at det ikke er en iterativ prosess, og dermed en rekursiv prosess.
+# $0
+# endsnippet
+
+# snippet lfspecialforms
+# Special forms er ikke alltid slik at de evaluerer fra venstre til høyre. Når en prosedyre er en special form, så kan den ikke defineres på vanlig vis, fordi den trenger egne evalueringsregler. Nøyaktig hva disse evalueringsreglene er, kommer helt an på. I _or_ og _and_, evalueres argumentene fra venstre til høyre, mens andre special forms, som f.eks. define fungerer helt annerledes.
+# $0
+# endsnippet
+
+# snippet lf1unøyaktig
+# Fint, men du kan godt være litt mer nøyaktig hva som går galt, ikke hva man kan gjøre for å fikse det. F.eks. i oppgave _b_, så gir uttrykket \`(* (+ 4 2) (5))\` en feilmelding fordi det ene argumentet til _*_, \`(5)\` tolkes som ett forsøk på å kalle prosedyren 5. Vi får en feilmelding siden 5 evaluerer til seg selv, tallet fem, og ikke en prosedyre.
+
+# Vil anbefale å støtte deg litt mer på evalueringsreglene i Scheme når du svarer på denne typen oppgaver.
+# $0
+# endsnippet
+
+# snippet lf3iterasjonforklaring
+# Løsningsforslag:
+# \`\`\`scheme
+# ;; gir en rekursiv prosess:
+
+# (define (plus x y)
+#   (if (zero? x) ;; avslutte rekursjon?
+#       y
+#       (add1 (plus (sub1 x) y))))
+
+# ;; gir en iterativ prosess:
+
+# (define (plus x y)
+#   (if (zero? x) ;; avslutte rekursjon?
+#       y
+#       (plus (sub1 x) (add1 y))))
+# \`\`\`
+
+# Det eneste som skiller en iterativ og rekursiv prosess er hvorvidt det rekursive kallet er _det siste som skjer_ eller ikke. Må vi gjøre noe med returverdien til det rekursive kallet? Da er det en rekursiv prosess. Kan vi bare returnere det samme som det rekursive kallet returnerer? Da er den iterativ. I eksempelet over så ser vi at den rekursive prosessen må først gjøre ett rekursivt kall på plus, og deretter sende resultatet inn i prosedyren add1. I motsetning har vi den iterative, som kan returnere resultatet fra det rekursive kallet direkte.
+# $0
+# endsnippet
+
+# # vim:ft=snippets:
+
+
+#######################
+#  SNIPPETS Oblig 2a  #
+#######################
+
+
+snippet lf1bandre
+Andre let-uttrykk er ikke helt riktig, selv om utskriften er det samme.
+
+\`\`\`scheme
+((lambda (bar baz)
+   ((lambda (bar foo)
+      (list foo bar))
+    (list bar baz) baz))
+ foo 'towel)
+; -->
+; (towel (42 towel))
+\`\`\`
+endsnippet
