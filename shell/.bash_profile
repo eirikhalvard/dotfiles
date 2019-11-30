@@ -34,7 +34,6 @@ alias scripts="cd \$SCRIPTS"
 ##################### ALIAS COMMANDS ######################
 alias ifi='ssh eirikhsa@login.ifi.uio.no'
 alias c='clear'
-alias popen='atom ~/.bash_profile'
 alias pcat='ccat ~/.bash_profile'
 alias psrc='source ~/.bash_profile'
 alias hb='hub browse'
@@ -51,6 +50,7 @@ alias tn='tmux new -s'
 alias tls='tmux ls'
 alias -g FF='$(fzf)'
 alias -g PF='| fzf'
+alias -g CC='| pbcopy'
 
 ##################### FUNCTIONS ###########################
 unalias z 2> /dev/null
@@ -96,7 +96,7 @@ docs() {
   esac
 }
 
-function hoog() {
+function hoogle() {
   open "https://hoogle.haskell.org/?hoogle=$1"
 }
 
