@@ -3,3 +3,12 @@ priority -50
 snippet impq "Qualified import"
 import qualified ${1:Data.Text} as ${0:`!p snip.rv = t[1].split(".")[-1]`}
 endsnippet
+
+snippet stanlang "Standard Language Extensions"
+{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE OverloadedStrings #-}
+endsnippet
+
+snippet lang "Language extension"
+{-# LANGUAGE $1 #-}
+endsnippet

@@ -1,6 +1,10 @@
-:set prompt "\n\ESC[0;37m%s\n\ESC[1;91mλ \ESC[m"
+:set prompt "\n\ESC[1;91mλ \ESC[m"
 :def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
 :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
 :set +t
 :m + Text.Show.Functions
+import Control.Lens
+import qualified Data.List as L
+import qualified Data.Map.Strict as M
+import qualified Data.Sequence as S
 

@@ -1,9 +1,6 @@
 " ABBREVIATIONS
 " iabbrev -> $\rightarrow$
-iabbrev hr Helt riktig!
-
-map æs :e+ ~/.config/nvim/plugged/vim-snippets/UltiSnips/markdown.snippets<CR>
-map æt :SlimeSend1 (load "test2a.scm")<CR>
+map <leader>ap  <Plug>MarkdownPreviewToggle<CR>
 
 " IN2040 rette-makroer
 let @c ="V/##kkcqj�kbkjq"

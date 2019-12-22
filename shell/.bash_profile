@@ -15,8 +15,7 @@ export IN5290=$SKOLE/S7/IN5290
 export IN2040=$SKOLE/S7/IN2040
 export PROSJEKTER=$SKOLE/Prosjekter
 export GITHUB=$HOME/GitHub
-export SCRIPTS=$HOME/.scripts
-export INIT=$HOME/config/nvim/init.vim
+export CONFIG=$HOME/.config
 
 ##################### ALIAS NAVIGATION ####################
 alias 4070="cd \$IN4070"
@@ -24,30 +23,33 @@ alias 5320="cd \$IN5320"
 alias 5290="cd \$IN5290"
 alias 2040="cd \$IN2040"
 alias forskerlinjen="cd \$FORSKERLINJEN"
-alias fl="forskerlinjen"
 alias prosjekter="cd \$PROSJEKTER"
 alias skole="cd \$SKOLE"
-alias semester="cd \SKOLE/S6"
+alias semester="cd \SKOLE/S7"
 alias github="cd \$GITHUB"
-alias scripts="cd \$SCRIPTS"
+alias config="cd \$CONFIG"
 
 ##################### ALIAS COMMANDS ######################
-alias ifi='ssh eirikhsa@login.ifi.uio.no'
 alias c='clear'
+alias pwdc='pwd | pbcopy'
+alias ifi='ssh eirikhsa@login.ifi.uio.no'
 alias pcat='ccat ~/.bash_profile'
 alias psrc='source ~/.bash_profile'
 alias hb='hub browse'
 alias a='atom .'
-alias o='open .'
-alias sml='rlwrap sml'
-alias pwdc='pwd | pbcopy'
-alias maude='$HOME/.Maude-2.7.1-osx/maude'
-alias scm='c && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
 alias vim='nvim'
+alias o='open .'
+alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
 alias t='tmux'
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
 alias tls='tmux ls'
+
+alias sml='rlwrap sml'
+alias scm='c && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
+alias maude='$HOME/bin/maude/maude.darwin64'
+
 alias -g FF='$(fzf)'
 alias -g PF='| fzf'
 alias -g CC='| pbcopy'
@@ -74,9 +76,7 @@ jc() {
 }
 
 mekk() {
-  git add -A;
-  git commit -m "$1";
-  git push;
+  gaa && gcmsg "$1" && gp
 }
 
 docs() {
@@ -173,7 +173,7 @@ export NVM_DIR="$HOME/.nvm"
  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
-##################### CUSTOM SCRIPTS ######################
+##################### CUSTOM CONFIG ######################
 
 
 ##################### WELCOME MESSAGE #####################

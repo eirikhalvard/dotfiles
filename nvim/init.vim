@@ -21,6 +21,7 @@ Plug 'kana/vim-textobj-entire'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-exchange'
 Plug 'wellle/targets.vim'
+Plug 'chaoren/vim-wordmotion'
 
 " === Editor === "
 Plug '/usr/local/opt/fzf'
@@ -165,6 +166,9 @@ map <leader>tf :NERDTreeFocus<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" === Vim Wordmotion === "
+let g:wordmotion_prefix = '-'
+
 " === Paredit === "
 let g:paredit_leader = 'æ'
 let g:paredit_electric_return = 0
@@ -199,9 +203,16 @@ map <Right> <C-l>
 map <Down> }j
 map <Up> {k
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 nnoremap Y y$
+
+" substitute in buffer or selection
 nnoremap S :%s//g<Left><Left>
+vmap S <ESC>:%s/\%V/g<Left><Left>
+
+" substitute selection or word under cursor
 nnoremap gS yiw:%s/<C-r>"//g<Left><Left>
+vmap gS y:%s/<C-r>"//g<Left><Left>
 
 " === Leader mappings === "
 map <leader>w :w<CR>
@@ -210,7 +221,6 @@ map <silent> <leader><leader> :e#<CR>
 
 " === Toggles (t) === "
 map <silent> <leader>tc  :call ToggleFocusColor()<CR>
-map <silent> <leader>tm  <Plug>MarkdownPreviewToggle<CR>
 map <silent> <leader>ta  :ALEToggle<CR>
 map <silent> <leader>tss :set spell<CR>
 map <silent> <leader>tsn :set spelllang=nb<CR>
@@ -220,6 +230,7 @@ map <silent> <leader>tse :set spelllang=en<CR>
 map <leader>ai :source ~/.config/nvim/init.vim<CR>
 map <leader>as :syntax sync fromstart<CR>
 map <leader>ac :w! \| !compiler <C-r>%<CR>
+" map <leader>ap   -- preview. defined in ftplugin
 
 " === Opens (o) === "
 map <leader>os :UltiSnipsEdit<CR>
@@ -258,7 +269,8 @@ hi link ALEInfo SpellCap
 let g:ale_enabled = 0
 let g:ale_sign_column_always = 1   "keep gutter open
 let g:ale_haskell_hie_executable = 'hie-wrapper'
-let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
+let g:ale_linters = { 'haskell': ['hlint'] }
+" let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
 let g:ale_lint_on_text_changed = 'never'
 
