@@ -1,5 +1,14 @@
 priority -50
 
+global !p
+def last_module(mod):
+	return mod.rstrip('.').rsplit('.', 1)[-1]
+
+def space_if(p):
+	return " " if p else ""
+
+endglobal
+
 snippet impq "Qualified import"
 import qualified ${1:Data.Text} as ${0:`!p snip.rv = t[1].split(".")[-1]`}
 endsnippet
@@ -11,4 +20,21 @@ endsnippet
 
 snippet lang "Language extension"
 {-# LANGUAGE $1 #-}
+endsnippet
+
+snippet template "Haskell Standard Template"
+{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+module `!p snip.rv = snip.basename.capitalize()` where
+
+import Control.Lens
+import qualified Data.List as L
+import qualified Data.Set as S
+import qualified Data.Map as M
+import qualified Data.Text as T
+
+main :: IO ()
+main = do
+  print "hello"
 endsnippet

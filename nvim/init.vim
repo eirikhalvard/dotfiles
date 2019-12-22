@@ -230,6 +230,7 @@ map <silent> <leader>tse :set spelllang=en<CR>
 map <leader>ai :source ~/.config/nvim/init.vim<CR>
 map <leader>as :syntax sync fromstart<CR>
 map <leader>ac :w! \| !compiler <C-r>%<CR>
+map <leader>af gqae<C-o><C-o>k<CR>
 " map <leader>ap   -- preview. defined in ftplugin
 
 " === Opens (o) === "
