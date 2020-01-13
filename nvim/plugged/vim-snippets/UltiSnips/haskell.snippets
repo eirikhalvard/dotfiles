@@ -9,10 +9,6 @@ def space_if(p):
 
 endglobal
 
-snippet impq "Qualified import"
-import qualified ${1:Data.Text} as ${0:`!p snip.rv = t[1].split(".")[-1]`}
-endsnippet
-
 snippet stanlang "Standard Language Extensions"
 {-# LANGUAGE TupleSections #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -22,11 +18,15 @@ snippet lang "Language extension"
 {-# LANGUAGE $1 #-}
 endsnippet
 
+snippet impq "Qualified import"
+import qualified ${1:Data.Text} as ${0:`!p snip.rv = t[1].split(".")[-1]`}
+endsnippet
+
 snippet template "Haskell Standard Template"
 {-# LANGUAGE TupleSections #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module `!p snip.rv = snip.basename.capitalize()` where
+module `!p snip.rv = snip.basename[0].capitalize() + snip.basename[1:]` where
 
 import Control.Lens
 import qualified Data.List as L
@@ -38,3 +38,17 @@ main :: IO ()
 main = do
   print "hello"
 endsnippet
+
+snippet id "Import Data..."
+import Data.$0
+endsnippet
+
+snippet ic "Import Control..."
+import Control.$0
+endsnippet
+
+snippet trace "Debug Trace"
+import Debug.Trace (trace)
+$0-- (show >>= trace)
+endsnippet
+

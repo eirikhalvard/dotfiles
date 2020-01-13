@@ -50,6 +50,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'rakr/vim-one'
 Plug 'luochen1990/rainbow'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -145,9 +146,6 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
-" Formatting
-map <leader>q gqip
-
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
@@ -208,11 +206,11 @@ nnoremap Y y$
 
 " substitute in buffer or selection
 nnoremap S :%s//g<Left><Left>
-vmap S <ESC>:%s/\%V/g<Left><Left>
+vnoremap S <ESC>:%s/\%V/g<Left><Left>
 
 " substitute selection or word under cursor
 nnoremap gS yiw:%s/<C-r>"//g<Left><Left>
-vmap gS y:%s/<C-r>"//g<Left><Left>
+vnoremap gS y:%s/<C-r>"//g<Left><Left>
 
 " === Leader mappings === "
 map <leader>w :w<CR>
@@ -230,12 +228,17 @@ map <silent> <leader>tse :set spelllang=en<CR>
 map <leader>ai :source ~/.config/nvim/init.vim<CR>
 map <leader>as :syntax sync fromstart<CR>
 map <leader>ac :w! \| !compiler <C-r>%<CR>
-map <leader>af gqae<C-o><C-o>k<CR>
+map <leader>af :ALEFix<CR>
+map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
+" map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
 " map <leader>ap   -- preview. defined in ftplugin
+
 
 " === Opens (o) === "
 map <leader>os :UltiSnipsEdit<CR>
+map <leader>ot :Tags<CR>
 map <leader>oi :e ~/.config/nvim/init.vim<CR>
+map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
 map <leader>ob :e ~/.bash_profile<CR>
 
 " === Help (h) === "
@@ -270,16 +273,16 @@ hi link ALEInfo SpellCap
 let g:ale_enabled = 0
 let g:ale_sign_column_always = 1   "keep gutter open
 let g:ale_haskell_hie_executable = 'hie-wrapper'
-let g:ale_linters = { 'haskell': ['hlint'] }
 " let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
-let g:ale_fixers = { 'haskell': ['hlint'] }
+let g:ale_linters = { 'haskell': ['hlint'] }
+let g:ale_fixers = { 'haskell': ['brittany', 'hlint'] }
 let g:ale_lint_on_text_changed = 'never'
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 nnoremap <silent> K :ALEHover<CR>
-nnoremap <silent> gd :ALEGoToDefinition<CR>
+nnoremap <silent> gd <C-]>
 nnoremap <silent> gD :ALEGoToDefinitionInVSplit<CR>
 nnoremap <silent> <leader>cf :ALEFindReferences<CR>
 

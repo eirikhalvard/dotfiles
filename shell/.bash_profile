@@ -96,8 +96,16 @@ docs() {
   esac
 }
 
-function hoogle() {
+hoogle() {
   open "https://hoogle.haskell.org/?hoogle=$1"
+}
+
+hrepl() {
+  if [ "$#" -eq 0 ]; then
+    echo "Please supply a haskell file to start a ghcid session with"
+  else
+    ghcid $1 --test=main
+  fi
 }
 
 google() {

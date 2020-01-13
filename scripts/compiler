@@ -13,7 +13,7 @@ base="${file%.*}"
 cd "$dir" || exit
 
 case "$file" in
-	*\.tex) pdflatex "$file" ;;
+	*\.tex) pdflatex --shell-escape "$file" ;;
 	*\.md) pandoc "$file" -o "$base".pdf ;;
 	*\.py) python3 "$file" ;;
 	*\.hs) runhaskell "$file" ;;
