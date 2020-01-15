@@ -55,6 +55,7 @@ alias -g PF='| fzf'
 alias -g CC='| pbcopy'
 
 ##################### FUNCTIONS ###########################
+
 unalias z 2> /dev/null
 z() {
   [ $# -gt 0 ] && _z "$*" && return
@@ -82,15 +83,6 @@ mekk() {
 docs() {
   livet=$1;
   case $livet in
-    p5) open https://p5js.org/reference/;;
-    materialize) open http://materializecss.com/getting-started.html;;
-    vue) open https://vuejs.org/v2/guide/;;
-    three) open https://threejs.org/docs/;;
-    ruter) open http://reisapi.ruter.no/help;;
-    3331) open http://www.uio.no/studier/emner/matnat/ifi/INF3331/h18/index.html;;
-    3110) open http://www.uio.no/studier/emner/matnat/math/INF3110/h18/index.html;;
-    2100) open http://www.uio.no/studier/emner/matnat/ifi/INF2100/h18/index.html;;
-    2010) open http://www.uio.no/studier/emner/matnat/ifi/IN2010/h18/index.html;;
     hoogle) open "https://hoogle.haskell.org/?hoogle=$2";;
     *) open "http://www.google.com/search?q=docs+$livet";;
   esac
@@ -104,8 +96,36 @@ hrepl() {
   if [ "$#" -eq 0 ]; then
     echo "Please supply a haskell file to start a ghcid session with"
   else
-    ghcid $1 --test=main
+    ghcid "$1" --test=main
   fi
+}
+
+conf() {
+  # inspired from guide: https://blog.htbaa.com/news/tmux-scripting
+
+  SESSION="conf"
+
+  # Detatch and attach conf session if it exists
+  tmux detach &>/dev/null
+  if tmux attach -t "$SESSION" &>/dev/null ; then
+    return
+  fi
+
+  # Setup and attach new session otherwise
+  cd "$HOME/.config"
+  tmux new-session -n "config" -d -s "$SESSION"
+  tmux split-window -h
+  tmux resize-pane -D 20
+
+  tmux new-window -t "$SESSION:2" -n "vim"
+  tmux send-keys "cd nvim && vim .init.vim" C-m
+
+  tmux new-window -t "$SESSION:3" -n "shell"
+  tmux send-keys "cd shell && vim .bash_profile" C-m
+
+  tmux select-window -t "$SESSION:1"
+  tmux attach-session -t "$SESSION"
+
 }
 
 google() {
