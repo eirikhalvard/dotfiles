@@ -299,7 +299,7 @@ let g:lightline = {
    \ 'colorscheme' : 'challenger_deep',
    \ 'active': {
    \   'left': [ [ 'mode', 'paste' ],
-   \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+   \             [ 'readonly', 'filename', 'modified' ] ]
    \ },
    \ }
 
