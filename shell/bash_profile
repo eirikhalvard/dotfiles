@@ -105,27 +105,89 @@ conf() {
 
   SESSION="conf"
 
-  # Detatch and attach conf session if it exists
-  tmux detach &>/dev/null
-  if tmux attach -t "$SESSION" &>/dev/null ; then
+  # We need to manually detach the session
+  # then run the command from outside of tmux
+  if [ -n "$TMUX" ] ; then 
+    echo "please detach before running command!"
+    return
+  fi
+
+  # Attach SESSION if it already exists
+  if tmux has-session -t "$SESSION" ; then
+    tmux attach-session -t "$SESSION"
     return
   fi
 
   # Setup and attach new session otherwise
-  cd "$HOME/.config"
-  tmux new-session -n "config" -d -s "$SESSION"
-  tmux split-window -h
-  tmux resize-pane -D 20
+  tmux new-session -c "$HOME/.config" -n "config" -d -s "$SESSION"
+  tmux split-window -c "$HOME/.config" -h
 
-  tmux new-window -t "$SESSION:2" -n "vim"
-  tmux send-keys "cd nvim && vim .init.vim" C-m
+  tmux new-window -c "$HOME/.config/nvim" -t "$SESSION:2" -n "vim"
+  tmux send-keys "vim init.vim" C-m
 
-  tmux new-window -t "$SESSION:3" -n "shell"
-  tmux send-keys "cd shell && vim .bash_profile" C-m
+  tmux new-window -c "$HOME/.config/shell" -t "$SESSION:3" -n "shell"
+  tmux send-keys "vim bash_profile" C-m
 
-  tmux select-window -t "$SESSION:1"
-  tmux attach-session -t "$SESSION"
+  tmux attach-session -t "$SESSION:1"
 
+}
+
+codewars() {
+  # attaches a new window to the haskell tmux session (creates a new session if there isn't one)
+  # The window includes three panes: 
+  #   1) a vim window for the codewars module
+  #   2) a ghcid window that watches the file and compiles and runs `main` on save
+  #   3) a ghci window for repl-work
+
+  # inspired from guide: https://blog.htbaa.com/news/tmux-scripting
+
+  # check for module argument
+  if [ "$#" -eq 0 ]; then
+    echo "Please supply name for the codewars module"
+    return
+  fi
+
+  # We need to manually detach the session
+  # then run the command from outside of tmux
+  if [ -n "$TMUX" ] ; then 
+    echo "please detach before running command!"
+    return
+  fi
+
+  CODEWARS_MODULE="$1"
+
+  SESSION="hask"
+  CODEWARS_FOLDER="$PROSJEKTER/Haskell/Codewars"
+  CODEWARS_FILE="$CODEWARS_FOLDER/$CODEWARS_MODULE.hs"
+
+  if test -f "$CODEWARS_FOLDER/$CODEWARS_MODULE.hs" ; then
+    echo "module already exist! Please try another name"
+    return
+  fi
+
+  touch "$CODEWARS_FILE"
+  echo "module $CODEWARS_MODULE where" >> "$CODEWARS_FILE"
+  echo ""                              >> "$CODEWARS_FILE"
+  echo "main :: IO ()"                 >> "$CODEWARS_FILE"
+  echo "main = do"                     >> "$CODEWARS_FILE"
+  echo "  print \"put tests here!\""   >> "$CODEWARS_FILE"
+
+  # attach haskell session and codewars window
+  if tmux has-session -t "$SESSION" ; then
+    tmux new-window -c "$CODEWARS_FOLDER" -a -t "$SESSION" -n "$CODEWARS_MODULE"
+  else
+    tmux new-session -c "$CODEWARS_FOLDER" -n "$CODEWARS_MODULE" -d -s "$SESSION"
+  fi
+
+  tmux split-window -c "$CODEWARS_FOLDER" -t "$SESSION:$CODEWARS_MODULE" -h
+  tmux split-window -c "$CODEWARS_FOLDER" -t "$SESSION:$CODEWARS_MODULE" -v
+
+  tmux send-keys -t "$SESSION:$CODEWARS_MODULE.1" "vim $CODEWARS_MODULE.hs" C-m
+  tmux send-keys -t "$SESSION:$CODEWARS_MODULE.2" "ghcid $CODEWARS_MODULE.hs --test=main" C-m
+  tmux send-keys -t "$SESSION:$CODEWARS_MODULE.3" "ghci $CODEWARS_MODULE.hs" C-m
+
+
+  tmux attach-session -t "$SESSION:$CODEWARS_MODULE"
 }
 
 google() {
