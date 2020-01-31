@@ -6,11 +6,16 @@
 # Compiles .tex. groff (.mom, .ms), .rmd, .md.  Opens .sent files as sent
 # presentations.  Runs scripts based on extention or shebang
 
-function compileEssay() {
-  export TEXINPUTS="ifimaster/:duoforside/:$(TEXINPUTS)"
-  pdflatex --shell-escape "$1"
-  biber thesis
-  pdflatex --shell-escape "$1"
+function watchMaude() {
+  fswatch -o --event Updated "$1" | while read num ; do
+    clear
+    echo "running maude program ($1)"
+    content=$(<"$1")
+    "$HOME/bin/maude/maude.darwin64" -no-banner <<EOF
+$content
+q
+EOF
+  done
 }
 
 file=$(greadlink -f "$1")
@@ -20,13 +25,7 @@ base="${file%.*}"
 cd "$dir" || exit
 
 case "$file" in
-  *thesis\.tex) compileEssay "$file" ;;
-	*\.tex) pdflatex --shell-escape "$file" ;;
-	*\.md) pandoc "$file" -o "$base".pdf ;;
-	*\.py) python3 "$file" ;;
-	*\.hs) runhaskell "$file" ;;
+  *\.maude) watchMaude $file ;;
+	*\.hs) ghcid "$file" --test=main ;;
 	*) printf "filetype not supported\n" ;;
 esac
-
-
-

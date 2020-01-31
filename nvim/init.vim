@@ -31,6 +31,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'vim-scripts/paredit.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wincent/terminus'
+Plug 'skywind3000/asyncrun.vim'
 
 " === Completion === "
 Plug 'w0rp/ale'
@@ -158,7 +159,6 @@ let NERDTreeIgnore = ['__pycache__', '\.pyc$','\.o$', '\.so$', '\.a$', '\.swp', 
 let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 map <leader>tt :NERDTreeToggle<CR>
-map <leader>tf :NERDTreeFocus<CR>
 
 " === Vim Align === "
 xmap ga <Plug>(EasyAlign)
@@ -227,7 +227,8 @@ map <silent> <leader>tse :set spelllang=en<CR>
 " === Actions (a) === "
 map <leader>ai :source ~/.config/nvim/init.vim<CR>
 map <leader>as :syntax sync fromstart<CR>
-map <leader>ac :w! \| !compiler <C-r>%<CR>
+" map <leader>ac :w! \| !compiler <C-r>%<CR>
+map <leader>ac :w! \| AsyncRun compiler "%" <CR>
 map <leader>af :ALEFix<CR>
 map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 " map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
@@ -274,8 +275,8 @@ let g:ale_enabled = 0
 let g:ale_sign_column_always = 1   "keep gutter open
 let g:ale_haskell_hie_executable = 'hie-wrapper'
 " let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
-let g:ale_linters = { 'haskell': ['hlint'] }
-let g:ale_fixers = { 'haskell': ['brittany', 'hlint'] }
+let g:ale_linters = { 'haskell': ['hlint'], 'tex': ['chktex'] }
+let g:ale_fixers = { 'haskell': ['brittany', 'hlint'], 'tex': ['latexindent'] }
 let g:ale_lint_on_text_changed = 'never'
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)

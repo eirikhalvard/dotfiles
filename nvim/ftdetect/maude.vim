@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.maude   set syntax=maude
+autocmd BufNewFile,BufRead *.maude   set filetype=maude

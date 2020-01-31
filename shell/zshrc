@@ -59,7 +59,7 @@ plugins=(
   colored-man-pages
   alias-tips
   oh-my-matrix
-  # history-substring-search
+  history-substring-search
   zsh-syntax-highlighting
   vi-mode
   z
