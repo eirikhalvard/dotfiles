@@ -9,24 +9,12 @@ export FDK_EXE="/Users/Eirik/bin/FDK/Tools/osx"
 ##################### CUSTOM EXPORTS ######################
 export DRIVE=$HOME/Drive
 export SKOLE=$DRIVE/Skole
-export IN4070=$SKOLE/S7/IN4070
-export IN5320=$SKOLE/S7/IN5320
-export IN5290=$SKOLE/S7/IN5290
-export IN2040=$SKOLE/S7/IN2040
 export PROSJEKTER=$SKOLE/Prosjekter
-export GITHUB=$HOME/GitHub
 export CONFIG=$HOME/.config
 
 ##################### ALIAS NAVIGATION ####################
-alias 4070="cd \$IN4070"
-alias 5320="cd \$IN5320"
-alias 5290="cd \$IN5290"
-alias 2040="cd \$IN2040"
-alias forskerlinjen="cd \$FORSKERLINJEN"
 alias prosjekter="cd \$PROSJEKTER"
 alias skole="cd \$SKOLE"
-alias semester="cd \SKOLE/S7"
-alias github="cd \$GITHUB"
 alias config="cd \$CONFIG"
 
 ##################### ALIAS COMMANDS ######################
@@ -40,6 +28,7 @@ alias a='atom .'
 alias vim='nvim'
 alias o='open .'
 alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+alias mantar='curl cheat.sh/tar'
 
 alias t='tmux'
 alias ta='tmux attach -t'
@@ -133,6 +122,22 @@ conf() {
 }
 
 codewars() {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: codewars [ModuleName]"
+    return
+  fi
+  haskellModule "$1" "$PROSJEKTER/Haskell/Codewars"
+}
+
+hdiv() {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: hdiv [ModuleName]"
+    return
+  fi
+  haskellModule "$1" "$PROSJEKTER/Haskell/DivCode"
+}
+
+haskellModule() {
   # attaches a new window to the haskell tmux session (creates a new session if there isn't one)
   # The window includes three panes: 
   #   1) a vim window for the codewars module
@@ -141,9 +146,12 @@ codewars() {
 
   # inspired from guide: https://blog.htbaa.com/news/tmux-scripting
 
+  # tmux session name to attach window
+  SESSION="hask"
+
   # check for module argument
-  if [ "$#" -eq 0 ]; then
-    echo "Please supply name for the codewars module"
+  if [ "$#" -lt 2 ]; then
+    echo "Usage: haskellModule [ModuleName] [Folder]"
     return
   fi
 
@@ -154,40 +162,38 @@ codewars() {
     return
   fi
 
-  CODEWARS_MODULE="$1"
+  HASKELL_MODULE="${1%.*}"
+  HASKELL_FOLDER="$(greadlink -f "$2")"
+  HASKELL_FILE="$HASKELL_FOLDER/$HASKELL_MODULE.hs"
 
-  SESSION="hask"
-  CODEWARS_FOLDER="$PROSJEKTER/Haskell/Codewars"
-  CODEWARS_FILE="$CODEWARS_FOLDER/$CODEWARS_MODULE.hs"
-
-  if test -f "$CODEWARS_FOLDER/$CODEWARS_MODULE.hs" ; then
-    echo "module already exist! Please try another name"
+  if test -f "$HASKELL_FILE" ; then
+    echo "module already exist! Please try another module name"
     return
   fi
 
-  touch "$CODEWARS_FILE"
-  echo "module $CODEWARS_MODULE where" >> "$CODEWARS_FILE"
-  echo ""                              >> "$CODEWARS_FILE"
-  echo "main :: IO ()"                 >> "$CODEWARS_FILE"
-  echo "main = do"                     >> "$CODEWARS_FILE"
-  echo "  print \"put tests here!\""   >> "$CODEWARS_FILE"
+  touch "$HASKELL_FILE"
+  echo "module $HASKELL_MODULE where"  >> "$HASKELL_FILE"
+  echo ""                              >> "$HASKELL_FILE"
+  echo "main :: IO ()"                 >> "$HASKELL_FILE"
+  echo "main = do"                     >> "$HASKELL_FILE"
+  echo "  print \"put tests here!\""   >> "$HASKELL_FILE"
 
   # attach haskell session and codewars window
   if tmux has-session -t "$SESSION" ; then
-    tmux new-window -c "$CODEWARS_FOLDER" -a -t "$SESSION" -n "$CODEWARS_MODULE"
+    tmux new-window -c "$HASKELL_FOLDER" -a -t "$SESSION" -n "$HASKELL_MODULE"
   else
-    tmux new-session -c "$CODEWARS_FOLDER" -n "$CODEWARS_MODULE" -d -s "$SESSION"
+    tmux new-session -c "$HASKELL_FOLDER" -n "$HASKELL_MODULE" -d -s "$SESSION"
   fi
 
-  tmux split-window -c "$CODEWARS_FOLDER" -t "$SESSION:$CODEWARS_MODULE" -h
-  tmux split-window -c "$CODEWARS_FOLDER" -t "$SESSION:$CODEWARS_MODULE" -v
+  tmux split-window -c "$HASKELL_FOLDER" -t "$SESSION:$HASKELL_MODULE" -h
+  tmux split-window -c "$HASKELL_FOLDER" -t "$SESSION:$HASKELL_MODULE" -v
 
-  tmux send-keys -t "$SESSION:$CODEWARS_MODULE.1" "vim $CODEWARS_MODULE.hs" C-m
-  tmux send-keys -t "$SESSION:$CODEWARS_MODULE.2" "ghcid $CODEWARS_MODULE.hs --test=main" C-m
-  tmux send-keys -t "$SESSION:$CODEWARS_MODULE.3" "ghci $CODEWARS_MODULE.hs" C-m
+  tmux send-keys -t "$SESSION:$HASKELL_MODULE.1" "vim $HASKELL_MODULE.hs" C-m
+  tmux send-keys -t "$SESSION:$HASKELL_MODULE.2" "ghcid $HASKELL_MODULE.hs --test=main" C-m
+  tmux send-keys -t "$SESSION:$HASKELL_MODULE.3" "ghci $HASKELL_MODULE.hs" C-m
 
 
-  tmux attach-session -t "$SESSION:$CODEWARS_MODULE"
+  tmux attach-session -t "$SESSION:$HASKELL_MODULE"
 }
 
 google() {
@@ -263,8 +269,22 @@ export NVM_DIR="$HOME/.nvm"
  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
-##################### CUSTOM CONFIG ######################
+######################### COLORS #########################
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
+function light() {
+  echo "set background=light" > ~/.vimrc_bgtype
+  base16_one-light
+}
+
+function dark() {
+  echo "set background=dark" > ~/.vimrc_bgtype
+  echo "colorscheme gruvbox" >> ~/.vimrc_bgtype
+  base16_gruvbox-dark-hard
+}
 
 ##################### WELCOME MESSAGE #####################
 clear;
