@@ -35,5 +35,5 @@ endfunction
 
 " Call everytime we open a Markdown file
 autocmd BufRead,BufNewFile,BufEnter *.md,*.markdown call MathAndLiquid()
-
+autocmd BufWinEnter * silent! :%foldopen!
 
