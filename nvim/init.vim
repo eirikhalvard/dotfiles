@@ -8,7 +8,6 @@ filetype off
 "                                  IMPORTS                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 call plug#begin('~/.config/nvim/plugged')
 
 " === Core functionality === "
@@ -48,11 +47,10 @@ Plug 'neovimhaskell/haskell-vim'
 
 " === Visual === "
 Plug 'itchyny/lightline.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'rakr/vim-one'
 Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
-
+Plug 'gruvbox-community/gruvbox'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 
@@ -154,6 +152,10 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+" Haskell Parsing (Alex and Happy)
+au BufRead,BufNewFile *.x set syntax=haskell
+au BufRead,BufNewFile *.y set syntax=haskell
+
 " === NERDTree === "
 let NERDTreeIgnore = ['__pycache__', '\.pyc$','\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*$', '[a-zA-Z]*egg[a-zA-Z]*', '.DS_Store', '.class']
 let NERDTreeShowHidden=1
@@ -224,11 +226,13 @@ map <silent> <leader>tss :set spell<CR>
 map <silent> <leader>tsn :set spelllang=nb<CR>
 map <silent> <leader>tse :set spelllang=en<CR>
 
+" === Compile (c) === "
+map <leader>ca :w! \| AsyncRun compiler "%" <CR>
+map <leader>cc :w! \| !compiler <C-r>%<CR>
+
 " === Actions (a) === "
 map <leader>ai :source ~/.config/nvim/init.vim<CR>
 map <leader>as :syntax sync fromstart<CR>
-" map <leader>ac :w! \| !compiler <C-r>%<CR>
-map <leader>ac :w! \| AsyncRun compiler "%" <CR>
 map <leader>af :ALEFix<CR>
 map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 " map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
@@ -276,7 +280,11 @@ let g:ale_sign_column_always = 1   "keep gutter open
 let g:ale_haskell_hie_executable = 'hie-wrapper'
 " let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
 let g:ale_linters = { 'haskell': ['hlint'], 'tex': ['chktex'] }
-let g:ale_fixers = { 'haskell': ['brittany', 'hlint'], 'tex': ['latexindent'] }
+let g:ale_fixers = { 
+  \ 'haskell': ['brittany', 'hlint'], 
+  \ 'tex': ['latexindent'],
+  \ 'json': ['fixjson']
+  \}
 let g:ale_lint_on_text_changed = 'never'
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -292,12 +300,11 @@ nnoremap <silent> <leader>cf :ALEFindReferences<CR>
 "                              LAYOUT & DESIGN                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 " === LightLine === "
 set noshowmode " remove built in INSERT promt, lightlines takes care of this!
 
 let g:lightline = {
-   \ 'colorscheme' : 'challenger_deep',
+   \ 'colorscheme' : 'one',
    \ 'active': {
    \   'left': [ [ 'mode', 'paste' ],
    \             [ 'readonly', 'filename', 'modified' ] ]
@@ -305,26 +312,17 @@ let g:lightline = {
    \ }
 
 " === Colors === "
-let g:one_allow_italics = 1 " I love italic for comments
 set termguicolors
 highlight Comment cterm=italic
 
-let g:focuscolour = 2
-function! ToggleFocusColor()
-  if (g:focuscolour == 0)
-    colorscheme one
-    set background=light
-    let g:focuscolour = 1
-  elseif (g:focuscolour == 1)
-    colorscheme one
-    set background=dark
-    let g:focuscolour = 2
-  elseif (g:focuscolour == 2)
-    colorscheme challenger_deep
-    hi LineNr guibg=NONE
-    hi Normal guibg=NONE ctermbg=NONE
-    let g:focuscolour = 0
-  endif
-endfunc
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
-call ToggleFocusColor()
+if filereadable(expand("~/.vimrc_bgtype"))
+  source ~/.vimrc_bgtype
+endif
+
+hi LineNr guibg=NONE
+hi Normal guibg=NONE ctermbg=NONE
