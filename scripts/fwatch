@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-# This script will set up a file watcher that automaticly compiles/runs
-# on save. Currenty set up with maude and haskell, but easily extendible 
-# for adding support of other filetypes
-# `fwatch file.filetype` to run
+# This script will set up a file watcher 
+# that automaticly compiles/runs on save. 
+
+file=$(greadlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
 
 function watchMaude() {
-  fswatch -o --event Updated "$1" | while read num ; do
+  fswatch -o --event Updated "$file" | while read num ; do
     clear
     echo "running maude program ($1)"
     content=$(<"$1")
@@ -17,14 +19,19 @@ EOF
   done
 }
 
-file=$(greadlink -f "$1")
-dir=$(dirname "$file")
-base="${file%.*}"
+function watchPython() {
+  fswatch -o --event Updated "$1" | while read num ; do
+    clear
+    echo "running python program ($1)"
+    python3 "$1"
+  done
+}
 
 cd "$dir" || exit
 
 case "$file" in
-  *\.maude) watchMaude $file ;;
+	*\.py) watchPython "$file" ;;
 	*\.hs) ghcid "$file" --test=main ;;
+  *\.maude) watchMaude $file ;;
 	*) printf "filetype not supported\n" ;;
 esac

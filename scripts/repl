@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# This script will start a repl from a file 
+
+file=$(greadlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
+relfile=$(realpath --relative-to "$dir" "$file")
+
+cd "$dir" || exit
+
+case "$file" in
+	*\.py) python3 -i "$relfile" ;;
+	*\.hs) ghci "$relfile" ;;
+	*\.maude) maude "$relfile" ;;
+	*) printf "filetype not supported\n" ;;
+esac
+
+
+

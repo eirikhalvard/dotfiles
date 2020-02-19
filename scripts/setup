@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# This script will setup a new tmux window in the current session
+# Including a window with source code, one with a file watcher
+# and one with a interactive repl
+
+if [ "$#" -eq 0 ]; then
+  echo "Usage: setup [filename.hs]"
+  echo "or:    setup [filename.py]"
+  echo "or:    setup [filename.maude]"
+  exit 1
+fi
+
+file=$(greadlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
+filename=$(realpath --relative-to "$dir" "$base")
+relfile=$(realpath --relative-to "$dir" "$file")
+
+cd "$dir" || exit
+
+fullSetup() {
+  # attaches a new window to the current tmux session
+  # The window includes three panes: 
+  #   1) a vim window for the module
+  #   2) a window that watches the file and compiles and runs on save
+  #   3) a interactive window for repl-work
+
+  # inspired from guide: https://blog.htbaa.com/news/tmux-scripting
+
+  if [ -z "$TMUX" ] ; then 
+    echo "Need to be attached to a session!"
+    exit 1
+  fi
+
+  template "$file"
+
+  tmux new-window -c "$dir" -a -n "$filename"
+
+  tmux split-window -t "$filename" -h
+  tmux split-window -t "$filename" -v
+
+  tmux send-keys -t "$filename.1" "vim $relfile" C-m
+  tmux send-keys -t "$filename.1" ",w"
+  tmux send-keys -t "$filename.2" "fwatch $relfile" C-m
+  tmux send-keys -t "$filename.3" "repl $relfile" C-m
+}
+
+case "$file" in
+  *\.py) fullSetup ;;
+	*\.hs) fullSetup  ;;
+	*\.maude) fullSetup ;;
+	*) printf "filetype not supported\n" && exit 1;;
+esac

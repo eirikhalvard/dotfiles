@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# This script will generate a template file from a filename
+# based on the file extension
+
+if [ "$#" -eq 0 ]; then
+  echo "Usage: template [filename.hs]"
+  echo "or:    template [filename.py]"
+  echo "or:    template [filename.maude]"
+  exit 1
+fi
+
+file=$(greadlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
+filename=$(realpath --relative-to "$dir" "$base")
+relfile=$(realpath --relative-to "$dir" "$file")
+
+cd "$dir" || exit
+
+pyTemplate='print("insert code...")'
+
+hsTemplate=$(cat <<-EOF
+module $filename where
+
+main :: IO ()
+main = do
+  print "hello"
+EOF
+)
+
+maudeTemplate='red 2 + 3'
+
+makeTemplate() {
+  if test -f "$file" ; then
+    echo "file already exist! Please try another file name"
+    exit 1
+  fi
+
+  touch "$file"
+  echo "$1" >> "$file"
+}
+
+case "$file" in
+  *\.py) makeTemplate "$pyTemplate" ;;
+	*\.hs) makeTemplate "$hsTemplate" ;;
+	*\.maude) makeTemplate "$maudeTemplate" ;;
+	*) printf "filetype not supported\n" && exit 1;;
+esac
