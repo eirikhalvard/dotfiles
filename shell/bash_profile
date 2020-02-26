@@ -34,9 +34,10 @@ alias t='tmux'
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
 alias tls='tmux ls'
+alias tkeys='tmux list-keys | fzf'
 
 alias sml='rlwrap sml'
-alias scm='c && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
+alias scm='clear && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
 alias maude='$HOME/bin/maude/maude.darwin64'
 
 alias -g FF='$(fzf)'
