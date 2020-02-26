@@ -242,12 +242,18 @@ vnoremap <leader>egS y:%s/<C-r>"//g<Left><Left>
 map <leader>ff :Files<CR>
 map <leader>fg :GFiles<CR>
 map <leader>fb :Buffers<CR>
-map <leader>fh :tabprevious<CR>
-map <leader>fj :bnext<CR>
+map <leader>fK :bfirst<CR>
 map <leader>fk :bprevious<CR>
+map <leader>fj :bnext<CR>
+map <leader>fJ :blast<CR>
+map <leader>fH :tabfirst<CR>
+map <leader>fh :tabprevious<CR>
 map <leader>fl :tabnext<CR>
-map <leader>fn :cnext<CR>
+map <leader>fL :tablast<CR>
+map <leader>fP :cfirst<CR>
 map <leader>fp :cprevious<CR>
+map <leader>fn :cnext<CR>
+map <leader>fN :clast<CR>
 map <leader>fc :cwindow<CR>
 
 " === Git (g) === "
