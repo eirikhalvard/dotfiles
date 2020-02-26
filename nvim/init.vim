@@ -31,10 +31,14 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wincent/terminus'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 " === Completion === "
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fszymanski/deoplete-emoji'
+Plug 'Shougo/neco-syntax'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -51,6 +55,8 @@ Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
 Plug 'gruvbox-community/gruvbox'
 Plug 'chriskempson/base16-vim'
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 
@@ -121,6 +127,8 @@ set noswapfile
 set undodir=~/.config/nvim/.vimdid
 set undofile
 
+set listchars=tab:▸\ ,eol:¬
+
 set clipboard=unnamed
 
 " === TEX === "
@@ -145,13 +153,6 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
-" Or use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
-
 " Haskell Parsing (Alex and Happy)
 au BufRead,BufNewFile *.x set syntax=haskell
 au BufRead,BufNewFile *.y set syntax=haskell
@@ -160,7 +161,6 @@ au BufRead,BufNewFile *.y set syntax=haskell
 let NERDTreeIgnore = ['__pycache__', '\.pyc$','\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*$', '[a-zA-Z]*egg[a-zA-Z]*', '.DS_Store', '.class']
 let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
-map <leader>tt :NERDTreeToggle<CR>
 
 " === Vim Align === "
 xmap ga <Plug>(EasyAlign)
@@ -192,39 +192,29 @@ let g:rainbow_active = 1
 
 
 " === General Mappings === "
-map √ }
-map ª {
-imap √ {
-imap ª }
-imap ı \
-imap ﬁ ->
 map <Left> <C-h>
 map <Right> <C-l>
 map <Down> }j
 map <Up> {k
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Down>"
 nnoremap Y y$
-
-" substitute in buffer or selection
-nnoremap S :%s//g<Left><Left>
-vnoremap S <ESC>:%s/\%V/g<Left><Left>
-
-" substitute selection or word under cursor
-nnoremap gS yiw:%s/<C-r>"//g<Left><Left>
-vnoremap gS y:%s/<C-r>"//g<Left><Left>
 
 " === Leader mappings === "
 map <leader>w :w<CR>
+map <leader><space> :Commands<CR>
 map <silent> <leader>s :Snippets<CR>
 map <silent> <leader><leader> :e#<CR>
 
 " === Toggles (t) === "
-map <silent> <leader>tc  :call ToggleFocusColor()<CR>
-map <silent> <leader>ta  :ALEToggle<CR>
-map <silent> <leader>tss :set spell<CR>
-map <silent> <leader>tsn :set spelllang=nb<CR>
-map <silent> <leader>tse :set spelllang=en<CR>
+map <leader>ta  :ALEToggle<CR>
+map <leader>tss :set spell!<CR>
+map <leader>tsn :set spelllang=nb<CR>
+map <leader>tse :set spelllang=en<CR>
+map <leader>tt :NERDTreeToggle<CR>
+map <leader>tg :Goyo<CR>
+map <leader>tl :set list!<CR>
 
 " === Compile (c) === "
 map <leader>ca :w! \| AsyncRun compiler "%" <CR>
@@ -238,6 +228,42 @@ map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 " map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
 " map <leader>ap   -- preview. defined in ftplugin
 
+" === Edit (e) === "
+" substitute in buffer or selection
+nnoremap <leader>es :%s//g<Left><Left>
+vnoremap <leader>es <ESC>:%s/\%V/g<Left><Left>
+" substitute selection or word under cursor
+nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
+nnoremap <leader>egS yiw:%s/<C-r>"//g<Left><Left>
+vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
+vnoremap <leader>egS y:%s/<C-r>"//g<Left><Left>
+
+" === File navigation (f) === "
+map <leader>ff :Files<CR>
+map <leader>fg :GFiles<CR>
+map <leader>fb :Buffers<CR>
+map <leader>fh :tabprevious<CR>
+map <leader>fj :bnext<CR>
+map <leader>fk :bprevious<CR>
+map <leader>fl :tabnext<CR>
+map <leader>fn :cnext<CR>
+map <leader>fp :cprevious<CR>
+map <leader>fc :cwindow<CR>
+
+" === Git (g) === "
+map <leader>gb :Git blame<CR>
+map <leader>gc :Git commit<CR>
+map <leader>gf :Git fetch<CR>
+map <leader>gg :Git<CR>
+map <leader>gh :GBrowse<CR>
+map <leader>gp :Git push<CR>
+map <leader>gw :Gwrite<CR>
+
+" === Locate (l) === "
+map <leader>la :ALENextWrap<CR>
+map <leader>lA :ALEPreviousWrap<CR>
+map <leader>ls ]s
+map <leader>lS [s
 
 " === Opens (o) === "
 map <leader>os :UltiSnipsEdit<CR>
@@ -266,8 +292,16 @@ nmap øsm <Plug>SlimeMotionSend
 nmap øsq øsmiq
 nmap øsb øsmab
 
+
 " === DEOPLETE === "
 let g:deoplete#enable_at_startup = 1
+" Use ALE and also some plugin 'foobar' as completion sources for all code.
+" call deoplete#custom#option('sources', {
+" \ '_': ['buffer', 'emoji'],
+" \})
+
+" use built in emojis
+call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
 
 " === ALE === "
 hi link ALEError Error
@@ -278,17 +312,17 @@ hi link ALEInfo SpellCap
 let g:ale_enabled = 0
 let g:ale_sign_column_always = 1   "keep gutter open
 let g:ale_haskell_hie_executable = 'hie-wrapper'
-" let g:ale_linters = { 'haskell': ['hie', 'hlint'] }
-let g:ale_linters = { 'haskell': ['hlint'], 'tex': ['chktex'] }
-let g:ale_fixers = { 
-  \ 'haskell': ['brittany', 'hlint'], 
-  \ 'tex': ['latexindent'],
-  \ 'json': ['fixjson']
-  \}
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters = { 
+\  'haskell': ['hlint'], 
+\  'tex': ['chktex'] 
+\}
 
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_fixers = { 
+\  'haskell': ['brittany', 'hlint'], 
+\  'tex': ['latexindent'],
+\  'json': ['fixjson']
+\}
+let g:ale_lint_on_text_changed = 'never'
 
 nnoremap <silent> K :ALEHover<CR>
 nnoremap <silent> gd <C-]>
@@ -307,7 +341,10 @@ let g:lightline = {
    \ 'colorscheme' : 'one',
    \ 'active': {
    \   'left': [ [ 'mode', 'paste' ],
-   \             [ 'readonly', 'filename', 'modified' ] ]
+   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+   \ },
+   \ 'component_function': {
+   \   'gitbranch': 'FugitiveHead'
    \ },
    \ }
 
