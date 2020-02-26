@@ -33,7 +33,10 @@ fullSetup() {
     exit 1
   fi
 
-  template "$file"
+  # Create file if it doesn't exist
+  if ! test -f "$file" ; then
+    template "$file"
+  fi
 
   tmux new-window -c "$dir" -a -n "$filename"
 

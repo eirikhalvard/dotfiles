@@ -12,7 +12,7 @@ cd "$dir" || exit
 case "$file" in
 	*\.py) python3 -i "$relfile" ;;
 	*\.hs) ghci "$relfile" ;;
-	*\.maude) maude "$relfile" ;;
+	*\.maude) "$HOME/bin/maude/maude.darwin64" "$relfile" ;;
 	*) printf "filetype not supported\n" ;;
 esac
 

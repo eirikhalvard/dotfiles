@@ -29,7 +29,7 @@ main = do
 EOF
 )
 
-maudeTemplate='red 2 + 3'
+maudeTemplate='red 2 + 3 .'
 
 makeTemplate() {
   if test -f "$file" ; then

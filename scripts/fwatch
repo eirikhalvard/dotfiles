@@ -5,7 +5,7 @@
 
 file=$(greadlink -f "$1")
 dir=$(dirname "$file")
-base="${file%.*}"
+# base="${file%.*}"
 
 function watchMaude() {
   fswatch -o --event Updated "$file" | while read num ; do
@@ -32,6 +32,6 @@ cd "$dir" || exit
 case "$file" in
 	*\.py) watchPython "$file" ;;
 	*\.hs) ghcid "$file" --test=main ;;
-  *\.maude) watchMaude $file ;;
+  *\.maude) watchMaude "$file" ;;
 	*) printf "filetype not supported\n" ;;
 esac
