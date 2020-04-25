@@ -1,8 +1,9 @@
-" ABBREVIATIONS
-" iabbrev -> $\rightarrow$
-map <leader>ap  <Plug>MarkdownPreviewToggle<CR>
+map <buffer> <leader>ap  <Plug>MarkdownPreviewToggle<CR>
+map <buffer> <leader>or :e rettermal.md<CR>
+map <buffer> <leader>op :w<CR>:silent !open -a Skim %<.pdf<CR>
 
-" IN2040 rette-makroer
+
+" rette-makroer
 let @c ="V/##kkcqj€kbkjq"
 let @d ="V/##kkjdkk//€kb###jj"
 let @h ="@ciHelt riktig!  kk/###jj"

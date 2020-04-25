@@ -5,6 +5,7 @@ export PATH=$PATH:$HOME/.config/scripts
 export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:"/Users/Eirik/bin/FDK/Tools/osx"
 export FDK_EXE="/Users/Eirik/bin/FDK/Tools/osx"
+export LC_ALL=en_US.UTF-8
 
 ##################### CUSTOM EXPORTS ######################
 export DRIVE=$HOME/Drive

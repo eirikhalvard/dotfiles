@@ -10,6 +10,11 @@ function compileEssay() {
   pdflatex --shell-escape "$1"
 }
 
+function compilaCompile() {
+  cd /Users/Eirik/Drive/Skole/S8/INF5110/compila07/ || exit
+  make
+}
+
 file=$(greadlink -f "$1")
 dir=$(dirname "$file")
 base="${file%.*}"
@@ -18,6 +23,7 @@ cd "$dir" || exit
 
 case "$file" in
   *thesis\.tex) compileEssay "$file" ;;
+  /Users/Eirik/Drive/Skole/S8/INF5110/compila07/*) compilaCompile ;;
 	*\.tex) pdflatex --shell-escape "$file" ;;
 	*\.md) pandoc "$file" -o "$base".pdf ;;
 	*\.py) python3 "$file" ;;

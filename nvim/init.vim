@@ -44,7 +44,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " === Filetype specific === "
-Plug 'vim-latex/vim-latex'
 Plug 'masukomi/vim-markdown-folding'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neovimhaskell/haskell-vim'
@@ -203,8 +202,10 @@ nnoremap Y y$
 
 " === Leader mappings === "
 map <leader>w :w<CR>
+map <leader>q :q<CR>
+map <leader>Q :q!<CR>
 map <leader><space> :Commands<CR>
-map <silent> <leader>s :Snippets<CR>
+map <leader>s :Snippets<CR>
 map <silent> <leader><leader> :e#<CR>
 
 " === Toggles (t) === "
@@ -228,10 +229,11 @@ map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 " map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
 " map <leader>ap   -- preview. defined in ftplugin
 
+
 " === Edit (e) === "
 " substitute in buffer or selection
 nnoremap <leader>es :%s//g<Left><Left>
-vnoremap <leader>es <ESC>:%s/\%V/g<Left><Left>
+vnoremap <leader>es :%s/\%V/g<Left><Left>
 " substitute selection or word under cursor
 nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
 nnoremap <leader>egS yiw:%s/<C-r>"//g<Left><Left>
@@ -260,6 +262,7 @@ map <leader>fc :cwindow<CR>
 map <leader>gb :Git blame<CR>
 map <leader>gc :Git commit<CR>
 map <leader>gf :Git fetch<CR>
+map <leader>gl :Git pull<CR>
 map <leader>gg :Git<CR>
 map <leader>gh :GBrowse<CR>
 map <leader>gp :Git push<CR>
@@ -326,7 +329,8 @@ let g:ale_linters = {
 let g:ale_fixers = { 
 \  'haskell': ['brittany', 'hlint'], 
 \  'tex': ['latexindent'],
-\  'json': ['fixjson']
+\  'json': ['fixjson'],
+\  'java': ['google_java_format']
 \}
 let g:ale_lint_on_text_changed = 'never'
 
