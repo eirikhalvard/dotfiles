@@ -233,7 +233,7 @@ map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 " === Edit (e) === "
 " substitute in buffer or selection
 nnoremap <leader>es :%s//g<Left><Left>
-vnoremap <leader>es :%s/\%V/g<Left><Left>
+vnoremap <leader>es :s/\%V/g<Left><Left>
 " substitute selection or word under cursor
 nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
 nnoremap <leader>egS yiw:%s/<C-r>"//g<Left><Left>
