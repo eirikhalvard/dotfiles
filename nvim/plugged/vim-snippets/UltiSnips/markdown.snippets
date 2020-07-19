@@ -111,11 +111,11 @@ endsnippet
 
 snippet template
 ---
-title: Løsningsforslag uke 07
-subtitle: IN2100 - Logikk for systemanalyse
+title: Title
+subtitle: Subtitle
 author:
 - Eirik Halvard Sæther
-keywords: [nothing, nothingness]
+keywords: [kw, keyword]
 abstract: |
   This is the abstract.
 
@@ -131,7 +131,7 @@ header-includes:
 
 ## Greier
 
-ting $3 \cdot 4$
+ting \$3 \\cdot 4\$
 
     if (a == b):
       then 4
@@ -167,6 +167,14 @@ endsnippet
 
 snippet HR "Helt riktig!" A
 Helt riktig!
+endsnippet
+
+snippet IR "Ikke riktig." A
+Ikke riktig.
+endsnippet
+
+snippet IHR "Ikke helt riktig." A
+Ikke helt riktig.
 endsnippet
 
 snippet LF "løsningsforslag" A
@@ -411,16 +419,15 @@ endsnippet
 #######################
 
 
-snippet lf1bandre
-Andre let-uttrykk er ikke helt riktig, selv om utskriften er det samme.
-
-\`\`\`scheme
-((lambda (bar baz)
-   ((lambda (bar foo)
-      (list foo bar))
-    (list bar baz) baz))
- foo 'towel)
-; -->
-; (towel (42 towel))
-\`\`\`
-endsnippet
+# snippet lf1bandre
+# Andre let-uttrykk er ikke helt riktig, selv om utskriften er det samme.
+# \`\`\`scheme
+# ((lambda (bar baz)
+#    ((lambda (bar foo)
+#       (list foo bar))
+#     (list bar baz) baz))
+#  foo 'towel)
+# ; -->
+# ; (towel (42 towel))
+# \`\`\`
+# endsnippet

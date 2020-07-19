@@ -47,6 +47,7 @@ Plug 'honza/vim-snippets'
 Plug 'masukomi/vim-markdown-folding'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neovimhaskell/haskell-vim'
+Plug 'lervag/vimtex'
 
 " === Visual === "
 Plug 'itchyny/lightline.vim'
@@ -219,7 +220,7 @@ map <leader>tl :set list!<CR>
 
 " === Compile (c) === "
 map <leader>ca :w! \| AsyncRun compiler "%" <CR>
-map <leader>cc :w! \| !compiler <C-r>%<CR>
+map <leader>cc :w! \| !compiler "<C-r>%"<CR>
 
 " === Actions (a) === "
 map <leader>ai :source ~/.config/nvim/init.vim<CR>
@@ -239,6 +240,9 @@ nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
 nnoremap <leader>egS yiw:%s/<C-r>"//g<Left><Left>
 vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
 vnoremap <leader>egS y:%s/<C-r>"//g<Left><Left>
+
+vnoremap <leader>en :g/.*/norm 
+vnoremap <leader>eN :g/..*/norm 
 
 " === File navigation (f) === "
 map <leader>ff :Files<CR>
@@ -304,14 +308,12 @@ nmap øsb øsmab
 
 " === DEOPLETE === "
 let g:deoplete#enable_at_startup = 1
-" Use ALE and also some plugin 'foobar' as completion sources for all code.
-" call deoplete#custom#option('sources', {
-" \ '_': ['buffer', 'emoji'],
-" \})
-
 " use built in emojis
 call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
-
+" This is new style
+call deoplete#custom#var('omni', 'input_patterns', {
+        \ 'tex': g:vimtex#re#deoplete
+        \})
 " === ALE === "
 hi link ALEError Error
 hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold

@@ -19,6 +19,14 @@ EOF
   done
 }
 
+function watchMarkdown() {
+  fswatch -o --event Updated "$1" | while read num ; do
+    clear
+    echo "compiling to pdf ($1)"
+    compiler "$1"
+  done
+}
+
 function watchPython() {
   fswatch -o --event Updated "$1" | while read num ; do
     clear
@@ -32,6 +40,7 @@ cd "$dir" || exit
 case "$file" in
 	*\.py) watchPython "$file" ;;
 	*\.hs) ghcid "$file" --test=main ;;
+	*\.md) watchMarkdown "$file" ;;
   *\.maude) watchMaude "$file" ;;
 	*) printf "filetype not supported\n" ;;
 esac
