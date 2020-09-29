@@ -48,6 +48,7 @@ Plug 'masukomi/vim-markdown-folding'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neovimhaskell/haskell-vim'
 Plug 'lervag/vimtex'
+Plug 'elmcast/elm-vim'
 
 " === Visual === "
 Plug 'itchyny/lightline.vim'
@@ -147,6 +148,8 @@ set smartcase
 if has('nvim')
   set inccommand=nosplit
 end
+
+let $FZF_DEFAULT_OPTS='--reverse'
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
@@ -260,7 +263,7 @@ map <leader>fP :cfirst<CR>
 map <leader>fp :cprevious<CR>
 map <leader>fn :cnext<CR>
 map <leader>fN :clast<CR>
-map <leader>fc :cwindow<CR>
+map <leader>fc :Files ~/.config<CR>
 
 " === Git (g) === "
 map <leader>gb :Git blame<CR>
@@ -332,7 +335,9 @@ let g:ale_fixers = {
 \  'haskell': ['brittany', 'hlint'], 
 \  'tex': ['latexindent'],
 \  'json': ['fixjson'],
-\  'java': ['google_java_format']
+\  'java': ['google_java_format'],
+\  'markdown': ['prettier'],
+\  'elm': ['elm-format']
 \}
 let g:ale_lint_on_text_changed = 'never'
 

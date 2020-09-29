@@ -35,6 +35,13 @@ function watchPython() {
   done
 }
 
+function watchScheme() {
+  fswatch -o --event Updated "$1" | while read num ; do
+    clear
+    rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs "$1"
+  done
+}
+
 cd "$dir" || exit
 
 case "$file" in
@@ -42,5 +49,6 @@ case "$file" in
 	*\.hs) ghcid "$file" --test=main ;;
 	*\.md) watchMarkdown "$file" ;;
   *\.maude) watchMaude "$file" ;;
+  *\.scm) watchScheme "$file" ;;
 	*) printf "filetype not supported\n" ;;
 esac

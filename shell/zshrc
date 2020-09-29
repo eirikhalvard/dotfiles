@@ -111,6 +111,8 @@ RPS2=$RPS1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+eval "$(bw completion --shell zsh); compdef _bw bw;"
+
 bindkey '^X' fzf-cd-widget
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
