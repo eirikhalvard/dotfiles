@@ -35,12 +35,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " === Completion === "
-Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fszymanski/deoplete-emoji'
-Plug 'Shougo/neco-syntax'
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " === Filetype specific === "
@@ -180,11 +174,6 @@ let g:paredit_electric_return = 0
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
 
-" === Snippets === "
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
-
-
 " === Rainbow === "
 let g:rainbow_active = 1
 
@@ -199,9 +188,6 @@ map <Left> <C-h>
 map <Right> <C-l>
 map <Down> }j
 map <Up> {k
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Down>"
 nnoremap Y y$
 
 " === Leader mappings === "
@@ -209,11 +195,9 @@ map <leader>w :w<CR>
 map <leader>q :q<CR>
 map <leader>Q :q!<CR>
 map <leader><space> :Commands<CR>
-map <leader>s :Snippets<CR>
 map <silent> <leader><leader> :e#<CR>
 
 " === Toggles (t) === "
-map <leader>ta  :ALEToggle<CR>
 map <leader>tss :set spell!<CR>
 map <leader>tsn :set spelllang=nb<CR>
 map <leader>tse :set spelllang=en<CR>
@@ -232,7 +216,6 @@ map <leader>af :ALEFix<CR>
 map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 " map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
 " map <leader>ap   -- preview. defined in ftplugin
-
 
 " === Edit (e) === "
 " substitute in buffer or selection
@@ -276,13 +259,10 @@ map <leader>gp :Git push<CR>
 map <leader>gw :Gwrite<CR>
 
 " === Locate (l) === "
-map <leader>la :ALENextWrap<CR>
-map <leader>lA :ALEPreviousWrap<CR>
 map <leader>ls ]s
 map <leader>lS [s
 
 " === Opens (o) === "
-map <leader>os :UltiSnipsEdit<CR>
 map <leader>ot :Tags<CR>
 map <leader>oi :e ~/.config/nvim/init.vim<CR>
 map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
@@ -308,43 +288,6 @@ nmap øsm <Plug>SlimeMotionSend
 nmap øsq øsmiq
 nmap øsb øsmab
 
-
-" === DEOPLETE === "
-let g:deoplete#enable_at_startup = 1
-" use built in emojis
-call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
-" This is new style
-call deoplete#custom#var('omni', 'input_patterns', {
-        \ 'tex': g:vimtex#re#deoplete
-        \})
-" === ALE === "
-hi link ALEError Error
-hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold
-hi link ALEWarning Warning
-hi link ALEInfo SpellCap
-
-let g:ale_enabled = 0
-let g:ale_sign_column_always = 1   "keep gutter open
-let g:ale_haskell_hie_executable = 'hie-wrapper'
-let g:ale_linters = { 
-\  'haskell': ['hlint'], 
-\  'tex': ['chktex'] 
-\}
-
-let g:ale_fixers = { 
-\  'haskell': ['brittany', 'hlint'], 
-\  'tex': ['latexindent'],
-\  'json': ['fixjson'],
-\  'java': ['google_java_format'],
-\  'markdown': ['prettier'],
-\  'elm': ['elm-format']
-\}
-let g:ale_lint_on_text_changed = 'never'
-
-nnoremap <silent> K :ALEHover<CR>
-nnoremap <silent> gd <C-]>
-nnoremap <silent> gD :ALEGoToDefinitionInVSplit<CR>
-nnoremap <silent> <leader>cf :ALEFindReferences<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -380,3 +323,63 @@ endif
 
 hi LineNr guibg=NONE
 hi Normal guibg=NONE ctermbg=NONE
+
+
+
+" \/ \/ OLD COMPLETION SETUP. \/ \/
+
+" === Snippets === "
+" let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
+" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
+
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Down>"
+
+
+" map <leader>ta  :ALEToggle<CR>
+
+"" map <leader>s :Snippets<CR>
+
+" map <leader>la :ALENextWrap<CR>
+" map <leader>lA :ALEPreviousWrap<CR>
+" map <leader>os :UltiSnipsEdit<CR>
+
+" === DEOPLETE === "
+" let g:deoplete#enable_at_startup = 1
+" " use built in emojis
+" call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
+" " This is new style
+" call deoplete#custom#var('omni', 'input_patterns', {
+"         \ 'tex': g:vimtex#re#deoplete
+"         \})
+" === ALE === "
+" hi link ALEError Error
+" hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold
+" hi link ALEWarning Warning
+" hi link ALEInfo SpellCap
+
+" let g:ale_enabled = 0
+" let g:ale_sign_column_always = 1   "keep gutter open
+" let g:ale_haskell_hie_executable = 'hie-wrapper'
+" let g:ale_linters = { 
+" \  'haskell': ['hlint'], 
+" \  'tex': ['chktex'] 
+" \}
+
+" let g:ale_fixers = { 
+" \  'haskell': ['brittany', 'hlint'], 
+" \  'tex': ['latexindent'],
+" \  'json': ['fixjson'],
+" \  'java': ['google_java_format'],
+" \  'markdown': ['prettier'],
+" \  'elm': ['elm-format']
+" \}
+" let g:ale_lint_on_text_changed = 'never'
+
+" nnoremap <silent> K :ALEHover<CR>
+" nnoremap <silent> gd <C-]>
+" nnoremap <silent> gD :ALEGoToDefinitionInVSplit<CR>
+" nnoremap <silent> <leader>cf :ALEFindReferences<CR>
+
