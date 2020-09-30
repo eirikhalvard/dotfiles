@@ -382,147 +382,137 @@ nnoremap Y y$
 " === Leader Key Mappings === "
 
 let g:which_key_map = {
-\ 'w' : [':w', 'write-file'],
-\ 'q' : [':q', 'quit-file'],
-\ 'Q' : [':q!', 'force-quit-file'],
-\ ',' : [':e#', 'previous-file'],
+\ 'name' : '🌍 Leader',
 \ ' ' : [':Commands', 'commands'],
-\ }
-
-    let g:which_key_map['t'] = {
-    \ 'name' : '🔘 Toggles',
-    \ 't' : [':NERDTreeToggle', 'tree'],
-    \ 'g' : [':Goyo', 'goyo'],
-    \ 'w' : [':set list!', 'whitespace'],
-    \ }
-
-        let g:which_key_map['t']['s'] = {
-        \ 'name' : '📝 Spell',
-        \ 's' : [':set spell!', 'toggle-spell'],
-        \ 'n' : [':set spelllang=nb', 'norwegian'],
-        \ 'e' : [':set spelllang=en', 'english'],
-        \ }
-
-    let g:which_key_map['c'] = {
+\ ',' : [':e#', 'previous-file'],
+\ 'a' : {
+    \ 'name' : '🎮 Actions',
+    \ 'h' : 'insert-haskell-expression',
+    \ 'i' : [':source ~/.config/nvim/init.vim', 'source-init'],
+    \ 's' : [':syntax sync fromstart', 'sync-syntax'],
+    \ },
+\ 'c' : {
     \ 'name' : '🛠  Compile',
     \ 'a' : 'async-compile',
     \ 'c' : 'compile',
-    \ }
-    map <leader>ca :w! \| AsyncRun compiler "%" <CR>
-    map <leader>cc :w! \| !compiler "<C-r>%"<CR>
-
-
-    let g:which_key_map['a'] = {
-    \ 'name' : '🎮 Actions',
-    \ 'i' : [':source ~/.config/nvim/init.vim', 'source-init'],
-    \ 's' : [':syntax sync fromstart', 'sync-syntax'],
-    \ 'h' : 'insert-haskell-expression',
-    \ }
-    map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
-
-
-    let g:which_key_map['e'] = {
+    \ },
+\ 'e' : {
     \ 'name' : '💻 Edits',
     \ 's' : 'substitute',
     \ 'S' : 'substitute-thing',
     \ 'n' : 'norm-lines',
     \ 'N' : 'norm-non-empty-lines',
-    \ }
-    nnoremap <leader>es :%s//g<Left><Left>
-    vnoremap <leader>es :s/\%V/g<Left><Left>
-    nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
-    vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
-    map <leader>en :g/.*/norm 
-    map <leader>eN :g/..*/norm 
-
-
-    let g:which_key_map['f'] = {
+    \ },
+\ 'f' : {
     \ 'name' : '💿 Files',
+    \ 'b' : [':Buffers', 'buffers'],
+    \ 'c' : [':Files ~/.config', 'config-files'],
     \ 'f' : [':Files', 'files'],
     \ 'g' : [':GFiles', 'git-files'],
-    \ 'b' : [':Buffers', 'buffers'],
-    \ 'K' : [':bfirst', 'first-buffer'],
-    \ 'k' : [':bprevious', 'previous-buffer'],
-    \ 'j' : [':bnext', 'next-buffer'],
-    \ 'J' : [':blast', 'last-buffer'],
     \ 'H' : [':tabfirst', 'first-tab'],
     \ 'h' : [':tabprevious', 'previous-tab'],
-    \ 'l' : [':tabnext', 'next-tab'],
+    \ 'J' : [':blast', 'last-buffer'],
+    \ 'j' : [':bnext', 'next-buffer'],
+    \ 'K' : [':bfirst', 'first-buffer'],
+    \ 'k' : [':bprevious', 'previous-buffer'],
     \ 'L' : [':tablast', 'last-tab'],
+    \ 'l' : [':tabnext', 'next-tab'],
+    \ 'N' : [':clast', 'last-quickfix'],
+    \ 'n' : [':cnext', 'next-quickfix'],
     \ 'P' : [':cfirst', 'first-quickfix'],
     \ 'p' : [':cprevious', 'previous-quickfix'],
-    \ 'n' : [':cnext', 'next-quickfix'],
-    \ 'N' : [':clast', 'last-quickfix'],
-    \ 'c' : [':Files ~/.config', 'config-files']
-    \ }
-
-    let g:which_key_map['g'] = {
+    \ },
+\ 'g' : {
     \ 'name' : '🐙 Git',
     \ 'b' : [':Git blame', 'blame'],
     \ 'c' : [':Git commit', 'commit'],
     \ 'f' : [':Git fetch', 'fetch'],
-    \ 'l' : [':Git pull', 'pull'],
     \ 'g' : [':Git', 'git-menu'],
     \ 'h' : [':GBrowse', 'browse-github'],
+    \ 'l' : [':Git pull', 'pull'],
     \ 'p' : [':Git push', 'push'],
     \ 'w' : [':Gwrite', 'stage-file'],
-    \ }
-
-
-    let g:which_key_map['o'] = {
-    \ 'name' : '🛹 Open',
-    \ 'i' : [':e ~/.config/nvim/init.vim', 'init.vim'],
-    \ 'f' : 'ftplugin-filetype',
-    \ 'b' : [':e ~/.bash_profile', 'bash-profile'],
-    \ }
-    map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
-
-
-    let g:which_key_map['o'] = {
+    \ },
+\ 'h' : {
     \ 'name' : '🏳️  Help',
     \ 'h' : [':Helptags', 'help'],
     \ 'm' : [':Maps', 'mappings'],
-    \ }
-
-
-    let g:which_key_map['r'] = {
-    \ 'name' : '🦀 Resources',
-    \ 's' : {
-      \ 'name' : '🐸 Slime',
-      \ 's' : 'send',
-      \ 'p' : ['<Plug>SlimeParagraphSend', 'send-paragraph'],
-      \ 'm' : ['<Plug>SlimeMotionSend', 'send-motion'],
-      \ 'q' : [',rsmiq', 'send-inside-quotes'],
-      \ 'b' : [',rsmab', 'send-bracket'],
-      \ 'c' : ['<Plug>SlimeConfig', 'config'],
-      \ },
-    \ }
-    xmap <leader>rss <Plug>SlimeRegionSend
-    nmap <leader>rss <Plug>SlimeParagraphSend
-
-
-    let g:which_key_map['l'] = {
+    \ },
+\ 'l' : {
     \ 'name' : '🚀 LSP',
-    \ 'g' : {
-      \ 'name' : '🏂 Go',
-      \ 'd' : ['<Plug>(coc-definition)', 'definition'],
-      \ 't' : ['<Plug>(coc-type-definition)', 'type-definition'],
-      \ 'i' : ['<Plug>(coc-implementation)', 'implementation'],
-      \ 'r' : ['<Plug>(coc-references)', 'references'],
-      \ },
+    \ 'a' : ['<Plug>(coc-codeaction-selected)', 'codeaction'],
+    \ 'af' : ['<Plug>(coc-codeaction)', 'codeaction-file'],
+    \ 'C' : [':Fold', 'fold-close'],
     \ 'd' : ['<Plug>(coc-diagnostics-next)', 'diagnostic-next'],
     \ 'D' : ['<Plug>(coc-diagnostics-prev)', 'diagnostic-prev'],
     \ 'F' : [':Format', 'format'],
-    \ 'C' : [':Fold', 'fold-close'],
-    \ 'O' : [':OR', 'organize-imports'],
-    \ 'r' : ['<Plug>(coc-rename)', 'rename'],
     \ 'f' : ['<Plug>(coc-format-selected)', 'format-selected'],
-    \ 'a' : ['<Plug>(coc-codeaction-selected)', 'codeaction'],
-    \ 'af' : ['<Plug>(coc-codeaction)', 'codeaction-file'],
-    \ 'q' : ['<Plug>(coc-fix-current)', 'fix-current'],
+    \ 'g' : {
+      \ 'name' : '🏂 Go',
+      \ 'd' : ['<Plug>(coc-definition)', 'definition'],
+      \ 'i' : ['<Plug>(coc-implementation)', 'implementation'],
+      \ 'r' : ['<Plug>(coc-references)', 'references'],
+      \ 't' : ['<Plug>(coc-type-definition)', 'type-definition'],
+      \ },
     \ 'l' : [':CocList', 'coc-list'],
+    \ 'O' : [':OR', 'organize-imports'],
+    \ 'q' : ['<Plug>(coc-fix-current)', 'fix-current'],
+    \ 'r' : ['<Plug>(coc-rename)', 'rename'],
     \ 's' : ['K', 'show-documentation (K)'],
-    \ }
+    \ },
+\ 'o' : {
+    \ 'name' : '🛹 Open',
+    \ 'b' : [':e ~/.bash_profile', 'bash-profile'],
+    \ 'f' : 'ftplugin-filetype',
+    \ 'i' : [':e ~/.config/nvim/init.vim', 'init.vim'],
+    \ },
+\ 'Q' : [':q!', 'force-quit-file'],
+\ 'q' : [':q', 'quit-file'],
+\ 'r' : {
+    \ 'name' : '🦀 Resources',
+    \ 's' : {
+      \ 'name' : '🐸 Slime',
+      \ 'b' : [',rsmab', 'send-bracket'],
+      \ 'c' : ['<Plug>SlimeConfig', 'config'],
+      \ 'm' : ['<Plug>SlimeMotionSend', 'send-motion'],
+      \ 'p' : ['<Plug>SlimeParagraphSend', 'send-paragraph'],
+      \ 'q' : [',rsmiq', 'send-inside-quotes'],
+      \ 's' : 'send',
+      \ },
+    \ },
+\ 't' : {
+    \ 'name' : '🔘 Toggles',
+    \ 'g' : [':Goyo', 'goyo'],
+    \ 's' : {
+        \ 'name' : '📝 Spell',
+        \ 'e' : [':set spelllang=en', 'english'],
+        \ 'n' : [':set spelllang=nb', 'norwegian'],
+        \ 's' : [':set spell!', 'toggle-spell'],
+        \ },
+    \ 't' : [':NERDTreeToggle', 'tree'],
+    \ 'w' : [':set list!', 'whitespace'],
+    \ },
+\ 'w' : [':w', 'write-file'],
+\ }
+
+" Some commands are to complex to be written directly in
+" the which-key map. Either there is an ex command that
+" uses more complex features, or we have custom implementation
+" for visual mode and normal mode
+map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
+map <leader>ca :w! \| AsyncRun compiler "%" <CR>
+map <leader>cc :w! \| !compiler "<C-r>%"<CR>
+map <leader>en :g/.*/norm 
+map <leader>eN :g/..*/norm 
+nnoremap <leader>es :%s//g<Left><Left>
+vnoremap <leader>es :s/\%V/g<Left><Left>
+nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
+vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
+map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
+xmap <leader>rss <Plug>SlimeRegionSend
+nmap <leader>rss <Plug>SlimeParagraphSend
+
+
 
 " Formatting selected code.
 " " Mappings for CoCList
