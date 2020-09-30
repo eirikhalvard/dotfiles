@@ -21,6 +21,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-exchange'
 Plug 'wellle/targets.vim'
 Plug 'chaoren/vim-wordmotion'
+Plug 'liuchengxu/vim-which-key'
 
 " === Editor === "
 Plug '/usr/local/opt/fzf'
@@ -68,6 +69,7 @@ syntax on
 filetype plugin indent on 
 
 let mapleader = ","
+let maplocalleader = "\<Space>"
 
 " Security
 set modelines=0
@@ -179,120 +181,7 @@ let g:slime_no_mappings = 1
 " === Rainbow === "
 let g:rainbow_active = 1
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  MAPPINGS                                  "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-" === General Mappings === "
-map <Left> <C-h>
-map <Right> <C-l>
-map <Down> }j
-map <Up> {k
-nnoremap Y y$
-
-" === Leader mappings === "
-map <leader>w :w<CR>
-map <leader>q :q<CR>
-map <leader>Q :q!<CR>
-map <leader><space> :Commands<CR>
-map <silent> <leader><leader> :e#<CR>
-
-" === Toggles (t) === "
-map <leader>tss :set spell!<CR>
-map <leader>tsn :set spelllang=nb<CR>
-map <leader>tse :set spelllang=en<CR>
-map <leader>tt :NERDTreeToggle<CR>
-map <leader>tg :Goyo<CR>
-map <leader>tl :set list!<CR>
-
-" === Compile (c) === "
-map <leader>ca :w! \| AsyncRun compiler "%" <CR>
-map <leader>cc :w! \| !compiler "<C-r>%"<CR>
-" See completion mappings for more mappings
-
-" === Actions (a) === "
-map <leader>ai :source ~/.config/nvim/init.vim<CR>
-map <leader>as :syntax sync fromstart<CR>
-map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
-" map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
-" map <leader>ap   -- preview. defined in ftplugin
-
-" === Edit (e) === "
-" substitute in buffer or selection
-nnoremap <leader>es :%s//g<Left><Left>
-vnoremap <leader>es :s/\%V/g<Left><Left>
-" substitute selection or word under cursor
-nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
-nnoremap <leader>egS yiw:%s/<C-r>"//g<Left><Left>
-vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
-vnoremap <leader>egS y:%s/<C-r>"//g<Left><Left>
-
-vnoremap <leader>en :g/.*/norm 
-vnoremap <leader>eN :g/..*/norm 
-
-" === File navigation (f) === "
-map <leader>ff :Files<CR>
-map <leader>fg :GFiles<CR>
-map <leader>fb :Buffers<CR>
-map <leader>fK :bfirst<CR>
-map <leader>fk :bprevious<CR>
-map <leader>fj :bnext<CR>
-map <leader>fJ :blast<CR>
-map <leader>fH :tabfirst<CR>
-map <leader>fh :tabprevious<CR>
-map <leader>fl :tabnext<CR>
-map <leader>fL :tablast<CR>
-map <leader>fP :cfirst<CR>
-map <leader>fp :cprevious<CR>
-map <leader>fn :cnext<CR>
-map <leader>fN :clast<CR>
-map <leader>fc :Files ~/.config<CR>
-
-" === Git (g) === "
-map <leader>gb :Git blame<CR>
-map <leader>gc :Git commit<CR>
-map <leader>gf :Git fetch<CR>
-map <leader>gl :Git pull<CR>
-map <leader>gg :Git<CR>
-map <leader>gh :GBrowse<CR>
-map <leader>gp :Git push<CR>
-map <leader>gw :Gwrite<CR>
-
-" === Locate (l) === "
-map <leader>ls ]s
-map <leader>lS [s
-
-" === Opens (o) === "
-map <leader>ot :Tags<CR>
-map <leader>oi :e ~/.config/nvim/init.vim<CR>
-map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
-map <leader>ob :e ~/.bash_profile<CR>
-
-" === Help (h) === "
-map <leader>ht :Helptags<CR>
-map <leader>hm :Maps<CR>
-
-" === FZF mappings === "
-map øb :Buffers<CR>
-map øl :Lines<CR>
-map øh :BLines<CR>
-map øf :Files<CR>
-map ør :Rg<CR>
-map øy yiw:Rg <C-r>"<CR>
-
-" === Slime mappings (øs) === "
-xmap øss <Plug>SlimeRegionSend
-nmap øss <Plug>SlimeParagraphSend
-nmap øsc <Plug>SlimeConfig
-nmap øsm <Plug>SlimeMotionSend
-nmap øsq øsmiq
-nmap øsb øsmab
-
-
 " === Completion Config === "
-
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -327,8 +216,6 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr><Left> pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr><Right> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Down>"
 
 function! s:check_back_space() abort
@@ -348,25 +235,12 @@ endfunction
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " === Completion Mappings === "
-
-" Diagnostics
-nmap <silent> <space>dk <Plug>(coc-diagnostics-prev)
-nmap <silent> <space>dj <Plug>(coc-diagnostics-next)
-
-" Go
-nmap <silent> <space>gd <Plug>(coc-definition)
-nmap <silent> <space>gt <Plug>(coc-type-definition)
-nmap <silent> <space>gi <Plug>(coc-implementation)
-nmap <silent> <space>gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -379,13 +253,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <space>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <space>f  <Plug>(coc-format-selected)
-nmap <space>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -394,15 +261,10 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
-" Example: `<space>aap` for current paragraph
-xmap <space>a  <Plug>(coc-codeaction-selected)
-nmap <space>a  <Plug>(coc-codeaction-selected)
+" Diagnostics
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <space>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <space>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -428,25 +290,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>la  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>le  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>lc  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>lo  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>ls  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>lj  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>lk  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>lp  :<C-u>CocListResume<CR>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              LAYOUT & DESIGN                               "
@@ -512,4 +355,184 @@ hi Normal guibg=NONE ctermbg=NONE
 " \  'markdown': ['prettier'],
 " \}
 " let g:ale_lint_on_text_changed = 'never'
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  MAPPINGS                                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+nnoremap <silent> <localleader> :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<Space>'<CR>
+vnoremap <silent> <leader>      :<c-u>WhichKeyVisual ','<CR>
+set timeoutlen=500
+let g:which_key_map = {}
+
+
+" === General Mappings === "
+
+map <Left> <C-h>
+map <Right> <C-l>
+map <Down> }j
+map <Up> {k
+nnoremap Y y$
+
+" === Leader Key Mappings === "
+
+let g:which_key_map = {
+\ 'name' : '🌍 Leader',
+\ ' ' : [':Commands', 'commands'],
+\ ',' : [':e#', 'previous-file'],
+\ 'a' : {
+    \ 'name' : '🎮 Actions',
+    \ 'h' : 'insert-haskell-expression',
+    \ 'i' : [':source ~/.config/nvim/init.vim', 'source-init'],
+    \ 's' : [':syntax sync fromstart', 'sync-syntax'],
+    \ },
+\ 'c' : {
+    \ 'name' : '🛠  Compile',
+    \ 'a' : 'async-compile',
+    \ 'c' : 'compile',
+    \ },
+\ 'e' : {
+    \ 'name' : '💻 Edits',
+    \ 's' : 'substitute',
+    \ 'S' : 'substitute-thing',
+    \ 'n' : 'norm-lines',
+    \ 'N' : 'norm-non-empty-lines',
+    \ },
+\ 'f' : {
+    \ 'name' : '💿 Files',
+    \ 'b' : [':Buffers', 'buffers'],
+    \ 'c' : [':Files ~/.config', 'config-files'],
+    \ 'f' : [':Files', 'files'],
+    \ 'g' : [':GFiles', 'git-files'],
+    \ 'H' : [':tabfirst', 'first-tab'],
+    \ 'h' : [':tabprevious', 'previous-tab'],
+    \ 'J' : [':blast', 'last-buffer'],
+    \ 'j' : [':bnext', 'next-buffer'],
+    \ 'K' : [':bfirst', 'first-buffer'],
+    \ 'k' : [':bprevious', 'previous-buffer'],
+    \ 'L' : [':tablast', 'last-tab'],
+    \ 'l' : [':tabnext', 'next-tab'],
+    \ 'N' : [':clast', 'last-quickfix'],
+    \ 'n' : [':cnext', 'next-quickfix'],
+    \ 'P' : [':cfirst', 'first-quickfix'],
+    \ 'p' : [':cprevious', 'previous-quickfix'],
+    \ },
+\ 'g' : {
+    \ 'name' : '🐙 Git',
+    \ 'b' : [':Git blame', 'blame'],
+    \ 'c' : [':Git commit', 'commit'],
+    \ 'f' : [':Git fetch', 'fetch'],
+    \ 'g' : [':Git', 'git-menu'],
+    \ 'h' : [':GBrowse', 'browse-github'],
+    \ 'l' : [':Git pull', 'pull'],
+    \ 'p' : [':Git push', 'push'],
+    \ 'w' : [':Gwrite', 'stage-file'],
+    \ },
+\ 'h' : {
+    \ 'name' : '🏳️  Help',
+    \ 'h' : [':Helptags', 'help'],
+    \ 'm' : [':Maps', 'mappings'],
+    \ },
+\ 'l' : {
+    \ 'name' : '🚀 LSP',
+    \ 'a' : ['<Plug>(coc-codeaction-selected)', 'codeaction'],
+    \ 'af' : ['<Plug>(coc-codeaction)', 'codeaction-file'],
+    \ 'C' : [':Fold', 'fold-close'],
+    \ 'd' : ['<Plug>(coc-diagnostics-next)', 'diagnostic-next'],
+    \ 'D' : ['<Plug>(coc-diagnostics-prev)', 'diagnostic-prev'],
+    \ 'F' : [':Format', 'format'],
+    \ 'f' : ['<Plug>(coc-format-selected)', 'format-selected'],
+    \ 'g' : {
+      \ 'name' : '🏂 Go',
+      \ 'd' : ['<Plug>(coc-definition)', 'definition'],
+      \ 'i' : ['<Plug>(coc-implementation)', 'implementation'],
+      \ 'r' : ['<Plug>(coc-references)', 'references'],
+      \ 't' : ['<Plug>(coc-type-definition)', 'type-definition'],
+      \ },
+    \ 'l' : [':CocList', 'coc-list'],
+    \ 'O' : [':OR', 'organize-imports'],
+    \ 'q' : ['<Plug>(coc-fix-current)', 'fix-current'],
+    \ 'r' : ['<Plug>(coc-rename)', 'rename'],
+    \ 's' : ['K', 'show-documentation (K)'],
+    \ },
+\ 'o' : {
+    \ 'name' : '🛹 Open',
+    \ 'b' : [':e ~/.bash_profile', 'bash-profile'],
+    \ 'f' : 'ftplugin-filetype',
+    \ 'i' : [':e ~/.config/nvim/init.vim', 'init.vim'],
+    \ },
+\ 'Q' : [':q!', 'force-quit-file'],
+\ 'q' : [':q', 'quit-file'],
+\ 'r' : {
+    \ 'name' : '🦀 Resources',
+    \ 's' : {
+      \ 'name' : '🐸 Slime',
+      \ 'b' : [',rsmab', 'send-bracket'],
+      \ 'c' : ['<Plug>SlimeConfig', 'config'],
+      \ 'm' : ['<Plug>SlimeMotionSend', 'send-motion'],
+      \ 'p' : ['<Plug>SlimeParagraphSend', 'send-paragraph'],
+      \ 'q' : [',rsmiq', 'send-inside-quotes'],
+      \ 's' : 'send',
+      \ },
+    \ },
+\ 't' : {
+    \ 'name' : '🔘 Toggles',
+    \ 'g' : [':Goyo', 'goyo'],
+    \ 's' : {
+        \ 'name' : '📝 Spell',
+        \ 'e' : [':set spelllang=en', 'english'],
+        \ 'n' : [':set spelllang=nb', 'norwegian'],
+        \ 's' : [':set spell!', 'toggle-spell'],
+        \ },
+    \ 't' : [':NERDTreeToggle', 'tree'],
+    \ 'w' : [':set list!', 'whitespace'],
+    \ },
+\ 'w' : [':w', 'write-file'],
+\ }
+
+" Some commands are to complex to be written directly in
+" the which-key map. Either there is an ex command that
+" uses more complex features, or we have custom implementation
+" for visual mode and normal mode
+map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
+map <leader>ca :w! \| AsyncRun compiler "%" <CR>
+map <leader>cc :w! \| !compiler "<C-r>%"<CR>
+map <leader>en :g/.*/norm 
+map <leader>eN :g/..*/norm 
+nnoremap <leader>es :%s//g<Left><Left>
+vnoremap <leader>es :s/\%V/g<Left><Left>
+nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
+vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
+map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
+xmap <leader>rss <Plug>SlimeRegionSend
+nmap <leader>rss <Plug>SlimeParagraphSend
+
+
+
+" Formatting selected code.
+" " Mappings for CoCList
+" " Show all diagnostics.
+" nnoremap <silent><nowait> <space>la  :<C-u>CocList diagnostics<cr>
+" " Manage extensions.
+" nnoremap <silent><nowait> <space>le  :<C-u>CocList extensions<cr>
+" " Show commands.
+" nnoremap <silent><nowait> <space>lc  :<C-u>CocList commands<cr>
+" " Find symbol of current document.
+" nnoremap <silent><nowait> <space>lo  :<C-u>CocList outline<cr>
+" " Search workspace symbols.
+" nnoremap <silent><nowait> <space>ls  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent><nowait> <space>lj  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent><nowait> <space>lk  :<C-u>CocPrev<CR>
+" " Resume latest coc list.
+" nnoremap <silent><nowait> <space>lp  :<C-u>CocListResume<CR>
+
+
+call which_key#register(',', "g:which_key_map")
 
