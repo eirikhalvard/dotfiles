@@ -203,100 +203,116 @@ map <Down> }j
 map <Up> {k
 nnoremap Y y$
 
-" === Top Level Mappings === "
+" === Leader Key Mappings === "
 
 let g:which_key_map = {
-\ 'w' : [':w', 'Qrite File'],
-\ 'q' : [':q', 'Quit File'],
-\ 'Q' : [':q!', 'Force Quit File'],
-\ ',' : [':e#', 'Previous File'],
-\ ' ' : [':Commands', 'Commands'],
+\ 'w' : [':w', 'write-file'],
+\ 'q' : [':q', 'quit-file'],
+\ 'Q' : [':q!', 'force-quit-file'],
+\ ',' : [':e#', 'previous-file'],
+\ ' ' : [':Commands', 'commands'],
 \ }
 
-  let g:which_key_map['t'] = {
-  \ 'name' : '🔘 Toggles',
-  \ 't' : [':NERDTreeToggle', 'Tree'],
-  \ 'g' : [':Goyo', 'Goyo'],
-  \ 'w' : [':set list!', 'Whitespace'],
-  \ }
-
-    let g:which_key_map['t']['s'] = {
-    \ 'name' : '📝 Spell',
-    \ 't' : [':set spell!', 'Toggle'],
-    \ 'g' : [':set spelllang=nb', 'Norwegian'],
-    \ 'w' : [':set spelllang=en', 'English'],
+    let g:which_key_map['t'] = {
+    \ 'name' : '🔘 Toggles',
+    \ 't' : [':NERDTreeToggle', 'tree'],
+    \ 'g' : [':Goyo', 'goyo'],
+    \ 'w' : [':set list!', 'whitespace'],
     \ }
 
+        let g:which_key_map['t']['s'] = {
+        \ 'name' : '📝 Spell',
+        \ 's' : [':set spell!', 'toggle-spell'],
+        \ 'n' : [':set spelllang=nb', 'norwegian'],
+        \ 'e' : [':set spelllang=en', 'english'],
+        \ }
+
+    let g:which_key_map['c'] = {
+    \ 'name' : '🛠  Compile',
+    \ 'a' : 'async-compile',
+    \ 'c' : 'compile',
+    \ }
+    map <leader>ca :w! \| AsyncRun compiler "%" <CR>
+    map <leader>cc :w! \| !compiler "<C-r>%"<CR>
+
+
+    let g:which_key_map['a'] = {
+    \ 'name' : '🎮 Actions',
+    \ 'i' : [':source ~/.config/nvim/init.vim', 'source-init'],
+    \ 's' : [':syntax sync fromstart', 'sync-syntax'],
+    \ 'h' : 'insert-haskell-expression',
+    \ }
+    map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
+
+
+    let g:which_key_map['e'] = {
+    \ 'name' : '💻 Edits',
+    \ 's' : 'substitute',
+    \ 'S' : 'substitute-thing',
+    \ 'n' : 'norm-lines',
+    \ 'N' : 'norm-non-empty-lines',
+    \ }
+    nnoremap <leader>es :%s//g<Left><Left>
+    vnoremap <leader>es :s/\%V/g<Left><Left>
+    nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
+    vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
+    map <leader>en :g/.*/norm 
+    map <leader>eN :g/..*/norm 
+
+
+    let g:which_key_map['f'] = {
+    \ 'name' : '💿 Files',
+    \ 'f' : [':Files', 'files'],
+    \ 'g' : [':GFiles', 'git-files'],
+    \ 'b' : [':Buffers', 'buffers'],
+    \ 'K' : [':bfirst', 'first-buffer'],
+    \ 'k' : [':bprevious', 'previous-buffer'],
+    \ 'j' : [':bnext', 'next-buffer'],
+    \ 'J' : [':blast', 'last-buffer'],
+    \ 'H' : [':tabfirst', 'first-tab'],
+    \ 'h' : [':tabprevious', 'previous-tab'],
+    \ 'l' : [':tabnext', 'next-tab'],
+    \ 'L' : [':tablast', 'last-tab'],
+    \ 'P' : [':cfirst', 'first-quickfix'],
+    \ 'p' : [':cprevious', 'previous-quickfix'],
+    \ 'n' : [':cnext', 'next-quickfix'],
+    \ 'N' : [':clast', 'last-quickfix'],
+    \ 'c' : [':Files ~/.config', 'config-files']
+    \ }
+
+    let g:which_key_map['g'] = {
+    \ 'name' : '🐙 Git',
+    \ 'b' : [':Git blame', 'blame'],
+    \ 'c' : [':Git commit', 'commit'],
+    \ 'f' : [':Git fetch', 'fetch'],
+    \ 'l' : [':Git pull', 'pull'],
+    \ 'g' : [':Git', 'git-menu'],
+    \ 'h' : [':GBrowse', 'browse-github'],
+    \ 'p' : [':Git push', 'push'],
+    \ 'w' : [':Gwrite', 'stage-file'],
+    \ }
+
+
+    let g:which_key_map['o'] = {
+    \ 'name' : '🛹 Open',
+    \ 'i' : [':e ~/.config/nvim/init.vim', 'init.vim'],
+    \ 'f' : 'ftplugin-filetype',
+    \ 'b' : [':e ~/.bash_profile', 'bash-profile'],
+    \ }
+    map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
+
+
+    let g:which_key_map['o'] = {
+    \ 'name' : '🏳️  Help',
+    \ 'h' : [':Helptags', 'help'],
+    \ 'm' : [':Maps', 'mappings'],
+    \ }
 
 
 call which_key#register(',', "g:which_key_map")
 
-" === Compile (c) === "
-map <leader>ca :w! \| AsyncRun compiler "%" <CR>
-map <leader>cc :w! \| !compiler "<C-r>%"<CR>
-" See completion mappings for more mappings
-
 " === Actions (a) === "
-map <leader>ai :source ~/.config/nvim/init.vim<CR>
-map <leader>as :syntax sync fromstart<CR>
-map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
-" map <leader>at :!ctags -R . -- generate tags. defined in ftplugin
 " map <leader>ap   -- preview. defined in ftplugin
-
-" === Edit (e) === "
-" substitute in buffer or selection
-nnoremap <leader>es :%s//g<Left><Left>
-vnoremap <leader>es :s/\%V/g<Left><Left>
-" substitute selection or word under cursor
-nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
-nnoremap <leader>egS yiw:%s/<C-r>"//g<Left><Left>
-vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
-vnoremap <leader>egS y:%s/<C-r>"//g<Left><Left>
-
-vnoremap <leader>en :g/.*/norm 
-vnoremap <leader>eN :g/..*/norm 
-
-" === File navigation (f) === "
-map <leader>ff :Files<CR>
-map <leader>fg :GFiles<CR>
-map <leader>fb :Buffers<CR>
-map <leader>fK :bfirst<CR>
-map <leader>fk :bprevious<CR>
-map <leader>fj :bnext<CR>
-map <leader>fJ :blast<CR>
-map <leader>fH :tabfirst<CR>
-map <leader>fh :tabprevious<CR>
-map <leader>fl :tabnext<CR>
-map <leader>fL :tablast<CR>
-map <leader>fP :cfirst<CR>
-map <leader>fp :cprevious<CR>
-map <leader>fn :cnext<CR>
-map <leader>fN :clast<CR>
-map <leader>fc :Files ~/.config<CR>
-
-" === Git (g) === "
-map <leader>gb :Git blame<CR>
-map <leader>gc :Git commit<CR>
-map <leader>gf :Git fetch<CR>
-map <leader>gl :Git pull<CR>
-map <leader>gg :Git<CR>
-map <leader>gh :GBrowse<CR>
-map <leader>gp :Git push<CR>
-map <leader>gw :Gwrite<CR>
-
-" === Locate (l) === "
-map <leader>ls ]s
-map <leader>lS [s
-
-" === Opens (o) === "
-map <leader>ot :Tags<CR>
-map <leader>oi :e ~/.config/nvim/init.vim<CR>
-map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
-map <leader>ob :e ~/.bash_profile<CR>
-
-" === Help (h) === "
-map <leader>ht :Helptags<CR>
-map <leader>hm :Maps<CR>
 
 " === FZF mappings === "
 map øb :Buffers<CR>
