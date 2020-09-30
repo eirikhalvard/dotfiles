@@ -21,6 +21,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-exchange'
 Plug 'wellle/targets.vim'
 Plug 'chaoren/vim-wordmotion'
+Plug 'liuchengxu/vim-which-key'
 
 " === Editor === "
 Plug '/usr/local/opt/fzf'
@@ -68,6 +69,7 @@ syntax on
 filetype plugin indent on 
 
 let mapleader = ","
+let maplocalleader = "\<Space>"
 
 " Security
 set modelines=0
@@ -185,27 +187,49 @@ let g:rainbow_active = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+nnoremap <silent> <localleader> :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<Space>'<CR>
+vnoremap <silent> <leader>      :<c-u>WhichKeyVisual ','<CR>
+set timeoutlen=500
+let g:which_key_map = {}
+
+
 " === General Mappings === "
+
 map <Left> <C-h>
 map <Right> <C-l>
 map <Down> }j
 map <Up> {k
 nnoremap Y y$
 
-" === Leader mappings === "
-map <leader>w :w<CR>
-map <leader>q :q<CR>
-map <leader>Q :q!<CR>
-map <leader><space> :Commands<CR>
-map <silent> <leader><leader> :e#<CR>
+" === Top Level Mappings === "
 
-" === Toggles (t) === "
-map <leader>tss :set spell!<CR>
-map <leader>tsn :set spelllang=nb<CR>
-map <leader>tse :set spelllang=en<CR>
-map <leader>tt :NERDTreeToggle<CR>
-map <leader>tg :Goyo<CR>
-map <leader>tl :set list!<CR>
+let g:which_key_map = {
+\ 'w' : [':w', 'Qrite File'],
+\ 'q' : [':q', 'Quit File'],
+\ 'Q' : [':q!', 'Force Quit File'],
+\ ',' : [':e#', 'Previous File'],
+\ ' ' : [':Commands', 'Commands'],
+\ }
+
+  let g:which_key_map['t'] = {
+  \ 'name' : '🔘 Toggles',
+  \ 't' : [':NERDTreeToggle', 'Tree'],
+  \ 'g' : [':Goyo', 'Goyo'],
+  \ 'w' : [':set list!', 'Whitespace'],
+  \ }
+
+    let g:which_key_map['t']['s'] = {
+    \ 'name' : '📝 Spell',
+    \ 't' : [':set spell!', 'Toggle'],
+    \ 'g' : [':set spelllang=nb', 'Norwegian'],
+    \ 'w' : [':set spelllang=en', 'English'],
+    \ }
+
+
+
+call which_key#register(',', "g:which_key_map")
 
 " === Compile (c) === "
 map <leader>ca :w! \| AsyncRun compiler "%" <CR>
