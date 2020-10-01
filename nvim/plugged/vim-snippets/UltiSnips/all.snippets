@@ -97,7 +97,7 @@ snippet datetime "YYYY-MM-DD hh:mm" w
 endsnippet
 
 snippet todo "TODO comment" bw
-`!p snip.rv=get_comment_format()[0]` ${2:TODO}: $0${3: <${4:`!v strftime('%d-%m-%y')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
+`!p snip.rv=get_comment_format()[0]` TODO: $0 <`!v strftime('%d-%m-%y')`, `!v g:snips_author`> `!p snip.rv=get_comment_format()[2]`
 endsnippet
 
 ##########
@@ -110,18 +110,6 @@ endsnippet
 #####################
 #  Custom snippets  #
 #####################
-
-snippet test "Test av script"
-`#!/usr/bin/env runhaskell
-hei = [1..10]
-main = putStrLn . unwords . map show $ hei
-`
-endsnippet
-
-# snippet upping "updating snippet maybe?"
-# ${1:diverse} også kommer noe mer
-# `!p snip.rv = t[1] + "--" + t[1]`
-# endsnippet
 
 snippet "list(\d+)-(\d+)(-(\d+))?" "creating numbers" r
 `!p
@@ -140,3 +128,5 @@ snip.rv = "\n".join(str(i) for i in range(start, end+1, step))`
 endsnippet
 
 # vim:ft=snippets:
+
+

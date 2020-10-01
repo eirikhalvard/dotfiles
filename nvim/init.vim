@@ -209,11 +209,17 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Down>"
@@ -330,6 +336,11 @@ hi LineNr guibg=NONE
 hi Normal guibg=NONE ctermbg=NONE
 
 
+" === Snippets === "
+
+let g:snips_author = "Eirik Sæther"
+let g:snips_email = "eirik.halvard.95@gmail.com"
+let g:snips_github = "https://github.com/eirikhalvard"
 
 " \/ \/ OLD COMPLETION SETUP. \/ \/
 
@@ -355,6 +366,7 @@ hi Normal guibg=NONE ctermbg=NONE
 " \  'markdown': ['prettier'],
 " \}
 " let g:ale_lint_on_text_changed = 'never'
+
 
 
 
@@ -390,6 +402,7 @@ let g:which_key_map = {
     \ 'h' : 'insert-haskell-expression',
     \ 'i' : [':source ~/.config/nvim/init.vim', 'source-init'],
     \ 's' : [':syntax sync fromstart', 'sync-syntax'],
+    \ 'y' : [':CocList -A --normal yank', 'yank-list'],
     \ },
 \ 'c' : {
     \ 'name' : '🛠  Compile',
