@@ -2,14 +2,20 @@ map <buffer> <leader>ap  <Plug>MarkdownPreviewToggle<CR>
 map <buffer> <leader>or :e rettermal.md<CR>
 map <buffer> <leader>op :w<CR>:silent !open -a Skim %<.pdf<CR>
 
+vmap <buffer> <leader>is dO```scheme<esc>gpO```<esc>
+nmap <buffer> <leader>is o```scheme<CR><CR>```<Up>
+
+" markdown syntax often glitches
+map <buffer> <leader>w :w<CR>:syntax sync fromstart<CR>:w<CR>
+
 
 " rette-makroer
 let @c ="V/##kkcqj€kbkjq"
 let @d ="V/##kkjdkk//€kb###jj"
 let @h ="@ciHelt riktig!  kk/###jj"
 let @g ="wwyWbbvehhp/###wwww"
-
-
+let @p ="$bvBohhybbvpjj"
+let @r ="kk@p@h"
 
 set foldexpr=NestedMarkdownFolds()
 
