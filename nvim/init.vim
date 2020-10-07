@@ -43,6 +43,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'masukomi/vim-markdown-folding'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neovimhaskell/haskell-vim'
+Plug 'nbouscal/vim-stylish-haskell'
 Plug 'lervag/vimtex'
 Plug 'elmcast/elm-vim'
 
@@ -231,11 +232,7 @@ endfunction
 
 " Use <c-space> to trigger completion.
 " TODO: find suitable mapping. c-space is mapped in system
-" if has('nvim')
-"   inoremap <silent><expr> <c-space> coc#refresh()
-" else
-"   inoremap <silent><expr> <c-@> coc#refresh()
-" endif
+" inoremap <silent><expr> <c-æ> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
@@ -458,6 +455,7 @@ let g:which_key_map = {
     \ 'C' : [':Fold', 'fold-close'],
     \ 'd' : ['<Plug>(coc-diagnostics-next)', 'diagnostic-next'],
     \ 'D' : ['<Plug>(coc-diagnostics-prev)', 'diagnostic-prev'],
+    \ 'e' : ['<Plug>(coc-codelens-action)', 'eval-codelens-action'],
     \ 'F' : [':Format', 'format'],
     \ 'f' : ['<Plug>(coc-format-selected)', 'format-selected'],
     \ 'g' : {
@@ -475,7 +473,8 @@ let g:which_key_map = {
     \ },
 \ 'o' : {
     \ 'name' : '🛹 Open',
-    \ 'b' : [':e ~/.bash_profile', 'bash-profile'],
+    \ 'b' : [':e ~/.config/shell/bash_profile', 'bash-profile'],
+    \ 'c' : [':CocConfig', 'coc-config'],
     \ 'f' : 'ftplugin-filetype',
     \ 'i' : [':e ~/.config/nvim/init.vim', 'init.vim'],
     \ },
@@ -526,6 +525,8 @@ xmap <leader>rss <Plug>SlimeRegionSend
 nmap <leader>rss <Plug>SlimeParagraphSend
 
 
+
+nmap øf :Files<CR>
 
 " Formatting selected code.
 " " Mappings for CoCList

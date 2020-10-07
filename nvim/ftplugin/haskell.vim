@@ -1,3 +1,1 @@
-setlocal formatprg=brittany
-
-map <leader>at :silent !fast-tags -R .<CR>
+setlocal formatprg=stylish-haskell
