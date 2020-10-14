@@ -372,9 +372,7 @@ let g:snips_github = "https://github.com/eirikhalvard"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-nnoremap <silent> <localleader> :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<Space>'<CR>
 vnoremap <silent> <leader>      :<c-u>WhichKeyVisual ','<CR>
 set timeoutlen=500
 let g:which_key_map = {}
@@ -453,8 +451,8 @@ let g:which_key_map = {
     \ 'a' : ['<Plug>(coc-codeaction-selected)', 'codeaction'],
     \ 'af' : ['<Plug>(coc-codeaction)', 'codeaction-file'],
     \ 'C' : [':Fold', 'fold-close'],
-    \ 'd' : ['<Plug>(coc-diagnostics-next)', 'diagnostic-next'],
-    \ 'D' : ['<Plug>(coc-diagnostics-prev)', 'diagnostic-prev'],
+    \ 'd' : ['<Plug>(coc-diagnostic-next)', 'diagnostic-next'],
+    \ 'D' : ['<Plug>(coc-diagnostic-prev)', 'diagnostic-prev'],
     \ 'e' : ['<Plug>(coc-codelens-action)', 'eval-codelens-action'],
     \ 'F' : [':Format', 'format'],
     \ 'f' : ['<Plug>(coc-format-selected)', 'format-selected'],
@@ -549,4 +547,3 @@ nmap øf :Files<CR>
 
 
 call which_key#register(',', "g:which_key_map")
-
