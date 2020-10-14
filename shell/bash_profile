@@ -31,6 +31,14 @@ alias o='open .'
 alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 alias mantar='curl cheat.sh/tar'
 
+alias l='clear && exa --long --all --group-directories-first'
+alias ls='exa --group-directories-first'
+alias tree="clear && exa --tree --group-directories-first"
+for i in {1..6}; do 
+  aliasContent="clear && exa --tree --level=${i} --group-directories-first"
+  alias tree${i}=${aliasContent}
+done
+
 alias t='tmux'
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
