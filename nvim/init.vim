@@ -37,6 +37,7 @@ Plug 'tpope/vim-rhubarb'
 
 " === Completion === "
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " === Filetype specific === "
@@ -339,13 +340,16 @@ let g:snips_author = "Eirik Sæther"
 let g:snips_email = "eirik.halvard.95@gmail.com"
 let g:snips_github = "https://github.com/eirikhalvard"
 
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
+
 " \/ \/ OLD COMPLETION SETUP. \/ \/
 
 " === Snippets === "
 " let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
 " let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 
-"" map <leader>s :Snippets<CR>
+" map <leader>s :Snippets<CR>
 
 " map <leader>os :UltiSnipsEdit<CR>
 " map <leader>af :ALEFix<CR>
@@ -475,6 +479,7 @@ let g:which_key_map = {
     \ 'c' : [':CocConfig', 'coc-config'],
     \ 'f' : 'ftplugin-filetype',
     \ 'i' : [':e ~/.config/nvim/init.vim', 'init.vim'],
+    \ 's' : [':UltiSnipsEdit', 'open-snippets'],
     \ },
 \ 'Q' : [':q!', 'force-quit-file'],
 \ 'q' : [':q', 'quit-file'],
@@ -490,6 +495,7 @@ let g:which_key_map = {
       \ 's' : 'send',
       \ },
     \ },
+\ 'S' : [':CocList snippets', 'insert-snippet'],
 \ 't' : {
     \ 'name' : '🔘 Toggles',
     \ 'g' : [':Goyo', 'goyo'],
