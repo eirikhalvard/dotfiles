@@ -39,12 +39,12 @@ Plug 'tpope/vim-rhubarb'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
 
 " === Filetype specific === "
 Plug 'masukomi/vim-markdown-folding'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neovimhaskell/haskell-vim'
-Plug 'nbouscal/vim-stylish-haskell'
 Plug 'lervag/vimtex'
 Plug 'elmcast/elm-vim'
 
@@ -352,24 +352,33 @@ let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/U
 " map <leader>s :Snippets<CR>
 
 " map <leader>os :UltiSnipsEdit<CR>
-" map <leader>af :ALEFix<CR>
+map <leader>af :ALEFix<CR>
+let g:ale_fix_on_save = 1
 
 " let g:ale_linters = { 
 " \  'haskell': ['hlint'], 
 " \  'tex': ['chktex'] 
 " \}
 
-" let g:ale_fixers = { 
-" \  'haskell': ['brittany', 'hlint'], 
+function! FormatHaskell(buffer) abort
+    return {
+    \   'command': 'fourmolu --indentation 2 --indent-wheres true'
+    \}
+endfunction
+
+execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu for haskell')
+
+let g:ale_linters_explicit = 1
+let g:ale_fixers = { 
+\  'haskell': ['fourmolu']
+\}
+
 " \  'tex': ['latexindent'],
 " \  'json': ['fixjson'],
 " \  'java': ['google_java_format'],
 " \  'markdown': ['prettier'],
-" \}
-" let g:ale_lint_on_text_changed = 'never'
-
-
-
+"
+let g:ale_lint_on_text_changed = 'never'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  MAPPINGS                                  "
@@ -498,6 +507,7 @@ let g:which_key_map = {
 \ 'S' : [':CocList snippets', 'insert-snippet'],
 \ 't' : {
     \ 'name' : '🔘 Toggles',
+    \ 'e' : [':CocCommand explorer', 'explorer'],
     \ 'g' : [':Goyo', 'goyo'],
     \ 's' : {
         \ 'name' : '📝 Spell',
@@ -528,9 +538,9 @@ map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
 xmap <leader>rss <Plug>SlimeRegionSend
 nmap <leader>rss <Plug>SlimeParagraphSend
 
-
-
 nmap øf :Files<CR>
+nmap ør :Rg<CR>
+nmap gd <Plug>(coc-definition)
 
 " Formatting selected code.
 " " Mappings for CoCList

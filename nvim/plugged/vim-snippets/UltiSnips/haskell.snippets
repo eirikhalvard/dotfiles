@@ -56,3 +56,22 @@ import Debug.Trace (trace)
 $0-- (show >>= trace)
 endsnippet
 
+snippet rec "Record type"
+data ${1:RecordName} =
+  $1
+    { ${2:_fieldName} :: ${3:FieldType}
+    }
+  deriving ( Show, Eq, Read )
+
+makeFieldsNoPrefix ''$1
+endsnippet
+
+snippet sum "Sum type"
+data ${1:SumType}
+  = ${2:SumOne}
+  | ${3:SumTwo}
+  deriving ( Show, Eq, Read )
+
+makePrisms ''$1
+endsnippet
+
