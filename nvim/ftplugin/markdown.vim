@@ -1,5 +1,5 @@
 map <buffer> <leader>ap  <Plug>MarkdownPreviewToggle<CR>
-map <buffer> <leader>or :e rettermal.md<CR>
+map <buffer> <leader>or :e rettemal.md<CR>
 map <buffer> <leader>op :w<CR>:silent !open -a Skim %<.pdf<CR>
 
 vmap <buffer> <leader>is dO```scheme<esc>gpO```<esc>
@@ -7,15 +7,40 @@ nmap <buffer> <leader>is o```scheme<CR><CR>```<Up>
 
 " markdown syntax often glitches
 map <buffer> <leader>w :w<CR>:syntax sync fromstart<CR>:w<CR>
+map <buffer> <leader>ag :grep Oppgave %<CR>
 
 
-" rette-makroer
-let @c ="V/##kkcqj€kbkjq"
-let @d ="V/##kkjdkk//€kb###jj"
-let @h ="@ciHelt riktig!  kk/###jj"
-let @g ="wwyWbbvehhp/###wwww"
-let @p ="$bvBohhybbvpjj"
-let @r ="kk@p@h"
+"""""""""""""""""""
+"  RETTE MAKROER  "
+"""""""""""""""""""
+
+" slett helt til neste
+let @d ="V/##kkjdkk//Äkb###jj"
+
+" [h]elt riktig på deloppgave
+let @h = "?###jjVV/##kkcHelt riktig!jjjjjjjj"
+
+" helt [r]iktig på hel [o]ppgave
+let @r = "?^## f(lr2jjV/^## kkcHelt riktig!jjjjjjjj"
+
+" [e]tt poeng på nærmeste poengblokk
+let @e = "mm?Xr1'm"
+
+" [p]oeng på nærmeste poengblokk
+let @p = "mm?X/llyt)hhvp'm"
+
+" [i]kke gjort (deloppgave)
+let @i = "?###jjV/###kkcIkke gjort.jjjj"
+
+" ikke [g]jort (hel oppgave)
+let @g = "?^## ff(lr0jjV/^## kkcO€kbIkke gjort.jjjjjjjjj"
+
+" [c]ustom feil
+let @c = "?###jjV/Løsningskkc"
+
+" custom feil [u]ten løsningsforslag
+let @u = "?###jjV/###kkc"
+
 
 set foldexpr=NestedMarkdownFolds()
 

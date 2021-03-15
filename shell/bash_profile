@@ -6,6 +6,7 @@ export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:"/Users/Eirik/bin/FDK/Tools/osx"
 export FDK_EXE="/Users/Eirik/bin/FDK/Tools/osx"
 export LC_ALL=en_US.UTF-8
+export EDITOR="vim"
 
 ##################### CUSTOM EXPORTS ######################
 export DRIVE=$HOME/Drive
@@ -33,9 +34,9 @@ alias mantar='curl cheat.sh/tar'
 
 alias l='clear && exa --long --all --group-directories-first'
 alias ls='exa --group-directories-first'
-alias tree="clear && exa --tree --group-directories-first"
+alias tree="clear && exa --tree --group-directories-first --git-ignore"
 for i in {1..6}; do 
-  aliasContent="clear && exa --tree --level=${i} --group-directories-first"
+  aliasContent="clear && exa --tree --level=${i} --group-directories-first --git-ignore"
   alias tree${i}=${aliasContent}
 done
 

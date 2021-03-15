@@ -42,6 +42,13 @@ function watchScheme() {
   done
 }
 
+function watchTex() {
+  fswatch -o --event Updated "$1" | while read num ; do
+    clear
+     compiler "$1"
+  done
+}
+
 cd "$dir" || exit
 
 case "$file" in
@@ -50,5 +57,6 @@ case "$file" in
 	*\.md) watchMarkdown "$file" ;;
   *\.maude) watchMaude "$file" ;;
   *\.scm) watchScheme "$file" ;;
+  *\.tex) watchTex "$file" ;;
 	*) printf "filetype not supported\n" ;;
 esac

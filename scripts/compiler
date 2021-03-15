@@ -10,16 +10,12 @@ $content
 q
 EOF
 }
-function compileEssay() {
+
+function compileThesis() {
   export TEXINPUTS="ifimaster/:duoforside/:$(TEXINPUTS)"
   pdflatex --shell-escape "$1"
   biber thesis
   pdflatex --shell-escape "$1"
-}
-
-function compilaCompile() {
-  cd /Users/Eirik/Drive/Skole/S8/INF5110/compila07/ || exit
-  make
 }
 
 file=$(greadlink -f "$1")
@@ -29,8 +25,7 @@ base="${file%.*}"
 cd "$dir" || exit
 
 case "$file" in
-  *thesis\.tex) compileEssay "$file" ;;
-  /Users/Eirik/Drive/Skole/S8/INF5110/compila07/*) compilaCompile ;;
+  *thesis\.tex) compileThesis "$file" ;;
 	*\.tex) pdflatex --shell-escape "$file" ;;
 	*\.md) pandoc "$file" -o "$base".pdf ;;
 	*\.py) python3 "$file" ;;
@@ -38,6 +33,3 @@ case "$file" in
 	*\.maude) maudeAndQuit "$file" ;;
 	*) printf "filetype not supported\n" ;;
 esac
-
-
-

@@ -419,10 +419,11 @@ let g:which_key_map = {
     \ },
 \ 'e' : {
     \ 'name' : '💻 Edits',
-    \ 's' : 'substitute',
-    \ 'S' : 'substitute-thing',
     \ 'n' : 'norm-lines',
     \ 'N' : 'norm-non-empty-lines',
+    \ 'r' : 'raise-word-to-parenexp',
+    \ 's' : 'substitute',
+    \ 'S' : 'substitute-thing',
     \ },
 \ 'f' : {
     \ 'name' : '💿 Files',
@@ -479,6 +480,7 @@ let g:which_key_map = {
     \ 'l' : [':CocList', 'coc-list'],
     \ 'O' : [':OR', 'organize-imports'],
     \ 'q' : ['<Plug>(coc-fix-current)', 'fix-current'],
+    \ 'R' : ['<Plug>(coc-restart)', 'coc-restart'],
     \ 'r' : ['<Plug>(coc-rename)', 'rename'],
     \ 's' : ['K', 'show-documentation (K)'],
     \ },
@@ -528,6 +530,8 @@ let g:which_key_map = {
 map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
 map <leader>ca :w! \| AsyncRun compiler "%" <CR>
 map <leader>cc :w! \| !compiler "<C-r>%"<CR>
+nnoremap <leader>er diwvabp
+vnoremap <leader>er dvabp
 map <leader>en :g/.*/norm 
 map <leader>eN :g/..*/norm 
 nnoremap <leader>es :%s//g<Left><Left>
@@ -541,6 +545,7 @@ nmap <leader>rss <Plug>SlimeParagraphSend
 nmap øf :Files<CR>
 nmap ør :Rg<CR>
 nmap gd <Plug>(coc-definition)
+
 
 " Formatting selected code.
 " " Mappings for CoCList
