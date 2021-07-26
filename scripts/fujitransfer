@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+main() {
+  if [ "$#" -ne 3 ] && [ "$#" -ne 1 ] ; then
+    echo "Move in range  : fujitransfer [folder] [start] [end]"
+    echo "Move all       : fujitransfer [folder]"
+    echo "Will move JPG, RAF, MOV files from SD Card \"Untitled\" to the folder specified."
+    echo "Either all files will be moved, or all files in range"
+    exit 1
+  fi
+  
+  # ensure output folder exists
+  folder=$(realpath "$1")
+  if [ ! -d "$folder" ] ; then
+      echo "Error: Directory \"$folder\" does not exists."
+      exit 1
+  fi
+  
+  # ensure sd card exists
+  sdcard="/Volumes/Untitled/DCIM"
+  if [ ! -d "$sdcard" ] ; then
+      echo "Error: Directory \"$sdcard\" does not exists."
+      exit 1
+  fi
+  
+  cd "$sdcard" || exit
+
+  if [ $# -eq 1 ] ; then
+    for infile in */* ; do
+      echo $infile
+      echo "TODO: NOT YET IMPLEMENTED. (need to case on filetype, decide either 01_JPG, 02_RAF, 03_MOV)"
+    done;
+  else
+    startnum="${2}"
+    endnum="${3}"
+    # loop files in SD card
+    for fuji in */ ; do
+      for num in $(seq -f "%04g" $startnum $endnum); do 
+        checkAndTransfer "JPG" "01_JPG" "${sdcard}/${fuji}DSCF${num}.JPG"
+        checkAndTransfer "RAF" "02_RAW" "${sdcard}/${fuji}DSCF${num}.RAF"
+        checkAndTransfer "MOV" "04_MOV" "${sdcard}/${fuji}DSCF${num}.MOV"
+      done
+    done
+  fi
+}
+
+checkAndTransfer() {
+  filetype=$1
+  filefolder=$2
+  infile=$3
+
+  [ ! -f "$infile" ] && return
+
+  outfolder="${folder}/${filefolder}"
+  outfile="${outfolder}/DSCF${num}.${filetype}"
+
+  if [ ! -f "$infile" ] ; then
+    true # pass
+  elif [ -f "$outfile" ] ; then
+    echo "outfile \"$outfile\" exists"
+  else 
+    if [ ! -d "$outfolder" ] ; then
+      echo "creating missing folder: \"$outfolder\""
+      mkdir "$outfolder"
+    fi
+    echo "Moving ${infile} to $outfile"
+    mv "${infile}" "${outfile}"
+  fi
+}
+
+main "$@"
