@@ -108,7 +108,9 @@ runtime! macros/matchit.vim
 
 " Move up/down editor lines
 noremap j gj
+noremap gj j
 noremap k gk
+noremap gk k
 
 " Allow hidden buffers
 set hidden
@@ -419,6 +421,7 @@ let g:which_key_map = {
     \ },
 \ 'e' : {
     \ 'name' : '💻 Edits',
+    \ 'f' : ['z=1<CR>', 'fix-typo'],
     \ 'n' : 'norm-lines',
     \ 'N' : 'norm-non-empty-lines',
     \ 'r' : 'raise-word-to-parenexp',
