@@ -18,6 +18,7 @@ export CONFIG=$HOME/.config
 alias prosjekter="cd \$PROSJEKTER"
 alias skole="cd \$SKOLE"
 alias config="cd \$CONFIG"
+alias f21="cd /Volumes/EirikT5/Pictures/Fuji/2021"
 
 ##################### ALIAS COMMANDS ######################
 alias c='clear'
@@ -49,6 +50,8 @@ alias tkeys='tmux list-keys | fzf'
 alias sml='rlwrap sml'
 alias scm='clear && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
 alias maude='$HOME/bin/maude/maude.darwin64'
+
+alias affirm='/Users/Eirik/Drive/Diverse/affirmations/affirmation'
 
 alias -g FF='$(fzf)'
 alias -g PF='| fzf'
