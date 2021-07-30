@@ -5,76 +5,59 @@ require('my.lualine')
 require('my.misc')
 require('my.options')
 
-vim.api.nvim_exec(
-[[
-" Turn on syntax highlighting
-syntax on 
+vim.g.builtin_lsp = true
 
-" For plugins to load correctly
-filetype plugin indent on 
+vim.g.mapleader = [[,]]
+vim.g.maplocalleader = [[ ]]
 
-let mapleader = ","
-let maplocalleader = "\<Space>"
+vim.opt.modelines = 0
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-" Security
-set modelines=0
+-- Show file stats
+vim.opt.ruler = true
 
-" Show line numbers
-set number
-set relativenumber
+-- Blink cursor on error instead of beeping (grr)
+vim.opt.belloff = "all"
+vim.opt.encoding = "utf-8"
 
-" Show file stats
-set ruler
+-- Whitespace
+vim.opt.wrap = true
+vim.opt.textwidth = 0 -- set to 79 to autowrap after whitespace 
+vim.opt.formatoptions = "cqrn1" -- t - autowrap
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+vim.opt.shiftround = false
+vim.opt.linebreak = true
 
-" Blink cursor on error instead of beeping (grr)
-set belloff=all
+-- Cursor motion
+vim.opt.scrolloff = 4
+vim.opt.backspace = "indent,eol,start"
+vim.opt.matchpairs:append("<:>")
 
-" Encoding
-set encoding=utf-8
+-- Allow hidden buffers
+vim.opt.hidden = true
 
-" Whitespace
-set wrap
-set textwidth=0 " set to 79 to autowrap after whitespace
-set formatoptions=cqrn1 "t - autowrap
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set noshiftround
-set linebreak
+-- Rendering
+vim.opt.ttyfast = true
 
-" Cursor motion
-set scrolloff=7
-set backspace=indent,eol,start
-set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
+-- Status bar
+vim.opt.laststatus = 2
 
-" Move up/down editor lines
-noremap j gj
-noremap gj j
-noremap k gk
-noremap gk k
+-- Last line
+vim.opt.showmode = true
+vim.opt.showcmd = true
 
-" Allow hidden buffers
-set hidden
+vim.opt.swapfile = false
+vim.opt.undodir = "~/.config/nvim/.vimdid"
+vim.opt.undofile = true
+vim.opt.listchars = [[tab:▸\ ,eol:¬]]
+vim.opt.clipboard = "unnamed"
 
-
-" Rendering
-set ttyfast
-
-" Status bar
-set laststatus=2
-
-" Last line
-set showmode
-set showcmd
-
-set noswapfile
-set undodir=~/.config/nvim/.vimdid
-set undofile
-
-set listchars=tab:▸\ ,eol:¬
-
-set clipboard=unnamed
-]],
-false)
+function _G.dump(...)
+    local objects = vim.tbl_map(vim.inspect, {...})
+    print(unpack(objects))
+    return ...
+end
