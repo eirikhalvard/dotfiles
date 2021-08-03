@@ -10,7 +10,7 @@ karabiner/assets
 karabiner/automatic_backups
 texstudio
 yarn
-nvim/.vimdid
+nvim/.vimdid/
 nvim/.netrwhist
 nvim/spell
 /nvim/plugged/*

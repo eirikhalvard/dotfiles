@@ -25,7 +25,17 @@ return require('packer').startup(function()
   use 'tommcdo/vim-exchange'
   use 'wellle/targets.vim'
   use 'chaoren/vim-wordmotion'
-  use 'liuchengxu/vim-which-key'
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section in 
+        -- https://github.com/folke/which-key.nvim#%EF%B8%8F-configuration
+      }
+    end
+  }
 
   --=== Editor ===--
   use '/usr/local/opt/fzf'
@@ -47,7 +57,11 @@ return require('packer').startup(function()
   
   --=== Filetype specific ===--
   use 'masukomi/vim-markdown-folding'
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+  use {
+    'iamcco/markdown-preview.nvim', 
+    run = 'cd app && yarn install', 
+    cmd = 'MarkdownPreview'
+  }
   use 'neovimhaskell/haskell-vim'
   use 'lervag/vimtex'
   use 'elmcast/elm-vim'
@@ -59,5 +73,4 @@ return require('packer').startup(function()
   use 'gruvbox-community/gruvbox'
   use 'chriskempson/base16-vim'
   use 'junegunn/goyo.vim'
-
 end)
