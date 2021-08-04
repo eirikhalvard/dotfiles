@@ -1,6 +1,7 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
+require('my.compiled_colortype')
 require('my.plugins')
 require('my.mappings')
 require('my.lsp')
@@ -116,7 +117,6 @@ vim.g.snips_github = "https://github.com/eirikhalvard"
 -- vim.g.UltiSnipsSnippetDirectories = "~/.config/nvim/plugged/vim-snippets/UltiSnips"
 
 -- " === Ale === "
-
 vim.api.nvim_set_var("ale_fix_on_save", 1)
 vim.g.ale_linters_explicit = 1
 vim.g.ale_fixerss = { haskell =  { "fourmolu" }  }
@@ -141,19 +141,23 @@ execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu
 -- "                              LAYOUT & DESIGN                               "
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+-- " === Color Scheme === "
+vim.g.base16colorspace = 256
 vim.o.termguicolors = true
-vim.cmd([[
-highlight Comment cterm=italic
+vim.cmd [[ highlight Comment cterm=italic ]]
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+if vim.g.color_is_light then
+  lualine_colorscheme = "onelight"
+  vim.g.colors_name = "base16-one-light"
+else
+  lualine_colorscheme = "gruvbox"
+  vim.g.colors_name = "gruvbox"
+end
 
-if filereadable(expand("~/.vimrc_bgtype"))
-  source ~/.vimrc_bgtype
-endif
+vim.cmd [[hi LineNr guibg=NONE ]]
+vim.cmd [[hi Normal guibg=NONE ctermbg=NONE ]]
 
-hi LineNr guibg=NONE
-hi Normal guibg=NONE ctermbg=NONE
-]])
+-- " === Lualine === "
+require('lualine').setup{ 
+  options = { theme = lualine_colorscheme } 
+}

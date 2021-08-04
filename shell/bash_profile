@@ -175,15 +175,12 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 function light() {
-  echo "set background=light" > ~/.vimrc_bgtype
-  echo "lua require('lualine').setup{ options = { theme = \"onelight\"} }" >> ~/.vimrc_bgtype
+  echo "vim.g.color_is_light = true" > ~/.config/nvim/lua/my/compiled_colortype.lua
   base16_one-light
 }
 
 function dark() {
-  echo "set background=dark" > ~/.vimrc_bgtype
-  echo "colorscheme gruvbox" >> ~/.vimrc_bgtype
-  echo "lua require('lualine').setup{ options = { theme = \"gruvbox\"} }" >> ~/.vimrc_bgtype
+  echo "vim.g.color_is_light = false" > ~/.config/nvim/lua/my/compiled_colortype.lua
   base16_gruvbox-dark-hard
 }
 
