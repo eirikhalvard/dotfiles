@@ -48,7 +48,10 @@ return require('packer').startup(function()
   use 'skywind3000/asyncrun.vim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
-  
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons'
+  } 
   --=== Completion ===--
   use 'honza/vim-snippets'
   use 'SirVer/ultisnips'

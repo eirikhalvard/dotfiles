@@ -144,19 +144,13 @@ wk.register({
          n = { '<cmd>set spelllang=nb<CR>', 'norwegian' },
          s = { '<cmd>set spell!<CR>', 'toggle-spell' },
          },
-     t = { '<cmd>NERDTreeToggleCR', 'tree' },
+     t = { '<cmd>NvimTreeToggle<CR>', 'tree' },
      w = { '<cmd>set list!<CR>', 'whitespace' },
      },
  w = { '<cmd>w<CR>', 'write-file' },
 }, { prefix = "<leader>" })
 
 
--- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
--- "                                  MAPPINGS                                  "
--- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
--- set timeoutlen=500
 -- " === General Mappings === "
 
 -- map <Left> <C-h>
