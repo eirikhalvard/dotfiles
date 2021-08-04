@@ -176,12 +176,14 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 function light() {
   echo "set background=light" > ~/.vimrc_bgtype
+  echo "lua require('lualine').setup{ options = { theme = \"onelight\"} }" >> ~/.vimrc_bgtype
   base16_one-light
 }
 
 function dark() {
   echo "set background=dark" > ~/.vimrc_bgtype
   echo "colorscheme gruvbox" >> ~/.vimrc_bgtype
+  echo "lua require('lualine').setup{ options = { theme = \"gruvbox\"} }" >> ~/.vimrc_bgtype
   base16_gruvbox-dark-hard
 }
 

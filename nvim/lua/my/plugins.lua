@@ -70,10 +70,13 @@ return require('packer').startup(function()
   use 'elmcast/elm-vim'
   
   --=== Visual ===--
-  use 'itchyny/lightline.vim'
   use 'luochen1990/rainbow'
   use 'airblade/vim-gitgutter'
   use 'gruvbox-community/gruvbox'
   use 'chriskempson/base16-vim'
   use 'junegunn/goyo.vim'
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
 end)

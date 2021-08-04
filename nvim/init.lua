@@ -10,9 +10,7 @@ require('my.options')
 
 -- TODO
 -- setup telescope
--- setup mappings
 -- setup lsp, remove coc
--- setup lualine
 
 vim.g.builtin_lsp = true
 
@@ -142,26 +140,6 @@ execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 -- "                              LAYOUT & DESIGN                               "
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
--- " === LightLine === "
--- set noshowmode " remove built in INSERT promt, lightlines takes care of this!
-
--- let g:lightline = {
---    \ 'colorscheme' : 'one',
---    \ 'active': {
---    \   'left': [ [ 'mode', 'paste' ],
---    \             [ 'cocstatus', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
---    \ },
---    \ 'component_function': {
---    \   'gitbranch': 'FugitiveHead',
---    \   'cocstatus': 'coc#status'
---    \ },
---    \ }
-
--- " Use auocmd to force lightline update.
--- autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
--- " === Colors === "
 
 vim.o.termguicolors = true
 vim.cmd([[
