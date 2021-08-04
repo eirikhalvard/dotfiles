@@ -111,3 +111,25 @@ vim.g.builtin_lsp = true
 
 -- " Add `:OR` command for organize imports of the current buffer.
 -- command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+-- " === Ale === "
+vim.api.nvim_set_var("ale_fix_on_save", 1)
+vim.g.ale_linters_explicit = 1
+vim.g.ale_fixerss = { haskell =  { "fourmolu" }  }
+-- old linters:
+-- " \  'tex': ['latexindent'],
+-- " \  'json': ['fixjson'],
+-- " \  'java': ['google_java_format'],
+-- " \  'markdown': ['prettier'],
+-- "
+-- let g:ale_lint_on_text_changed = 'never'
+
+vim.cmd([[
+function! FormatHaskell(buffer) abort
+    return {
+    \   'command': 'fourmolu --indentation 2 --indent-wheres true'
+    \}
+endfunction
+execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu for haskell')
+]])
+

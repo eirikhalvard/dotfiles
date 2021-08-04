@@ -13,12 +13,33 @@ wk.register({
     s = { "<cmd>syntax sync fromstart<CR>", "sync-syntax" },
     -- y = {':CocList -A --normal yank', 'yank-list'},
   },
+  c = {
+     name = '🛠  Compile',
+     a = 'async-compile',
+     c = 'compile'
+  },
+ e = {
+     name = '💻 Edits',
+     f = { 'z=1<CR>', 'fix-typo' },
+     n = 'norm-lines',
+     N = 'norm-non-empty-lines',
+     r = 'raise-word-to-parenexp',
+     s = 'substitute',
+     S = 'substitute-thing',
+     },
   f = {
     name = '💿 Files',
-    b = { '<cmd>Buffers<CR>', 'buffers' },
-    c = { '<cmd>Files ~/.config<CR>', 'config-files' },
-    f = { '<cmd>Files<CR>', 'files' },
-    g = { '<cmd>GFiles<CR>', 'git-files' },
+    b = { '<cmd>Telescope buffers<CR>', 'buffers' },
+    c = { '<cmd>Telescope find_files search_dirs=~/.config<CR>', 'config-files' }, 
+    f = { '<cmd>Telescope find_files<CR>', 'files' },
+    F = { '<cmd>Telescope file_browser<CR>', 'files' },
+    g = { 
+      name = '🌳 Git',
+      b = { '<cmd>Telescope git_branches<CR>', 'git-branches' },
+      f = { '<cmd>Telescope git_files<CR>', 'git-files' },
+      j = { '<cmd>Telescope git_stash<CR>', 'git-stash' },
+      s = { '<cmd>Telescope git_status<CR>', 'git-status' },
+    },
     H = { '<cmd>tabfirst<CR>', 'first-tab' },
     h = { '<cmd>tabprevious<CR>', 'previous-tab' },
     J = { '<cmd>blast<CR>', 'last-buffer' },
@@ -29,42 +50,13 @@ wk.register({
     l = { '<cmd>tabnext<CR>', 'next-tab' },
     N = { '<cmd>clast<CR>', 'last-quickfix' },
     n = { '<cmd>cnext<CR>', 'next-quickfix' },
+    o = { '<cmd>Telescope old_files<CR>', 'old-files' },
     P = { '<cmd>cfirst<CR>', 'first-quickfix' },
     p = { '<cmd>cprevious<CR>', 'previous-quickfix' },
+    s = { '<cmd>Telescope grep_string<CR>', 'search' },
+    t = { '<cmd>Telescope<CR>', 'telescope' },
+    y = { '<cmd>Telescope grep_string<CR>', 'yank-and-search' },
     },
-  c = {
-     name = '🛠  Compile',
-     a = 'async-compile',
-     c = 'compile',
-     },
- e = {
-     name = '💻 Edits',
-     f = { 'z=1<CR>', 'fix-typo' },
-     n = 'norm-lines',
-     N = 'norm-non-empty-lines',
-     r = 'raise-word-to-parenexp',
-     s = 'substitute',
-     S = 'substitute-thing',
-     },
- f = {
-     name = '💿 Files',
-     b = { '<cmd>Buffers<CR>', 'buffers' },
-     c = { '<cmd>Files ~/.config<CR>', 'config-files' },
-     f = { '<cmd>Files<CR>', 'files' },
-     g = { '<cmd>GFiles<CR>', 'git-files' },
-     H = { '<cmd>tabfirst<CR>', 'first-tab' },
-     h = { '<cmd>tabprevious<CR>', 'previous-tab' },
-     J = { '<cmd>blast<CR>', 'last-buffer' },
-     j = { '<cmd>bnext<CR>', 'next-buffer' },
-     K = { '<cmd>bfirst<CR>', 'first-buffer' },
-     k = { '<cmd>bprevious<CR>', 'previous-buffer' },
-     L = { '<cmd>tablast<CR>', 'last-tab' },
-     l = { '<cmd>tabnext<CR>', 'next-tab' },
-     N = { '<cmd>clast<CR>', 'last-quickfix' },
-     n = { '<cmd>cnext<CR>', 'next-quickfix' },
-     P = { '<cmd>cfirst<CR>', 'first-quickfix' },
-     p = { '<cmd>cprevious<CR>', 'previous-quickfix' },
-     },
  g = {
      name = '🐙 Git',
      b = { '<cmd>Git blame<CR>', 'blame' },
@@ -78,8 +70,9 @@ wk.register({
      },
  h = {
      name = '🏳️  Help',
-     h = { '<cmd>Helptags<CR>', 'help' },
-     m = { '<cmd>Maps<CR>', 'mappings' },
+     h = { '<cmd>Telescope help_tags<CR>', 'help' },
+     s = { '<cmd>Telescope spell_suggest<CR>', 'spell-suggest' },
+     m = { '<cmd>Telescope man_pages<CR>', 'man-pages' },
      },
  l = {
      name = '🚀 LSP',
@@ -183,6 +176,6 @@ vim.api.nvim_set_keymap("", "<Down>", "}j", { noremap = false })
 vim.api.nvim_set_keymap("", "<Up>", "{k", { noremap = false })
 vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 
-vim.api.nvim_set_keymap("n", "øf", ":Files<CR>", { noremap = false })
+vim.api.nvim_set_keymap("n", "øf", "<leader>ff", { noremap = false })
 vim.api.nvim_set_keymap("n", "ør", ":Rg<CR>", { noremap = false })
 vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", { noremap = false })

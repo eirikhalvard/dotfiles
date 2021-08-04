@@ -40,6 +40,10 @@ return require('packer').startup(function()
   --=== Editor ===--
   use '/usr/local/opt/fzf'
   use 'junegunn/fzf.vim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
   use 'scrooloose/nerdtree'
   use 'jpalardy/vim-slime'
   use 'vim-scripts/paredit.vim'
