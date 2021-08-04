@@ -1,3 +1,5 @@
+vim.g.builtin_lsp = true
+
 -- " === Completion Config === "
 
 -- " Some servers have issues with backup files, see #649.
