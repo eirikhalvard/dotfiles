@@ -1,10 +1,3 @@
-
--- -- Move up/down editor lines
--- noremap j gj
--- noremap gj j
--- noremap k gk
--- noremap gk k
-
 local wk = require("which-key")
 
 -- === Leader Key Mappings === --
@@ -151,58 +144,45 @@ wk.register({
  w = { '<cmd>w<CR>', 'write-file' },
 }, { prefix = "<leader>" })
 
-
--- " === General Mappings === "
-
--- map <Left> <C-h>
--- map <Right> <C-l>
--- map <Down> }j
--- map <Up> {k
--- nnoremap Y y$
-
+-- replace termcodes. used to escape certain mapping encodings
+local function t(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
 -- " Some commands are to complex to be written directly in
 -- " the which-key map. Either there is an ex command that
 -- " uses more complex features, or we have custom implementation
 -- " for visual mode and normal mode
--- map <leader>ah :read !ghead -n -1 < <(ghc -e "")<Left><Left>
--- map <leader>ca :w! \| AsyncRun compiler "%" <CR>
--- map <leader>cc :w! \| !compiler "<C-r>%"<CR>
--- nnoremap <leader>er diwvabp
--- vnoremap <leader>er dvabp
--- map <leader>en :g/.*/norm 
--- map <leader>eN :g/..*/norm 
--- nnoremap <leader>es :%s//g<Left><Left>
--- vnoremap <leader>es :s/\%V/g<Left><Left>
--- nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
--- vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
--- map <leader>of :e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>
--- xmap <leader>rss <Plug>SlimeRegionSend
--- nmap <leader>rss <Plug>SlimeParagraphSend
+vim.api.nvim_set_keymap("n", "<leader>ah", [[:read !ghead -n -1 < <(ghc -e "")<Left><Left>]], { noremap = false })
+vim.api.nvim_set_keymap("n", "<leader>ca", [[:w! | AsyncRun compiler "%"<CR>]], { noremap = false })
+vim.api.nvim_set_keymap("n", "<leader>cc", [[:w! | !compiler "<C-r>%"<CR>]], { noremap = false })
+vim.api.nvim_set_keymap("n", "<leader>er", "diwvabp", { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>er", "dvabp", { noremap = true })
+vim.api.nvim_set_keymap("", "<leader>en", ":g/.*/norm ", { noremap = false })
+vim.api.nvim_set_keymap("", "<leader>eN", ":g/..*/norm ", { noremap = false })
+vim.api.nvim_set_keymap("n", "<leader>es", ":%s//g<Left><Left>", { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>es", [[:s/\%V/g<Left><Left>]], { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>eS", [[yiw:%s/\<<C-r>"\>//g<Left><Left>]], { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>eS", [[y:%s/\<<C-r>"\>//g<Left><Left>]], { noremap = true })
+vim.api.nvim_set_keymap("", "<leader>of", [[:e ~/.config/nvim/ftplugin/<C-r>=&filetype<CR>.vim<CR>]], { noremap = false })
+vim.api.nvim_set_keymap("x", "<leader>rss", "<Plug>SlimeRegionSend", { noremap = false })
+vim.api.nvim_set_keymap("n", "<leader>rss", "<Plug>SlimeParagraphSend", { noremap = false })
 
--- nmap øf :Files<CR>
--- nmap ør :Rg<CR>
--- nmap gd <Plug>(coc-definition)
+-- " === General Mappings === "
 
+-- Move up/down editor lines
+vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
+vim.api.nvim_set_keymap("n", "gj", "j", { noremap = true })
+vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
+vim.api.nvim_set_keymap("n", "gk", "k", { noremap = true })
 
--- " Formatting selected code.
--- " " Mappings for CoCList
--- " " Show all diagnostics.
--- " nnoremap <silent><nowait> <space>la  :<C-u>CocList diagnostics<cr>
--- " " Manage extensions.
--- " nnoremap <silent><nowait> <space>le  :<C-u>CocList extensions<cr>
--- " " Show commands.
--- " nnoremap <silent><nowait> <space>lc  :<C-u>CocList commands<cr>
--- " " Find symbol of current document.
--- " nnoremap <silent><nowait> <space>lo  :<C-u>CocList outline<cr>
--- " " Search workspace symbols.
--- " nnoremap <silent><nowait> <space>ls  :<C-u>CocList -I symbols<cr>
--- " " Do default action for next item.
--- " nnoremap <silent><nowait> <space>lj  :<C-u>CocNext<CR>
--- " " Do default action for previous item.
--- " nnoremap <silent><nowait> <space>lk  :<C-u>CocPrev<CR>
--- " " Resume latest coc list.
--- " nnoremap <silent><nowait> <space>lp  :<C-u>CocListResume<CR>
+-- Use arrow keys to navigate files / tmux panes
+vim.api.nvim_set_keymap("", "<Left>", "<C-h>", { noremap = false })
+vim.api.nvim_set_keymap("", "<Right>", "<C-l>", { noremap = false })
+vim.api.nvim_set_keymap("", "<Down>", "}j", { noremap = false })
+vim.api.nvim_set_keymap("", "<Up>", "{k", { noremap = false })
+vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 
-
--- call which_key#register(',', "g:which_key_map")
+vim.api.nvim_set_keymap("n", "øf", ":Files<CR>", { noremap = false })
+vim.api.nvim_set_keymap("n", "ør", ":Rg<CR>", { noremap = false })
+vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", { noremap = false })

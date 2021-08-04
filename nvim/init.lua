@@ -13,7 +13,6 @@ require('my.options')
 -- setup mappings
 -- setup lsp, remove coc
 -- setup lualine
--- fix color-script setup
 
 vim.g.builtin_lsp = true
 
@@ -112,7 +111,6 @@ vim.g.slime_no_mappings = 1
 vim.g.rainbow_active = 1
 
 -- " === Snippets === "
-
 vim.g.snips_author = "Eirik Sæther"
 vim.g.snips_email = "eirik.halvard.95@gmail.com"
 vim.g.snips_github = "https://github.com/eirikhalvard"
