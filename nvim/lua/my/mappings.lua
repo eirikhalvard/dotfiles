@@ -14,7 +14,8 @@ wk.register({
   [","] = { '<cmd>e #<CR>', 'previous-file' },
   a = {
     name = "🎮 Actions",
-    -- h = 'insert-haskell-expression',
+    f = { "<cmd>ALEFix<CR>", "ale-fix" },
+    h = 'insert-haskell-expression',
     i = { "<cmd>luafile ~/.config/nvim/init.lua<CR>", "source-init" },
     s = { "<cmd>syntax sync fromstart<CR>", "sync-syntax" },
     -- y = {':CocList -A --normal yank', 'yank-list'},

@@ -79,7 +79,7 @@ vim.opt.smartcase = true
 vim.opt.inccommand = "nosplit"
 
 -- " === TEX === "
-vim.api.nvim_set_var("tex_flavor", "latex")
+vim.g.tex_flavor = "latex"
 -- Runs a script that cleans out tex build files 
 -- whenever I close out of a .tex file.
 vim.api.nvim_command("autocmd VimLeave *.tex !texclear %")
@@ -95,21 +95,51 @@ vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", { noremap = false })
 vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
 
 -- " === Vim Wordmotion === "
-vim.api.nvim_set_var("wordmotion_prefix", "-")
+vim.g.wordmotion_prefix = "-"
 
 -- " === Nvim Tree === "
-vim.api.nvim_set_var("nvim_tree_gitignore", 1)
+vim.g.nvim_tree_gitignore = 1
 
 -- " === Paredit === "
-vim.api.nvim_set_var("paredit_leader", "æ")
-vim.api.nvim_set_var("paredit_electric_return", 0)
+vim.g.paredit_leader = "æ"
+vim.g.paredit_electric_return = 0
 
 -- " === Slime === "
-vim.api.nvim_set_var("slime_target", "tmux")
-vim.api.nvim_set_var("slime_no_mappings", 1)
+vim.g.slime_target = "tmux"
+vim.g.slime_no_mappings = 1
 
 -- " === Rainbow Parenthesis === "
-vim.api.nvim_set_var("rainbow_active", 1)
+vim.g.rainbow_active = 1
+
+-- " === Snippets === "
+
+vim.g.snips_author = "Eirik Sæther"
+vim.g.snips_email = "eirik.halvard.95@gmail.com"
+vim.g.snips_github = "https://github.com/eirikhalvard"
+-- vim.g.UltiSnipsSnippetsDir = "~/.config/nvim/plugged/vim-snippets/UltiSnips"
+-- vim.g.UltiSnipsSnippetDirectories = "~/.config/nvim/plugged/vim-snippets/UltiSnips"
+
+-- " === Ale === "
+
+vim.api.nvim_set_var("ale_fix_on_save", 1)
+vim.g.ale_linters_explicit = 1
+vim.g.ale_fixerss = { haskell =  { "fourmolu" }  }
+-- old linters:
+-- " \  'tex': ['latexindent'],
+-- " \  'json': ['fixjson'],
+-- " \  'java': ['google_java_format'],
+-- " \  'markdown': ['prettier'],
+-- "
+-- let g:ale_lint_on_text_changed = 'never'
+
+vim.cmd([[
+function! FormatHaskell(buffer) abort
+    return {
+    \   'command': 'fourmolu --indentation 2 --indent-wheres true'
+    \}
+endfunction
+execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu for haskell')
+]])
 
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 -- "                              LAYOUT & DESIGN                               "
@@ -134,64 +164,20 @@ vim.api.nvim_set_var("rainbow_active", 1)
 -- autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 -- " === Colors === "
--- set termguicolors
--- highlight Comment cterm=italic
 
--- if filereadable(expand("~/.vimrc_background"))
---   let base16colorspace=256
---   source ~/.vimrc_background
--- endif
+vim.o.termguicolors = true
+vim.cmd([[
+highlight Comment cterm=italic
 
--- if filereadable(expand("~/.vimrc_bgtype"))
---   source ~/.vimrc_bgtype
--- endif
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
--- hi LineNr guibg=NONE
--- hi Normal guibg=NONE ctermbg=NONE
+if filereadable(expand("~/.vimrc_bgtype"))
+  source ~/.vimrc_bgtype
+endif
 
-
--- " === Snippets === "
-
--- let g:snips_author = "Eirik Sæther"
--- let g:snips_email = "eirik.halvard.95@gmail.com"
--- let g:snips_github = "https://github.com/eirikhalvard"
-
--- let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
--- let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
-
--- " \/ \/ OLD COMPLETION SETUP. \/ \/
-
--- " === Snippets === "
--- " let g:UltiSnipsSnippetsDir = '~/.config/nvim/plugged/vim-snippets/UltiSnips'
--- " let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
-
--- " map <leader>s :Snippets<CR>
-
--- " map <leader>os :UltiSnipsEdit<CR>
--- map <leader>af :ALEFix<CR>
--- let g:ale_fix_on_save = 1
-
--- " let g:ale_linters = { 
--- " \  'haskell': ['hlint'], 
--- " \  'tex': ['chktex'] 
--- " \}
-
--- function! FormatHaskell(buffer) abort
---     return {
---     \   'command': 'fourmolu --indentation 2 --indent-wheres true'
---     \}
--- endfunction
-
--- execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu for haskell')
-
--- let g:ale_linters_explicit = 1
--- let g:ale_fixers = { 
--- \  'haskell': ['fourmolu']
--- \}
-
--- " \  'tex': ['latexindent'],
--- " \  'json': ['fixjson'],
--- " \  'java': ['google_java_format'],
--- " \  'markdown': ['prettier'],
--- "
--- let g:ale_lint_on_text_changed = 'never'
+hi LineNr guibg=NONE
+hi Normal guibg=NONE ctermbg=NONE
+]])
