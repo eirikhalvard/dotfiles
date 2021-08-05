@@ -50,7 +50,7 @@ wk.register({
     l = { '<cmd>tabnext<CR>', 'next-tab' },
     N = { '<cmd>clast<CR>', 'last-quickfix' },
     n = { '<cmd>cnext<CR>', 'next-quickfix' },
-    o = { '<cmd>Telescope old_files<CR>', 'old-files' },
+    o = { '<cmd>Telescope oldfiles<CR>', 'oldfiles' },
     P = { '<cmd>cfirst<CR>', 'first-quickfix' },
     p = { '<cmd>cprevious<CR>', 'previous-quickfix' },
     s = { '<cmd>Telescope grep_string<CR>', 'search' },
@@ -76,35 +76,35 @@ wk.register({
      },
  l = {
      name = '🚀 LSP',
-     a = { '<Plug>(coc-codeaction-selected)', 'codeaction' },
-     af = { '<Plug>(coc-codeaction)', 'codeaction-file' },
-     C = { '<cmd>Fold<CR>', 'fold-close' },
-     d = { '<Plug>(coc-diagnostic-next)', 'diagnostic-next' },
-     D = { '<Plug>(coc-diagnostic-prev)', 'diagnostic-prev' },
-     e = { '<Plug>(coc-codelens-action)', 'eval-codelens-action' },
-     F = { '<cmd>Format<CR>', 'format' },
-     f = { '<Plug>(coc-format-selected)', 'format-selected' },
-     g = {
-       name = '🏂 Go',
-       d = { '<Plug>(coc-definition)', 'definition' },
-       i = { '<Plug>(coc-implementation)', 'implementation' },
-       r = { '<Plug>(coc-references)', 'references' },
-       t = { '<Plug>(coc-type-definition)', 'type-definition' },
-       },
-     l = { '<cmd>CocList<CR>', 'coc-list' },
-     O = { '<cmd>OR<CR>', 'organize-imports' },
-     q = { '<Plug>(coc-fix-current)', 'fix-current' },
-     R = { '<Plug>(coc-restart)', 'coc-restart' },
-     r = { '<Plug>(coc-rename)', 'rename' },
-     s = { 'K', 'show-documentation (K)' },
+     -- a = { '<Plug>(coc-codeaction-selected)', 'codeaction' },
+     -- af = { '<Plug>(coc-codeaction)', 'codeaction-file' },
+     -- C = { '<cmd>Fold<CR>', 'fold-close' },
+     -- d = { '<Plug>(coc-diagnostic-next)', 'diagnostic-next' },
+     -- D = { '<Plug>(coc-diagnostic-prev)', 'diagnostic-prev' },
+     -- e = { '<Plug>(coc-codelens-action)', 'eval-codelens-action' },
+     -- F = { '<cmd>Format<CR>', 'format' },
+     -- f = { '<Plug>(coc-format-selected)', 'format-selected' },
+     -- g = {
+     --   name = '🏂 Go',
+     --   d = { '<Plug>(coc-definition)', 'definition' },
+     --   i = { '<Plug>(coc-implementation)', 'implementation' },
+     --   r = { '<Plug>(coc-references)', 'references' },
+     --   t = { '<Plug>(coc-type-definition)', 'type-definition' },
+     --   },
+     -- l = { '<cmd>CocList<CR>', 'coc-list' },
+     -- O = { '<cmd>OR<CR>', 'organize-imports' },
+     -- q = { '<Plug>(coc-fix-current)', 'fix-current' },
+     -- R = { '<Plug>(coc-restart)', 'coc-restart' },
+     -- r = { '<Plug>(coc-rename)', 'rename' },
+     -- s = { 'K', 'show-documentation (K)' },
      },
  o = {
      name = '🛹 Open',
      b = { '<cmd>e ~/.config/shell/bash_profile<CR>', 'bash-profile' },
-     c = { '<cmd>CocConfig<CR>', 'coc-config' },
+     -- c = { '<cmd>CocConfig<CR>', 'coc-config' },
      f = 'ftplugin-filetype',
      i = { '<cmd>e ~/.config/nvim/init.lua<CR>', 'init.vim' },
-     s = { '<cmd>UltiSnipsEdit<CR>', 'open-snippets' },
+     -- s = { '<cmd>UltiSnipsEdit<CR>', 'open-snippets' },
      },
  Q = { '<cmd>q!<CR>', 'force-quit-file' },
  q = { '<cmd>q<CR>', 'quit-file' },
@@ -120,10 +120,10 @@ wk.register({
        s = 'send',
        },
      },
- S = { '<cmd>CocList snippets<CR>', 'insert-snippet' },
+ -- S = { '<cmd>CocList snippets<CR>', 'insert-snippet' },
  t = {
      name = '🔘 Toggles',
-     e = { '<cmd>CocCommand explorer<CR>', 'explorer' },
+     -- e = { '<cmd>CocCommand explorer<CR>', 'explorer' },
      g = { '<cmd>Goyo<CR>', 'goyo' },
      s = {
          name = '📝 Spell',
@@ -169,13 +169,15 @@ vim.api.nvim_set_keymap("n", "gj", "j", { noremap = true })
 vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
 vim.api.nvim_set_keymap("n", "gk", "k", { noremap = true })
 
+-- Y behaves the same was as D, C, etc
+vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
+
 -- Use arrow keys to navigate files / tmux panes
 vim.api.nvim_set_keymap("", "<Left>", "<C-h>", { noremap = false })
 vim.api.nvim_set_keymap("", "<Right>", "<C-l>", { noremap = false })
 vim.api.nvim_set_keymap("", "<Down>", "}j", { noremap = false })
 vim.api.nvim_set_keymap("", "<Up>", "{k", { noremap = false })
-vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 
 vim.api.nvim_set_keymap("n", "øf", "<leader>ff", { noremap = false })
-vim.api.nvim_set_keymap("n", "ør", ":Rg<CR>", { noremap = false })
-vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", { noremap = false })
+vim.api.nvim_set_keymap("n", "øs", "<leader>fs", { noremap = false })
+-- vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", { noremap = false })

@@ -57,10 +57,11 @@ return require('packer').startup(function()
     requires = 'kyazdani42/nvim-web-devicons'
   } 
   --=== Completion ===--
-  use 'honza/vim-snippets'
-  use 'SirVer/ultisnips'
-  use {'neoclide/coc.nvim', branch = 'release' }
-  use 'dense-analysis/ale'
+  use 'neovim/nvim-lspconfig'
+  -- use 'honza/vim-snippets'
+  -- use 'SirVer/ultisnips'
+  -- use {'neoclide/coc.nvim', branch = 'release' }
+  -- use 'dense-analysis/ale'
   
   --=== Filetype specific ===--
   use 'masukomi/vim-markdown-folding'

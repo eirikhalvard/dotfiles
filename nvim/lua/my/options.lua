@@ -1,3 +1,6 @@
+vim.g.mapleader = ","
+vim.g.maplocalleader = " "
+
 vim.opt.modelines = 0
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -58,3 +61,5 @@ vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = "nosplit"
+
+vim.g.builtin_lsp = true
