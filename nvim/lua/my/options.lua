@@ -63,3 +63,4 @@ vim.opt.smartcase = true
 vim.opt.inccommand = "nosplit"
 
 vim.g.builtin_lsp = true
+vim.o.completeopt = "menuone,noselect"

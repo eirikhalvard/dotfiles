@@ -58,6 +58,7 @@ return require('packer').startup(function()
   } 
   --=== Completion ===--
   use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-compe'
   -- use 'honza/vim-snippets'
   -- use 'SirVer/ultisnips'
   -- use {'neoclide/coc.nvim', branch = 'release' }
