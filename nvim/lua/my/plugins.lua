@@ -72,4 +72,5 @@ return require('packer').startup(function(use)
   use 'chriskempson/base16-vim'
   use 'junegunn/goyo.vim'
   use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+  use 'nvim-lua/lsp-status.nvim'
 end)

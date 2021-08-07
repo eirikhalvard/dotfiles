@@ -15,4 +15,7 @@ vim.cmd [[hi LineNr guibg=NONE ]]
 vim.cmd [[hi Normal guibg=NONE ctermbg=NONE ]]
 
 -- " === Lualine === "
-require('lualine').setup {options = {theme = Lualine_colorscheme}}
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
+require('lualine').setup {options = {theme = Lualine_colorscheme}, sections = {lualine_c = {"filename", lsp_status.status}}}

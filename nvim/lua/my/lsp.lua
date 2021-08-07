@@ -69,15 +69,6 @@ vim.cmd [[ autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- "
 -- let g:ale_lint_on_text_changed = 'never'
 
-vim.cmd([[
-function! FormatHaskell(buffer) abort
-    return {
-    \   'command': 'fourmolu --indentation 2 --indent-wheres true'
-    \}
-endfunction
-]])
--- execute ale#fix#registry#Add('fourmolu', 'FormatHaskell', ['haskell'], 'fourmolu for haskell')
-
 -- === COMPE === --
 require'compe'.setup {
   enabled = true,
