@@ -11,7 +11,6 @@ wk.register({
     h = 'insert-haskell-expression',
     i = { "<cmd>luafile ~/.config/nvim/init.lua<CR>", "source-init" },
     s = { "<cmd>syntax sync fromstart<CR>", "sync-syntax" },
-    -- y = {':CocList -A --normal yank', 'yank-list'},
   },
   c = {
      name = '🛠  Compile',
@@ -74,34 +73,9 @@ wk.register({
      s = { '<cmd>Telescope spell_suggest<CR>', 'spell-suggest' },
      m = { '<cmd>Telescope man_pages<CR>', 'man-pages' },
      },
- l = {
-     name = '🚀 LSP',
-     -- a = { '<Plug>(coc-codeaction-selected)', 'codeaction' },
-     -- af = { '<Plug>(coc-codeaction)', 'codeaction-file' },
-     -- C = { '<cmd>Fold<CR>', 'fold-close' },
-     -- d = { '<Plug>(coc-diagnostic-next)', 'diagnostic-next' },
-     -- D = { '<Plug>(coc-diagnostic-prev)', 'diagnostic-prev' },
-     -- e = { '<Plug>(coc-codelens-action)', 'eval-codelens-action' },
-     -- F = { '<cmd>Format<CR>', 'format' },
-     -- f = { '<Plug>(coc-format-selected)', 'format-selected' },
-     -- g = {
-     --   name = '🏂 Go',
-     --   d = { '<Plug>(coc-definition)', 'definition' },
-     --   i = { '<Plug>(coc-implementation)', 'implementation' },
-     --   r = { '<Plug>(coc-references)', 'references' },
-     --   t = { '<Plug>(coc-type-definition)', 'type-definition' },
-     --   },
-     -- l = { '<cmd>CocList<CR>', 'coc-list' },
-     -- O = { '<cmd>OR<CR>', 'organize-imports' },
-     -- q = { '<Plug>(coc-fix-current)', 'fix-current' },
-     -- R = { '<Plug>(coc-restart)', 'coc-restart' },
-     -- r = { '<Plug>(coc-rename)', 'rename' },
-     -- s = { 'K', 'show-documentation (K)' },
-     },
  o = {
      name = '🛹 Open',
      b = { '<cmd>e ~/.config/shell/bash_profile<CR>', 'bash-profile' },
-     -- c = { '<cmd>CocConfig<CR>', 'coc-config' },
      f = 'ftplugin-filetype',
      i = { '<cmd>e ~/.config/nvim/init.lua<CR>', 'init.vim' },
      -- s = { '<cmd>UltiSnipsEdit<CR>', 'open-snippets' },
@@ -120,10 +94,22 @@ wk.register({
        s = 'send',
        },
      },
- -- S = { '<cmd>CocList snippets<CR>', 'insert-snippet' },
+ s = {
+     name = '🚀 LSP',
+     a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "code-action" },
+     e = { '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', "show-line-diagnostics" },
+     D = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', "type-definitions" },
+     f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "formatting" },
+     j = { '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', "goto-next" },
+     k = { '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', "goto-prev" },
+     q = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', "set-loclist" },
+     r = { '<cmd>lua vim.lsp.buf.rename()<CR>', "rename" },
+     wa = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', "add-workspace-folder" },
+     wr = { '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', "remove-workspace-folder" },
+     wl = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', "list-workspace-folders" },
+     },
  t = {
      name = '🔘 Toggles',
-     -- e = { '<cmd>CocCommand explorer<CR>', 'explorer' },
      g = { '<cmd>Goyo<CR>', 'goyo' },
      s = {
          name = '📝 Spell',
@@ -136,11 +122,6 @@ wk.register({
      },
  w = { '<cmd>w<CR>', 'write-file' },
 }, { prefix = "<leader>" })
-
--- replace termcodes. used to escape certain mapping encodings
-local function t(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
 
 -- " Some commands are to complex to be written directly in
 -- " the which-key map. Either there is an ex command that
@@ -180,4 +161,12 @@ vim.api.nvim_set_keymap("", "<Up>", "{k", { noremap = false })
 
 vim.api.nvim_set_keymap("n", "øf", "<leader>ff", { noremap = false })
 vim.api.nvim_set_keymap("n", "øs", "<leader>fs", { noremap = false })
--- vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", { noremap = false })
+
+-- LSP
+vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true })
+
