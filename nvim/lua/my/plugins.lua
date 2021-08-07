@@ -2,7 +2,7 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  --=== Core functionality ===--
+  -- === Core functionality ===--
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
@@ -37,13 +37,10 @@ return require('packer').startup(function(use)
     end
   }
 
-  --=== Editor ===--
+  -- === Editor ===--
   use '/usr/local/opt/fzf'
   use 'junegunn/fzf.vim'
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-  }
+  use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
   use 'scrooloose/nerdtree'
   use 'jpalardy/vim-slime'
   use 'vim-scripts/paredit.vim'
@@ -52,37 +49,27 @@ return require('packer').startup(function(use)
   use 'skywind3000/asyncrun.vim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons'
-  } 
-  --=== Completion ===--
+  use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+  -- === Completion ===--
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
   -- use 'honza/vim-snippets'
   -- use 'SirVer/ultisnips'
   -- use {'neoclide/coc.nvim', branch = 'release' }
   -- use 'dense-analysis/ale'
-  
-  --=== Filetype specific ===--
+
+  -- === Filetype specific ===--
   use 'masukomi/vim-markdown-folding'
-  use {
-    'iamcco/markdown-preview.nvim', 
-    run = 'cd app && yarn install', 
-    cmd = 'MarkdownPreview'
-  }
+  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
   use 'neovimhaskell/haskell-vim'
   use 'lervag/vimtex'
   use 'elmcast/elm-vim'
-  
-  --=== Visual ===--
+
+  -- === Visual ===--
   use 'luochen1990/rainbow'
   use 'airblade/vim-gitgutter'
   use 'gruvbox-community/gruvbox'
   use 'chriskempson/base16-vim'
   use 'junegunn/goyo.vim'
-  use {
-    'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  }
+  use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
 end)

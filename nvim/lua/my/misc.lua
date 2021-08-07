@@ -6,13 +6,13 @@ vim.api.nvim_command("autocmd VimLeave *.tex !texclear %")
 
 vim.env.FZF_DEFAULT_OPTS = "--reverse"
 
-  -- " Haskell Parsing (Alex and Happy)
+-- " Haskell Parsing (Alex and Happy)
 vim.cmd [[au BufRead,BufNewFile *.x set syntax=haskell]]
 vim.cmd [[au BufRead,BufNewFile *.y set syntax=haskell]]
 
 -- " === Vim Align === "
-vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", { noremap = false })
-vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
+vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {noremap = false})
+vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {noremap = false})
 
 -- " === Vim Wordmotion === "
 vim.g.wordmotion_prefix = "-"
