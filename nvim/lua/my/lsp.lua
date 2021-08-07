@@ -47,12 +47,14 @@ nvim_lsp.efm.setup {
           formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb --indent-width=2",
           formatStdin = true
         }
-      }
+      },
+      haskell = {{formatCommand = "fourmolu --indentation 2 --indent-wheres true", formatStdin = true}}
     }
   }
 }
 
 vim.cmd [[ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
+vim.cmd [[ autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 
 -- " === Ale === "
 -- vim.api.nvim_set_var("ale_fix_on_save", 1)
