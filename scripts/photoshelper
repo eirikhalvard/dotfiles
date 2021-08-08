@@ -1,0 +1,93 @@
+#!/usr/bin/env osascript
+
+
+# on findBackgrounds()
+#     using terms from application "Photos"
+#         tell application "Photos"
+#             repeat with i in albums
+#                 set a to contents of i
+                
+
+#                 if name of a is "Backgrounds" then
+                    
+#                     return a
+#                 end if
+#             end repeat
+#         end tell
+#     end using terms from
+#     return missing value
+# end findBackgrounds
+
+# findBackgrounds()
+
+
+
+# using terms from application "Photos"
+#     set theFilenames to {}
+#     tell application "Photos"
+#         repeat with i in albums
+#             set a to contents of i
+#             if name of a is "Backgrounds" then
+#                 set theimages to get media items of a
+#                 repeat with image in theimages
+#                     set imgFilename to the ({filename of image})
+#                     set thePath to image as alias
+#                     log thePath
+#                 end repeat
+#                 # log theimages
+#                 # repeat with im in a
+#                     # set theFilenames to the ({filename of im} & {" "} & theFilenames)
+#                 # end repeat
+#             end if
+#         end repeat
+#         set the clipboard to theFilenames as string
+#     end tell
+# end using terms from
+
+tell application "Photos"
+    repeat with i in albums
+        set tFolder to (the POSIX path of "/Users/Eirik/Pictures/Export/" & (get name of i)) as POSIX file as text
+        repeat 1 times
+            tell application "Finder"
+                if exists tFolder then
+                    log "Skipping album " & (get name of i)
+                    exit repeat
+                end if
+            end tell
+            log "Album " & (get name of i) & " -> " & (the POSIX path of tFolder)
+            my makeFolder(tFolder) -- create a folder named (the name of this album) in dest
+        
+             with timeout of 30 * 60 seconds # 30 minutes
+                 export (get media items of i) to (tFolder as alias) with using originals
+             end timeout
+        end repeat
+    end repeat
+end tell
+
+on makeFolder(tPath)
+    do shell script "mkdir -p " & quoted form of POSIX path of tPath
+end makeFolder
+
+        # repeat with i in albums
+        #     set a to contents of i
+          
+
+        #     if name of a is "Backgrounds" then
+        #     set theFilenames to 
+              
+        #         return a
+        #     end if
+        # end repeat
+
+# tell application "Photos"
+# activate
+#   set theFilenames to {}
+#   set imageSel to (get selection) -- get the selected image
+#   repeat with im in imageSel
+#   set theFilenames to the ({filename of im} & {" "} & theFilenames)
+#   end repeat
+# set the clipboard totheFilenames as string
+#   return theFilenames
+# end tell
+
+
