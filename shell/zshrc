@@ -117,3 +117,5 @@ bindkey '^X' fzf-cd-widget
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f "/Users/Eirik/.ghcup/env" ] && source "/Users/Eirik/.ghcup/env" # ghcup-env
+
+alias luamake=/Users/Eirik/Drive/Skole/Prosjekter/Lua/lua-language-server/3rd/luamake/luamake

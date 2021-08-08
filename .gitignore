@@ -10,7 +10,7 @@ karabiner/assets
 karabiner/automatic_backups
 texstudio
 yarn
-nvim/.vimdid
+nvim/.vimdid/
 nvim/.netrwhist
 nvim/spell
 /nvim/plugged/*
@@ -24,3 +24,4 @@ base16-shell
 StardewValley
 gh/
 iterm2/
+nvim/lua/my/compiled_colortype.lua
