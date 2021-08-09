@@ -32,10 +32,19 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 - `Karabiner`
 - `iTerm`
 - `ghc`
-- `ohmyzsh/zsh`
+- `ohmyzsh/zsh` `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+- `base16` `git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell`
+- `alias-tips` zsh plugin: https://github.com/djui/alias-tips
+- `zsh-syntax-highlighting` `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
 
 #### brew installed packages
 
+Important:
 ```
-brew install ccat fd fswatch fzf google-java-format neovim tmux python3 pandoc node nvm readline proselint hub shellcheck wget tree ripgrep
+brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh bw exa zsh-syntax-highlighting
+```
+
+Useful:
+```
+brew install ccat google-java-format pandoc proselint hub shellcheck 
 ```
