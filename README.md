@@ -31,7 +31,7 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 - `Karabiner`
 - `iTerm`
-- `ghc`
+- `ghc`. -> install via ghcup
 - `ohmyzsh/zsh` `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 - `base16` `git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell`
 - `alias-tips` zsh plugin: https://github.com/djui/alias-tips
@@ -41,7 +41,7 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 Important:
 ```
-brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh bw exa zsh-syntax-highlighting
+brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh bw exa zsh-syntax-highlighting coreutils ghcid
 ```
 
 Useful:
