@@ -6,7 +6,7 @@ export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:"/Users/Eirik/bin/FDK/Tools/osx"
 export FDK_EXE="/Users/Eirik/bin/FDK/Tools/osx"
 export LC_ALL=en_US.UTF-8
-export EDITOR="vim"
+export EDITOR="nvim"
 
 ##################### CUSTOM EXPORTS ######################
 export DRIVE=$HOME/Drive
@@ -29,6 +29,7 @@ alias psrc='source ~/.bash_profile'
 alias hb='hub browse'
 alias a='atom .'
 alias vim='nvim'
+alias v='nvim -c "Telescope find_files"'
 alias o='open .'
 alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 alias mantar='curl cheat.sh/tar'
@@ -44,6 +45,7 @@ done
 alias t='tmux'
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
+alias ts='tmux swap-pane -U'
 alias tls='tmux ls'
 alias tkeys='tmux list-keys | fzf'
 

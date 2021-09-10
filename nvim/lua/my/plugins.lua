@@ -25,17 +25,7 @@ return require('packer').startup(function(use)
   use 'tommcdo/vim-exchange'
   use 'wellle/targets.vim'
   use 'chaoren/vim-wordmotion'
-  use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section in 
-        -- https://github.com/folke/which-key.nvim#%EF%B8%8F-configuration
-      }
-    end
-  }
+  use 'folke/which-key.nvim'
 
   -- === Editor ===--
   use '/usr/local/opt/fzf'
@@ -64,6 +54,8 @@ return require('packer').startup(function(use)
   use 'neovimhaskell/haskell-vim'
   use 'lervag/vimtex'
   use 'elmcast/elm-vim'
+  use 'pangloss/vim-javascript'
+  use 'scalameta/nvim-metals'
 
   -- === Visual ===--
   use 'luochen1990/rainbow'

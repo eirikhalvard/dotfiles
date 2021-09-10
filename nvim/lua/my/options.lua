@@ -22,6 +22,7 @@ vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.shiftround = false
 vim.opt.linebreak = true
+vim.opt.signcolumn = "yes"
 
 -- Cursor motion
 vim.opt.scrolloff = 4

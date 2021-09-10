@@ -3,6 +3,9 @@ local nvim_lsp = require('lspconfig')
 -- HASKELL
 nvim_lsp.hls.setup {}
 
+-- JAVASCRIPT / TYPESCRIPT
+require'lspconfig'.tsserver.setup{}
+
 -- LUA
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 local sumneko_root_path = '/Users/Eirik/Drive/Skole/Prosjekter/Lua/lua-language-server'

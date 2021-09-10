@@ -39,3 +39,8 @@ vim.g.snips_github = "https://github.com/eirikhalvard"
 -- vim.g.UltiSnipsSnippetDirectories = "~/.config/nvim/plugged/vim-snippets/UltiSnips"
 
 -- " === Telescope === "
+require("telescope").setup {
+  defaults = {
+    layout_strategy = "vertical"
+  }
+}

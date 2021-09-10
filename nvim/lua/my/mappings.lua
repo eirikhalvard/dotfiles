@@ -3,7 +3,7 @@ local wk = require("which-key")
 -- === Leader Key Mappings === --
 wk.register({
   name = '🌍 Leader',
-  [" "] = {'<cmd>Commands<CR>', 'commands'},
+  [" "] = {'<cmd>Telescope commands<CR>', 'commands'},
   [","] = {'<cmd>e #<CR>', 'previous-file'},
   a = {
     name = "🎮 Actions",
@@ -157,6 +157,7 @@ vim.api.nvim_set_keymap("", "<Up>", "{k", {noremap = false})
 
 vim.api.nvim_set_keymap("n", "øf", "<leader>ff", {noremap = false})
 vim.api.nvim_set_keymap("n", "øs", "<leader>fs", {noremap = false})
+vim.api.nvim_set_keymap("n", "ør", "<leader>fo", {noremap = false})
 
 -- LSP
 vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
