@@ -40,13 +40,16 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+
   -- === Completion ===--
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
-  -- use 'honza/vim-snippets'
-  -- use 'SirVer/ultisnips'
-  -- use {'neoclide/coc.nvim', branch = 'release' }
-  -- use 'dense-analysis/ale'
+  use 'hrsh7th/nvim-cmp'
+  use 'saadparwaiz1/cmp_luasnip'
+  use 'L3MON4D3/LuaSnip'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use {'andersevenrud/compe-tmux', branch = 'cmp'}
 
   -- === Filetype specific ===--
   use 'masukomi/vim-markdown-folding'
