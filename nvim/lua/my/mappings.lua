@@ -58,7 +58,7 @@ wk.register({
     c = {'<cmd>Git commit<CR>', 'commit'},
     f = {'<cmd>Git fetch<CR>', 'fetch'},
     g = {'<cmd>Git<CR>', 'git-menu'},
-    h = {'<cmd>GBrowse<CR>', 'browse-github'},
+    h = {'<cmd>!gh repo view -w<CR>', 'browse-github'},
     l = {'<cmd>Git pull<CR>', 'pull'},
     p = {'<cmd>Git push<CR>', 'push'},
     w = {'<cmd>Gwrite<CR>', 'stage-file'}
@@ -139,6 +139,7 @@ vim.api.nvim_set_keymap("x", "<leader>rss", "<Plug>SlimeRegionSend", {noremap = 
 vim.api.nvim_set_keymap("n", "<leader>rss", "<Plug>SlimeParagraphSend", {noremap = false})
 
 -- " === General Mappings === "
+vim.api.nvim_set_keymap("i", "fd", "<esc>", {noremap = true})
 
 -- Move up/down editor lines
 vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true})
