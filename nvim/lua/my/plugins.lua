@@ -28,7 +28,7 @@ return require('packer').startup(function(use)
   use 'folke/which-key.nvim'
 
   -- === Editor ===--
-  use '/usr/local/opt/fzf'
+  use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'junegunn/fzf.vim'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
   use 'scrooloose/nerdtree'

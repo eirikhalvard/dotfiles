@@ -61,6 +61,7 @@ wk.register({
     h = {'<cmd>!gh repo view -w<CR>', 'browse-github'},
     l = {'<cmd>Git pull<CR>', 'pull'},
     p = {'<cmd>Git push<CR>', 'push'},
+    s = {'<cmd>GitGutterStageHunk<CR>', 'stage-hunk'},
     w = {'<cmd>Gwrite<CR>', 'stage-file'}
   },
   h = {

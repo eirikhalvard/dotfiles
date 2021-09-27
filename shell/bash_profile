@@ -49,6 +49,8 @@ alias ts='tmux swap-pane -U'
 alias tls='tmux ls'
 alias tkeys='tmux list-keys | fzf'
 
+alias gdm='gd $(g merge-base --fork-point master)'
+
 alias sml='rlwrap sml'
 alias scm='clear && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
 alias maude='$HOME/bin/maude/maude.darwin64'
