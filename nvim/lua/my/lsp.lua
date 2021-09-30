@@ -3,6 +3,16 @@ local nvim_lsp = require('lspconfig')
 -- HASKELL
 nvim_lsp.hls.setup {}
 
+-- SCALA
+-- use nvim-metals package for scala
+vim.cmd [[augroup lsp]]
+vim.cmd [[au!]]
+vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach({})]]
+vim.cmd [[augroup end]]
+
+metals_config = require("metals").bare_config
+metals_config.init_options.statusBarProvider = "on"
+
 -- JAVASCRIPT / TYPESCRIPT
 require'lspconfig'.tsserver.setup {}
 
