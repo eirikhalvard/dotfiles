@@ -14,7 +14,7 @@ vim.opt.encoding = "utf-8"
 
 -- Whitespace
 vim.opt.wrap = true
-vim.opt.textwidth = 0 -- set to 79 to autowrap after whitespace 
+vim.opt.textwidth = 0 -- set to 79 to autowrap after whitespace
 vim.opt.formatoptions = "cqrn1" -- t - autowrap
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -49,14 +49,14 @@ vim.opt.listchars = [[tab:▸\ ,eol:¬]]
 vim.opt.clipboard = "unnamed"
 
 function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, {...})
-  print(unpack(objects))
-  return ...
+	local objects = vim.tbl_map(vim.inspect, { ... })
+	print(unpack(objects))
+	return ...
 end
 
 -- Searching
-vim.api.nvim_set_keymap("n", "/", [[/\v]], {noremap = true})
-vim.api.nvim_set_keymap("v", "/", [[/\v]], {noremap = true})
+vim.api.nvim_set_keymap("n", "/", [[/\v]], { noremap = true })
+vim.api.nvim_set_keymap("v", "/", [[/\v]], { noremap = true })
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true

@@ -1,18 +1,18 @@
 -- " === TEX === "
 vim.g.tex_flavor = "latex"
--- Runs a script that cleans out tex build files 
+-- Runs a script that cleans out tex build files
 -- whenever I close out of a .tex file.
 vim.api.nvim_command("autocmd VimLeave *.tex !texclear %")
 
 vim.env.FZF_DEFAULT_OPTS = "--reverse"
 
 -- " Haskell Parsing (Alex and Happy)
-vim.cmd [[au BufRead,BufNewFile *.x set syntax=haskell]]
-vim.cmd [[au BufRead,BufNewFile *.y set syntax=haskell]]
+vim.cmd([[au BufRead,BufNewFile *.x set syntax=haskell]])
+vim.cmd([[au BufRead,BufNewFile *.y set syntax=haskell]])
 
 -- " === Vim Align === "
-vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {noremap = false})
-vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {noremap = false})
+vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", { noremap = false })
+vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
 
 -- " === Vim Wordmotion === "
 vim.g.wordmotion_prefix = "-"
@@ -39,8 +39,8 @@ vim.g.snips_github = "https://github.com/eirikhalvard"
 -- vim.g.UltiSnipsSnippetDirectories = "~/.config/nvim/plugged/vim-snippets/UltiSnips"
 
 -- " === Telescope === "
-require("telescope").setup {
-  defaults = {
-    layout_strategy = "vertical"
-  }
-}
+require("telescope").setup({
+	defaults = {
+		layout_strategy = "vertical",
+	},
+})
