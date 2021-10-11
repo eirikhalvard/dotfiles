@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use 'wellle/targets.vim'
   use 'chaoren/vim-wordmotion'
   use 'folke/which-key.nvim'
+  use 'nvim-lua/plenary.nvim'
 
   -- === Editor ===--
   use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
@@ -44,12 +45,13 @@ return require('packer').startup(function(use)
   -- === Completion ===--
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use {'andersevenrud/compe-tmux', branch = 'cmp'}
+  use 'saadparwaiz1/cmp_luasnip'
+  use 'L3MON4D3/LuaSnip'
+  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- === Filetype specific ===--
   use 'masukomi/vim-markdown-folding'
