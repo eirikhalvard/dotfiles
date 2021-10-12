@@ -65,3 +65,6 @@ vim.opt.inccommand = "nosplit"
 
 vim.g.builtin_lsp = true
 vim.o.completeopt = "menuone,noselect"
+
+-- Highlight on yank
+vim.cmd [[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}]]

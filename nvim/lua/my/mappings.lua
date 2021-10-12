@@ -51,6 +51,8 @@ wk.register({
 		s = { "<cmd>Telescope grep_string<CR>", "search" },
 		t = { "<cmd>Telescope<CR>", "telescope" },
 		y = { "<cmd>Telescope grep_string<CR>", "yank-and-search" },
+		z = { "<cmd>lua require'telescope'.extensions.z.list{}<CR>", "telescope-z" },
+
 	},
 	g = {
 		name = "🐙 Git",
