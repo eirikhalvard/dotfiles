@@ -1,0 +1,92 @@
+" --------------------------------------------- "
+" ---------- IntelliJ IdeaVim Config ---------- "
+" ----------   Eirik Halvard Sæther  ---------- "
+" --------------------------------------------- "
+
+" ---------- options ---------- "
+
+set hidden
+set hlsearch
+set showmode
+
+set incsearch
+set inccommand
+
+set scrolloff=2
+set ignorecase
+set smartcase
+
+set clipboard=unnamed
+
+let mapleader=","
+
+" ---------- extensions ---------- "
+
+" use built in intellij smart joining
+set ideajoin
+
+" emulated vim plugins (https://github.com/JetBrains/ideavim/wiki/Emulated-plugins)
+set surround
+set commentary
+set exchange
+set highlightedyank
+set textobj-indent
+set matchit
+
+" ---------- mappings ---------- "
+
+map <leader>w :w<CR>
+map <leader>q :q<CR>
+map <leader>l :noh<CR>
+map <leader><leader> :e#<CR>
+
+" built-in navigation to navigated items works better
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+" but preserve ideavim defaults
+nnoremap g<c-o> <c-o>
+nnoremap g<c-i> <c-i>
+
+" Switch to prev/next tab
+nnoremap L gt
+nnoremap H gT
+
+" Move between panes
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-J> <C-W><C-J>
+
+" Action mappings
+nnoremap <leader>as :source ~/.ideavimrc<CR>
+nnoremap <leader>af :action ReformatCode<CR>
+nnoremap <leader>ar :action ReformatCode<CR>
+nnoremap <leader>ac :action CompileDirty<CR>
+
+" Find mappings
+nnoremap <leader>fe :action SearchEverywhere<CR>
+nnoremap <leader>fs :action GotoSymbol<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fa :action GotoAction<CR>
+nnoremap <leader>fc :action GotoClass<CR>
+nnoremap <leader>fd :action Switcher<CR>
+
+" Smart functionality mappings
+nnoremap <leader>sr :action RenameElement<CR>
+nnoremap <leader>st :action GotoTest<CR>
+
+" g mappings
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action FindUsages<CR>
+
+augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? :set hlsearch
+    autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
+
+" vimrc inspiration:
+"   - random person: https://github.com/saaguero/ideavimrc/blob/master/.ideavimrc
+"   - sondresl: https://github.com/sondresl/configs/blob/master/shell/ideavimrc
+"   - action list: https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+"   - ideavim docs: https://github.com/JetBrains/ideavim#emulated-vim-plugins

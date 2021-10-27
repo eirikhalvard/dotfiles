@@ -22,6 +22,7 @@ My current setup is only tested on MacOS. I use a combination of iTerm, neovim a
   - `ln -s ~/.config/shell/ghci ~/.ghci`
   - `ln -s ~/.config/shell/zshrc ~/.zshrc`
   - `ln -s ~/.config/shell/tmux.conf ~/.tmux.conf`
+  - `ln -s ~/.config/shell/ideavimrc ~/.ideavimrc`
 
 ### Dependencies
 
