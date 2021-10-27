@@ -6,7 +6,7 @@
 " ---------- options ---------- "
 
 set hidden
-set hlsearch
+set nohlsearch
 set showmode
 
 set incsearch
@@ -63,6 +63,8 @@ nnoremap <leader>af :action ReformatCode<CR>
 nnoremap <leader>ar :action ReformatCode<CR>
 nnoremap <leader>ac :action CompileDirty<CR>
 
+nnoremap <leader>cc :action CompileDirty<CR>
+
 " Find mappings
 nnoremap <leader>fe :action SearchEverywhere<CR>
 nnoremap <leader>fs :action GotoSymbol<CR>
@@ -74,6 +76,8 @@ nnoremap <leader>fd :action Switcher<CR>
 " Smart functionality mappings
 nnoremap <leader>sr :action RenameElement<CR>
 nnoremap <leader>st :action GotoTest<CR>
+nnoremap <leader>sj :action NextOccurence<CR>
+nnoremap <leader>sk :action PreviousOccurence<CR>
 
 " g mappings
 nnoremap gd :action GotoDeclaration<CR>
