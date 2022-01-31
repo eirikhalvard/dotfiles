@@ -179,13 +179,19 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
+function isLight() {
+  grep -q "vim.g.color_is_light = true" ~/.config/nvim/lua/my/compiled_colortype.lua
+}
+
 function light() {
   echo "vim.g.color_is_light = true" > ~/.config/nvim/lua/my/compiled_colortype.lua
+  sed -i "" 's/dark = true/light = true/g' ~/.gitconfig
   base16_one-light
 }
 
 function dark() {
   echo "vim.g.color_is_light = false" > ~/.config/nvim/lua/my/compiled_colortype.lua
+  sed -i "" 's/light = true/dark = true/g' ~/.gitconfig
   base16_gruvbox-dark-hard
 }
 

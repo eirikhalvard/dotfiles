@@ -1,17 +1,24 @@
 local nvim_lsp = require("lspconfig")
 
 -- HASKELL
-nvim_lsp.hls.setup({})
+nvim_lsp.hls.setup({
+	settings = {
+		haskell = {
+			formattingProvider = "fourmolu",
+		},
+	},
+})
+-- vim.g.ormolu_command = "fourmolu"
 
 -- SCALA
 -- use nvim-metals package for scala
-vim.cmd([[augroup lsp]])
-vim.cmd([[au!]])
-vim.cmd([[au FileType scala,sbt lua require("metals").initialize_or_attach({})]])
-vim.cmd([[augroup end]])
+-- vim.cmd([[augroup lsp]])
+-- vim.cmd([[au!]])
+-- vim.cmd([[au FileType scala,sbt lua require("metals").initialize_or_attach({})]])
+-- vim.cmd([[augroup end]])
 
-metals_config = require("metals").bare_config
-metals_config.init_options.statusBarProvider = "on"
+-- metals_config = require("metals").bare_config
+-- metals_config.init_options.statusBarProvider = "on"
 
 -- JAVASCRIPT / TYPESCRIPT
 nvim_lsp.tsserver.setup({})
@@ -123,3 +130,6 @@ cmp.setup({
 		{ name = "tmux" },
 	},
 })
+
+-- === TROUBLE === --
+require("trouble").setup({})

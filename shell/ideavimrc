@@ -37,8 +37,9 @@ set matchit
 
 map <leader>w :w<CR>
 map <leader>q :q<CR>
-map <leader>l :noh<CR>
 map <leader><leader> :e#<CR>
+
+map Y y$
 
 " built-in navigation to navigated items works better
 nnoremap <c-o> :action Back<cr>
@@ -48,38 +49,56 @@ nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>
 
 " Switch to prev/next tab
-nnoremap L gt
-nnoremap H gT
+nnoremap <C-TAB> gt
+nnoremap <C-S-TAB> gT
 
 " Move between panes
+nnoremap L <C-W><C-L>
 nnoremap <C-L> <C-W><C-L>
+nnoremap H <C-W><C-H>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-J> <C-W><C-J>
 
-" Action mappings
-nnoremap <leader>as :source ~/.ideavimrc<CR>
-nnoremap <leader>af :action ReformatCode<CR>
-nnoremap <leader>ar :action ReformatCode<CR>
-nnoremap <leader>ac :action CompileDirty<CR>
+" Do (Action) mappings
+nnoremap <leader>dc :action CompileDirty<CR>
+nnoremap <leader>df :action ReformatCode<CR>
+nnoremap <leader>dr :action Run<CR>
+nnoremap <leader>ds :source ~/.ideavimrc<CR>
 
 nnoremap <leader>cc :action CompileDirty<CR>
+nnoremap <leader>cr :action RunClass<CR>
 
 " Find mappings
-nnoremap <leader>fe :action SearchEverywhere<CR>
-nnoremap <leader>fs :action GotoSymbol<CR>
-nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>fa :action GotoAction<CR>
 nnoremap <leader>fc :action GotoClass<CR>
 nnoremap <leader>fd :action Switcher<CR>
+nnoremap <leader>fe :action SearchEverywhere<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fs :action GotoSymbol<CR>
+
+" Edit mappings
+nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
+nnoremap <leader>es :%s//g<Left><Left>
+vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
+vnoremap <leader>es :s//g<Left><Left>
 
 " Smart functionality mappings
-nnoremap <leader>sr :action RenameElement<CR>
-nnoremap <leader>st :action GotoTest<CR>
+nnoremap <leader>se :action GotoNextError<CR>
+nnoremap <leader>sf :action FindInPath<CR>
 nnoremap <leader>sj :action NextOccurence<CR>
 nnoremap <leader>sk :action PreviousOccurence<CR>
+nnoremap <leader>sr :action RenameElement<CR>
+nnoremap <leader>ss :action ShowIntentionActions<CR>
+nnoremap <leader>st :action GotoTest<CR>
+
+" Git mappings
+nnoremap <leader>gd :action Git.CompareWithBranch<CR>  
+nnoremap <leader>gg :action Git.ContextMenu<CR>  
+nnoremap <leader>gu :action Vcs.RollbackChangedLines<CR>  
 
 " g mappings
+nnoremap gD :action GotoTypeDeclaration<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gr :action FindUsages<CR>
 

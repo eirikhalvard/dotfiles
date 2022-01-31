@@ -55,6 +55,7 @@ return require("packer").startup(function(use)
 	use("saadparwaiz1/cmp_luasnip")
 	use("L3MON4D3/LuaSnip")
 	use("jose-elias-alvarez/null-ls.nvim")
+	use("folke/trouble.nvim")
 
 	-- === Filetype specific ===--
 	use("masukomi/vim-markdown-folding")
@@ -64,6 +65,7 @@ return require("packer").startup(function(use)
 	use("elmcast/elm-vim")
 	use("pangloss/vim-javascript")
 	use("scalameta/nvim-metals")
+	-- use("sdiehl/vim-ormolu")
 
 	-- === Visual ===--
 	use("luochen1990/rainbow")
@@ -73,4 +75,5 @@ return require("packer").startup(function(use)
 	use("junegunn/goyo.vim")
 	use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 	use("nvim-lua/lsp-status.nvim")
+	use("folke/lsp-colors.nvim")
 end)

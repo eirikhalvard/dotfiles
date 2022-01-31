@@ -18,6 +18,7 @@ vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
 vim.g.wordmotion_prefix = "-"
 
 -- " === Nvim Tree === "
+require("nvim-tree").setup()
 vim.g.nvim_tree_gitignore = 1
 
 -- " === Paredit === "
@@ -39,9 +40,16 @@ vim.g.snips_github = "https://github.com/eirikhalvard"
 -- vim.g.UltiSnipsSnippetDirectories = "~/.config/nvim/plugged/vim-snippets/UltiSnips"
 
 -- " === Telescope === "
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
 require("telescope").setup({
 	defaults = {
 		layout_strategy = "vertical",
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
 	},
 	extensions = {
 		fzf = {

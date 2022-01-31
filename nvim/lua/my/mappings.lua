@@ -5,14 +5,14 @@ wk.register({
 	name = "🌍 Leader",
 	[" "] = { "<cmd>Telescope commands<CR>", "commands" },
 	[","] = { "<cmd>e #<CR>", "previous-file" },
-	a = {
-		name = "🎮 Actions",
-		f = { "<cmd>ALEFix<CR>", "ale-fix" },
+	c = { name = "🛠  Compile", a = "async-compile", c = "compile" },
+	d = {
+		name = "🎮 Do (Action)",
+		f = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "code-action" },
 		h = "insert-haskell-expression",
 		i = { "<cmd>luafile ~/.config/nvim/init.lua<CR>", "source-init" },
 		s = { "<cmd>syntax sync fromstart<CR>", "sync-syntax" },
 	},
-	c = { name = "🛠  Compile", a = "async-compile", c = "compile" },
 	e = {
 		name = "💻 Edits",
 		f = { "z=1<CR>", "fix-typo" },
@@ -99,10 +99,14 @@ wk.register({
 		e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show-line-diagnostics" },
 		D = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "type-definitions" },
 		f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "formatting" },
+		i = { "<cmd>TroubleToggle lsp_document_diagnostics<CR>", "trouble-document" },
 		j = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "goto-next" },
 		k = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "goto-prev" },
+		o = { "<cmd>TroubleToggle lsp_workspace_diagnostics<CR>", "trouble-workspace" },
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set-loclist" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
+		s = { "<cmd>TroubleToggle<CR>", "trouble-toggle" },
+		u = { "<cmd>TroubleToggle quickfix<CR>", "trouble-quickfix" },
 		wa = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "add-workspace-folder" },
 		wr = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", "remove-workspace-folder" },
 		wl = { "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "list-workspace-folders" },
@@ -128,7 +132,7 @@ wk.register({
 -- " the which-key map. Either there is an ex command that
 -- " uses more complex features, or we have custom implementation
 -- " for visual mode and normal mode
-vim.api.nvim_set_keymap("n", "<leader>ah", [[:read !ghead -n -1 < <(ghc -e "")<Left><Left>]], { noremap = false })
+vim.api.nvim_set_keymap("n", "<leader>dh", [[:read !ghead -n -1 < <(ghc -e "")<Left><Left>]], { noremap = false })
 vim.api.nvim_set_keymap("n", "<leader>ca", [[:w! | AsyncRun compiler "%"<CR>]], { noremap = false })
 vim.api.nvim_set_keymap("n", "<leader>cc", [[:w! | !compiler "<C-r>%"<CR>]], { noremap = false })
 vim.api.nvim_set_keymap("n", "<leader>er", "diwvabp", { noremap = true })
@@ -176,4 +180,5 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>
 vim.api.nvim_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gr", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true })
