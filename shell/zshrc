@@ -118,14 +118,15 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 alias luamake="$HOME/Drive/Skole/Prosjekter/Lua/lua-language-server/3rd/luamake/luamake"
 
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+export ZSHCOMPDIR=$ZSH/completions
 if [ $commands[bw] ]; then
-  source <(bw completion --shell zsh)
-  compdef _bw bw
-  compdump
+  bw completion --shell zsh > "${ZSHCOMPDIR}/_bw"
 fi
 
-if [ $commands[gh] ]; then
-  source <(gh completion --shell zsh)
-  compdef _gh gh
-  compdump
+if [ $commands[fuji] ]; then
+  fuji --zsh-completion-script $(which fuji) > "${ZSHCOMPDIR}/_fuji"
 fi
+
+autoload -U compinit && compinit -i
