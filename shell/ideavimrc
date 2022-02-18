@@ -63,6 +63,7 @@ nnoremap <C-J> <C-W><C-J>
 " Do (Action) mappings
 nnoremap <leader>dc :action CompileDirty<CR>
 nnoremap <leader>df :action ReformatCode<CR>
+vnoremap <leader>df :action ReformatCode<CR>
 nnoremap <leader>dr :action Run<CR>
 nnoremap <leader>ds :source ~/.ideavimrc<CR>
 
