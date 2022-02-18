@@ -18,8 +18,11 @@ vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
 vim.g.wordmotion_prefix = "-"
 
 -- " === Nvim Tree === "
-require("nvim-tree").setup()
-vim.g.nvim_tree_gitignore = 1
+require("nvim-tree").setup {
+  git = {
+    ignore = 1
+  }
+}
 
 -- " === Paredit === "
 vim.g.paredit_leader = "æ"

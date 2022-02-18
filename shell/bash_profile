@@ -3,6 +3,7 @@
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.config/scripts
 export PATH=$PATH:$HOME/.local/bin/
+export PATH=$PATH:$HOME/.krew/bin
 
 # export PATH=$PATH:"/Users/Eirik/bin/FDK/Tools/osx"
 # export FDK_EXE="/Users/Eirik/bin/FDK/Tools/osx"
@@ -19,7 +20,7 @@ export CONFIG=$HOME/.config
 alias prosjekter="cd \$PROSJEKTER"
 alias skole="cd \$SKOLE"
 alias config="cd \$CONFIG"
-alias f21="cd /Volumes/EirikT5/Pictures/Fuji/2021"
+alias f22="cd /Volumes/EirikT5/Pictures/Fuji/2021"
 
 ##################### ALIAS COMMANDS ######################
 alias c='clear'
@@ -60,6 +61,7 @@ alias affirm="$HOME/Drive/Diverse/affirmations/affirmation"
 
 alias -g FF='$(fzf)'
 alias -g PF='| fzf'
+alias -g G='| grep'
 alias -g CC='| pbcopy'
 
 ##################### FUNCTIONS ###########################
