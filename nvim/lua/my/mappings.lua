@@ -64,6 +64,7 @@ wk.register({
 		l = { "<cmd>Git pull<CR>", "pull" },
 		p = { "<cmd>Git push<CR>", "push" },
 		s = { "<cmd>GitGutterStageHunk<CR>", "stage-hunk" },
+		u = { "<cmd>GitGutterUndoHunk<CR>", "undo-hunk" },
 		w = { "<cmd>Gwrite<CR>", "stage-file" },
 	},
 	h = {
@@ -102,6 +103,7 @@ wk.register({
 		i = { "<cmd>TroubleToggle lsp_document_diagnostics<CR>", "trouble-document" },
 		j = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "goto-next" },
 		k = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "goto-prev" },
+		l = { "<cmd>LuaSnipListAvailable<CR>", "lua-snippet-list" },
 		o = { "<cmd>TroubleToggle lsp_workspace_diagnostics<CR>", "trouble-workspace" },
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set-loclist" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },

@@ -54,6 +54,7 @@ return require("packer").startup(function(use)
 	use("andersevenrud/compe-tmux")
 	use("saadparwaiz1/cmp_luasnip")
 	use("L3MON4D3/LuaSnip")
+  use("rafamadriz/friendly-snippets")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("folke/trouble.nvim")
 

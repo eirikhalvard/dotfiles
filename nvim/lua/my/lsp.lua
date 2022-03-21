@@ -16,110 +16,61 @@ nvim_lsp.tsserver.setup({})
 -- PYTHON
 nvim_lsp.pylsp.setup({})
 
--- LUA
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
--- local sumneko_root_path = '/Users/Eirik/Drive/Skole/Prosjekter/Lua/lua-language-server'
-
--- local sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
--- local runtime_path = vim.split(package.path, ';')
--- table.insert(runtime_path, "lua/?.lua")
--- table.insert(runtime_path, "lua/?/init.lua")
-
--- nvim_lsp.sumneko_lua.setup {
---   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
---   settings = {
---     Lua = {
---       runtime = {
---         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
---         version = 'LuaJIT',
---         -- Setup your lua path
---         path = runtime_path
---       },
---       diagnostics = {
---         -- Get the language server to recognize the `vim` global
---         globals = {'vim'}
---       },
---       workspace = {
---         -- Make the server aware of Neovim runtime files
---         library = vim.api.nvim_get_runtime_file("", true)
---       },
---       -- Do not send telemetry data containing a randomized but unique identifier
---       telemetry = {enable = false}
---     }
---   }
--- }
-
--- NULL LS (general)
-
--- local null_ls = require("null-ls")
-
--- -- register any number of sources simultaneously
--- local sources = {
--- 	null_ls.builtins.formatting.prettier,
--- 	null_ls.builtins.code_actions.gitsigns,
--- 	null_ls.builtins.formatting.stylua,
--- }
-
--- null_ls.config({ sources = sources })
--- nvim_lsp["null-ls"].setup({})
-
--- " === Ale === "
--- vim.api.nvim_set_var("ale_fix_on_save", 1)
--- vim.g.ale_linters_explicit = 1
--- vim.g.ale_fixerss = { haskell =  { "fourmolu" }  }
-
--- old linters:
--- " \  'tex': ['latexindent'],
--- " \  'json': ['fixjson'],
--- " \  'java': ['google_java_format'],
--- " \  'markdown': ['prettier'],
--- "
--- let g:ale_lint_on_text_changed = 'never'
-
 -- === CMP === --
+
 local luasnip = require("luasnip")
 local cmp = require("cmp")
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  completion = { 
+    completeopt = 'menu,menuone,noinsert,noselect' 
+  },
+  mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
+		["<Up>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
+		["<Down>"] = cmp.mapping.select_next_item(),
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-		["<Tab>"] = function(fallback)
-			if vim.fn.pumvisible() == 1 then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-n>", true, true, true), "n")
-			elseif luasnip.expand_or_jumpable() then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-			else
-				fallback()
-			end
-		end,
-		["<S-Tab>"] = function(fallback)
-			if vim.fn.pumvisible() == 1 then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, true, true), "n")
-			elseif luasnip.jumpable(-1) then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-			else
-				fallback()
-			end
-		end,
-	},
-	sources = {
+		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  },
+  sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "path" },
 		{ name = "buffer" },
 		{ name = "tmux" },
-	},
+  }
 })
+require("luasnip.loaders.from_vscode").lazy_load()
 
 -- === TROUBLE === --
 require("trouble").setup({})
