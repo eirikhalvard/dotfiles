@@ -120,7 +120,7 @@ wk.register({
 			n = { "<cmd>set spelllang=nb<CR>", "norwegian" },
 			s = { "<cmd>set spell!<CR>", "toggle-spell" },
 		},
-		t = { "<cmd>NvimTreeFindFile<CR>", "tree" },
+		t = { "<cmd>NERDTree<CR>", "tree" },
 		w = { "<cmd>set list!<CR>", "whitespace" },
 	},
 	w = { "<cmd>w<CR>", "write-file" },

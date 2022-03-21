@@ -6,9 +6,11 @@ vim.cmd([[ highlight Comment cterm=italic ]])
 if vim.g.color_is_light then
 	Lualine_colorscheme = "onelight"
 	vim.g.colors_name = "base16-one-light"
+  vim.cmd("colorscheme base16-one-light")
 else
 	Lualine_colorscheme = "gruvbox"
 	vim.g.colors_name = "gruvbox"
+  vim.cmd("colorscheme gruvbox")
 end
 
 vim.cmd([[hi LineNr guibg=NONE ]])

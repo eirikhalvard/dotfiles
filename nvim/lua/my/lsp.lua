@@ -10,16 +10,6 @@ nvim_lsp.hls.setup({
 })
 -- vim.g.ormolu_command = "fourmolu"
 
--- SCALA
--- use nvim-metals package for scala
--- vim.cmd([[augroup lsp]])
--- vim.cmd([[au!]])
--- vim.cmd([[au FileType scala,sbt lua require("metals").initialize_or_attach({})]])
--- vim.cmd([[augroup end]])
-
--- metals_config = require("metals").bare_config
--- metals_config.init_options.statusBarProvider = "on"
-
 -- JAVASCRIPT / TYPESCRIPT
 nvim_lsp.tsserver.setup({})
 
@@ -61,17 +51,17 @@ nvim_lsp.pylsp.setup({})
 
 -- NULL LS (general)
 
-local null_ls = require("null-ls")
+-- local null_ls = require("null-ls")
 
--- register any number of sources simultaneously
-local sources = {
-	null_ls.builtins.formatting.prettier,
-	null_ls.builtins.code_actions.gitsigns,
-	null_ls.builtins.formatting.stylua,
-}
+-- -- register any number of sources simultaneously
+-- local sources = {
+-- 	null_ls.builtins.formatting.prettier,
+-- 	null_ls.builtins.code_actions.gitsigns,
+-- 	null_ls.builtins.formatting.stylua,
+-- }
 
-null_ls.config({ sources = sources })
-nvim_lsp["null-ls"].setup({})
+-- null_ls.config({ sources = sources })
+-- nvim_lsp["null-ls"].setup({})
 
 -- " === Ale === "
 -- vim.api.nvim_set_var("ale_fix_on_save", 1)

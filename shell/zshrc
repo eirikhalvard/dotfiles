@@ -120,7 +120,10 @@ alias luamake="$HOME/Drive/Skole/Prosjekter/Lua/lua-language-server/3rd/luamake/
 
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
 export ZSHCOMPDIR=$ZSH/completions
+
 if [ $commands[bw] ]; then
   bw completion --shell zsh > "${ZSHCOMPDIR}/_bw"
 fi

@@ -93,6 +93,9 @@ nnoremap <leader>sr :action RenameElement<CR>
 nnoremap <leader>ss :action ShowIntentionActions<CR>
 nnoremap <leader>st :action GotoTest<CR>
 
+" Toggle mappings
+nnoremap <leader>tt :action SelectInProjectView<CR>
+
 " Git mappings
 nnoremap <leader>gd :action Git.CompareWithBranch<CR>  
 nnoremap <leader>gg :action Git.ContextMenu<CR>  
