@@ -20,7 +20,7 @@ export CONFIG=$HOME/.config
 alias prosjekter="cd \$PROSJEKTER"
 alias skole="cd \$SKOLE"
 alias config="cd \$CONFIG"
-alias f22="cd /Volumes/EirikT5/Pictures/Fuji/2021"
+alias f22="cd /Volumes/EirikT5/Pictures/Fuji/2022"
 
 ##################### ALIAS COMMANDS ######################
 alias c='clear'

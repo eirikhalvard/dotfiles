@@ -16,6 +16,12 @@ nvim_lsp.tsserver.setup({})
 -- PYTHON
 nvim_lsp.pylsp.setup({})
 
+-- JSON
+nvim_lsp.jsonls.setup({})
+
+-- BASH
+nvim_lsp.bashls.setup({})
+
 -- === CMP === --
 
 local luasnip = require("luasnip")
