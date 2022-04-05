@@ -28,6 +28,7 @@ return require("packer").startup(function(use)
 	use("folke/which-key.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("nvim-lua/popup.nvim")
+  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
 	-- === Editor ===--
 	use({ "junegunn/fzf", dir = "~/.fzf", run = "./install --all" })
