@@ -8,7 +8,6 @@ nvim_lsp.hls.setup({
 		},
 	},
 })
--- vim.g.ormolu_command = "fourmolu"
 
 -- JAVASCRIPT / TYPESCRIPT
 nvim_lsp.tsserver.setup({})
