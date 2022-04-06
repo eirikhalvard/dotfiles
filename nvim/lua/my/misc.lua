@@ -47,21 +47,22 @@ local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 
 require("telescope").setup({
-	defaults = {
-		layout_strategy = "vertical",
+  defaults = {
+    layout_strategy = "vertical",
     mappings = {
       i = { ["<c-t>"] = trouble.open_with_trouble },
       n = { ["<c-t>"] = trouble.open_with_trouble },
     },
-	},
-	extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		},
-	},
+    path_display = { "smart" }
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+  },
 })
 
 require("telescope").load_extension("fzf")

@@ -77,7 +77,7 @@ wk.register({
 		name = "🛹 Open",
 		b = { "<cmd>e ~/.config/shell/bash_profile<CR>", "bash-profile" },
 		f = "ftplugin-filetype",
-		i = { "<cmd>e ~/.config/nvim/init.lua<CR>", "init.vim" },
+		i = { '<cmd>lua require("telescope.builtin").find_files({path_display = function(opts, path) return string.gsub(require("telescope.utils").path_tail(path), "/Users/n647546//.config/nvim/lua/my/mappings.lua.lua", "") end, search_dirs= {"~/.config/nvim/lua"}})<CR>', "config-files" },
 		-- s = { '<cmd>UltiSnipsEdit<CR>', 'open-snippets' },
 	},
 	Q = { "<cmd>q!<CR>", "force-quit-file" },
@@ -181,10 +181,10 @@ vim.api.nvim_set_keymap("n", "<F9>", ":w<CR>", { noremap = false }) -- CMD-s
 vim.api.nvim_set_keymap("i", "<F9>", "<C-O>:w<CR>", { noremap = false }) -- CMD-s
 
 -- LSP
-vim.api.nvim_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Telescope lsp_references<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "gr", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true })
