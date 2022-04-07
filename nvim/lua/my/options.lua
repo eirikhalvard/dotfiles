@@ -34,6 +34,7 @@ vim.opt.hidden = true
 
 -- Rendering
 vim.opt.ttyfast = true
+vim.opt.updatetime = 100
 
 -- Status bar
 vim.opt.laststatus = 2
