@@ -37,7 +37,7 @@ vim.opt.ttyfast = true
 vim.opt.updatetime = 100
 
 -- Status bar
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3
 
 -- Last line
 vim.opt.showmode = true
