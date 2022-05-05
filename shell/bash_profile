@@ -90,6 +90,10 @@ jc() {
   fi
 }
 
+arun() {
+  $(alias | grep -v "base16" | fzf | sed "s/.*=\(.*\)/\1/" | sed "s/'//g")
+}
+
 mekk() {
   gaa && gcmsg "$1" && gp
 }
@@ -121,7 +125,7 @@ google() {
   open "http://www.google.com/search?q=$argString";
 }
 
-ghcid_script {
+ghcid_script() {
     case "$3" in
 
         "-l" | "--lines")

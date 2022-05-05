@@ -177,8 +177,8 @@ vim.api.nvim_set_keymap("n", "øs", "<leader>fs", { noremap = false })
 vim.api.nvim_set_keymap("n", "ør", "<leader>fo", { noremap = false })
 
 -- Mappings for iTerm2
-vim.api.nvim_set_keymap("n", "<F9>", ":w<CR>", { noremap = false }) -- CMD-s
-vim.api.nvim_set_keymap("i", "<F9>", "<C-O>:w<CR>", { noremap = false }) -- CMD-s
+vim.api.nvim_set_keymap("n", "<F10>", ":w<CR>", { noremap = false }) -- CMD-s
+vim.api.nvim_set_keymap("i", "<F10>", "<C-O>:w<CR>", { noremap = false }) -- CMD-s
 
 -- LSP
 vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
