@@ -113,6 +113,7 @@ cmp.setup({
       end
     })
   },
+  
   sources = {
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lsp_signature_help" },
@@ -123,6 +124,7 @@ cmp.setup({
 		{ name = "tmux" },
   }
 })
+
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- === TROUBLE === --
@@ -130,6 +132,11 @@ require("trouble").setup({})
 
 -- TREE SITTER
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = { 
+    "haskell", "elm", "lua", "python", "r", "scala", 
+    "json", "comment", "markdown", "dockerfile", "yaml",
+    "bash", "vim", "css", "html", 
+  },
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

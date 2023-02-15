@@ -5,6 +5,9 @@ export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.config/scripts
 export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:$HOME/.krew/bin
+export PATH="$PATH:/opt/homebrew/opt/llvm@12/bin"
+export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi"
+
 export PATH=$PATH:$GOPATH/bin
 
 # export PATH=$PATH:"/Users/Eirik/bin/FDK/Tools/osx"
@@ -17,6 +20,7 @@ export DRIVE=$HOME/Drive
 export SKOLE=$DRIVE/Skole
 export PROSJEKTER=$SKOLE/Prosjekter
 export CONFIG=$HOME/.config
+export XDG_CONFIG_HOME=$CONFIG
 
 ##################### ALIAS NAVIGATION ####################
 alias prosjekter="cd \$PROSJEKTER"
@@ -207,13 +211,15 @@ isLight() {
 
 light() {
   echo "vim.g.color_is_light = true" > ~/.config/nvim/lua/my/compiled_colortype.lua
-  sed -i "" 's/dark = true/light = true/g' ~/.gitconfig
+  cat "$CONFIG/k9s/skin_light.yml" > "$CONFIG/k9s/skin.yml"
+  sed -i "" 's/dark = true/light = true/g' ~/.config/shell/gitconfig
   base16_one-light
 }
 
 dark() {
   echo "vim.g.color_is_light = false" > ~/.config/nvim/lua/my/compiled_colortype.lua
-  sed -i "" 's/light = true/dark = true/g' ~/.gitconfig
+  cat "$CONFIG/k9s/skin_dark.yml" > "$CONFIG/k9s/skin.yml"
+  sed -i "" 's/light = true/dark = true/g' ~/.config/shell/gitconfig
   base16_gruvbox-dark-hard
 }
 

@@ -5,12 +5,12 @@
 
 " ---------- options ---------- "
 
-set hidden
+" set hidden
 set nohlsearch
 set showmode
 
 set incsearch
-set inccommand
+" set inccommand
 
 set scrolloff=2
 set ignorecase
@@ -42,8 +42,8 @@ map <leader><leader> :e#<CR>
 map Y y$
 
 " built-in navigation to navigated items works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
+nmap <c-o> <Action>(Back)
+nmap <c-i> <Action>(Forward)
 " but preserve ideavim defaults
 nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>

@@ -25,6 +25,8 @@ StardewValley
 gh/
 iterm2/
 nvim/lua/my/compiled_colortype.lua
-./shell/localrc
+shell/localrc
+k9s/config.yml
+k9s/skin.yml
 filezilla
 .DS_Store

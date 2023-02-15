@@ -20,7 +20,7 @@ vim.g.wordmotion_prefix = "-"
 -- " === Nvim Tree === "
 require("nvim-tree").setup {
   git = {
-    ignore = 1
+    ignore = true
   }
 }
 
