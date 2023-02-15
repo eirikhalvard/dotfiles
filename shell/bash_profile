@@ -37,6 +37,7 @@ alias psrc='source ~/.zshrc'
 alias a='atom .'
 alias vim='nvim'
 alias v='nvim -c "Telescope find_files"'
+alias vg='nvim +Git +only'
 alias o='open .'
 alias k='kubectl'
 alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
@@ -60,6 +61,12 @@ alias tkeys='tmux list-keys | fzf'
 alias gdm='git diff $(g merge-base --fork-point master)'
 alias grw='gh repo view --web'
 alias gpw='gh pr view --web'
+alias gpc='gh pr create --assignee @me'
+
+alias sbtc='sbt "Test / compile"'
+alias sbtt='sbt -mem 12000 test'
+alias sbtut='sbt unitTest'
+alias sbta='sbt -mem 12000 -jvm-debug 5005 api/run'
 
 alias sml='rlwrap sml'
 alias scm='clear && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
@@ -228,3 +235,4 @@ clear;
 echo Velkommen til terminalen Eirik!;
 echo `date '+%H:%M - %d.%m.%Y'`;
 echo;
+. "$HOME/.cargo/env"

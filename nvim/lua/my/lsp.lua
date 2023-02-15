@@ -21,6 +21,11 @@ nvim_lsp.jsonls.setup({})
 -- BASH
 nvim_lsp.bashls.setup({})
 
+-- RUST
+local rt = require("rust-tools")
+
+rt.setup()
+
 -- === CMP === --
 
 local luasnip = require("luasnip")

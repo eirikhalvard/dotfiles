@@ -1,6 +1,6 @@
 # K9s Gruvbox Dark Skin Contributed by [@indiebrain](https://github.com/indiebrain)
 # Modified by 
-foreground: &foreground "#090a0b"
+foreground: &foreground "#202227"
 background: &background "#fafafa"
 current_line: &current_line "#383a42"
 selection: &selection "#a0a1a7"
