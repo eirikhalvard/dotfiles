@@ -18,12 +18,15 @@ My current setup is only tested on MacOS. I use a combination of iTerm, neovim a
 - Clone the repository and move it to `~/.config`. If `~/.config` already exists, rename the old as `~/.config_backup`
 - Install necessary programs using mainly `brew`. See the _Dependencies_ section for an incomplete list.
 - [Symlink](https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/) the following list of files to the home directory. This will let you have a file on the home directory which is just soft linked to a file in this repository. Changes in one of the files will reflect on the other, since they reference the same file.
-  - `ln -s ~/.config/shell/bash_profile ~/.bash_profile`
-  - `ln -s ~/.config/shell/ghci ~/.ghci`
-  - `ln -s ~/.config/shell/zshrc ~/.zshrc`
-  - `ln -s ~/.config/shell/tmux.conf ~/.tmux.conf`
-  - `ln -s ~/.config/shell/ideavimrc ~/.ideavimrc`
-  - `ln -s ~/.config/shell/gitconfig ~/.gitconfig`
+
+```bash
+ln -s ~/.config/shell/bash_profile ~/.bash_profile
+ln -s ~/.config/shell/ghci ~/.ghci
+ln -s ~/.config/shell/zshrc ~/.zshrc
+ln -s ~/.config/shell/tmux.conf ~/.tmux.conf
+ln -s ~/.config/shell/ideavimrc ~/.ideavimrc
+ln -s ~/.config/shell/gitconfig ~/.gitconfig
+```
 
 ### Dependencies
 
@@ -40,18 +43,12 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 Important:
 ```
-brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh bw exa zsh-syntax-highlighting coreutils greadlink
+brew install --cask google-chrome spotify affinity-photo affinity-designer affinity-publisher amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio iterm2 google-cloud-sdk
 
-brew install --cask spotify iterm2 amethyst Contexts
+brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh exa zsh-syntax-highlighting coreutils
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-code 
 -- install nerd font patch
-
-brew install 
-
-brew install gcloud
-brew install --cask google-cloud-sdk
-brew install --cask docker
 
 brew install ffmpeg
 pip3 install spotdl
