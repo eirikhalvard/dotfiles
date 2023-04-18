@@ -45,15 +45,15 @@ Important:
 ```
 brew install --cask google-chrome spotify affinity-photo affinity-designer affinity-publisher amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio iterm2 google-cloud-sdk
 
-brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh exa zsh-syntax-highlighting coreutils
+brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh exa zsh-syntax-highlighting coreutils tokei ccat git-delta bat sd ffmpeg rust
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-code 
 -- install nerd font patch
 
-brew install ffmpeg
 pip3 install spotdl
 
-brew install tokei ccat git-delta bat sd
+-- install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 -- language servers
 npm i -g bash-language-server

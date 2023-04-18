@@ -5,8 +5,12 @@ export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.config/scripts
 export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:$HOME/.krew/bin
-export PATH="$PATH:/opt/homebrew/opt/llvm@12/bin"
+export PATH=$PATH:$HOME/.ghcup/bin
+# export PATH="$PATH:/opt/homebrew/opt/llvm@12/bin"
+export PATH="$PATH:/opt/homebrew/Cellar/llvm@12/12.0.1_1/bin"
 export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi"
+
+eval "$(cs java --jvm 11 --env)"
 
 export PATH=$PATH:$GOPATH/bin
 
@@ -26,7 +30,8 @@ export XDG_CONFIG_HOME=$CONFIG
 alias prosjekter="cd \$PROSJEKTER"
 alias skole="cd \$SKOLE"
 alias config="cd \$CONFIG"
-alias f22="cd /Volumes/EirikT5/Pictures/Fuji/2022"
+alias f22="cd /Volumes/EirikT5/Pictures/Fuji/2023"
+alias f23="cd /Volumes/EirikT5/Pictures/Fuji/2023"
 
 ##################### ALIAS COMMANDS ######################
 alias c='clear'
@@ -38,6 +43,7 @@ alias a='atom .'
 alias vim='nvim'
 alias v='nvim -c "Telescope find_files"'
 alias vg='nvim +Git +only'
+alias vn='nvim ~/Drive/Diverse/notes.md'
 alias o='open .'
 alias k='kubectl'
 alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
@@ -62,6 +68,7 @@ alias gdm='git diff $(g merge-base --fork-point master)'
 alias grw='gh repo view --web'
 alias gpw='gh pr view --web'
 alias gpc='gh pr create --assignee @me'
+alias gpm='gh pr merge --rebase --delete-branch'
 
 alias sbtc='sbt "Test / compile"'
 alias sbtt='sbt -mem 12000 test'
@@ -83,8 +90,8 @@ alias -g CC='| pbcopy'
 
 unalias z 2> /dev/null
 z() {
-  [ $# -gt 0 ] && _z "$*" && return
-  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+  [ $# -gt 0 ] && zshz "$*" && return
+  cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
 cdf() {
@@ -210,7 +217,7 @@ export NVM_DIR="$HOME/.nvm"
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
+        source "$BASE16_SHELL/profile_helper.sh"
 
 isLight() {
   grep -q "vim.g.color_is_light = true" ~/.config/nvim/lua/my/compiled_colortype.lua
@@ -236,3 +243,7 @@ echo Velkommen til terminalen Eirik!;
 echo `date '+%H:%M - %d.%m.%Y'`;
 echo;
 . "$HOME/.cargo/env"
+
+# >>> JVM installed by coursier >>>
+export JAVA_HOME="/Users/eirik.sather/Library/Caches/Coursier/arc/https/github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u292b10.tar.gz/jdk8u292-b10/Contents/Home"
+# <<< JVM installed by coursier <<<
