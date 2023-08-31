@@ -1,2 +1,0 @@
-# Private, machine specific config for zshrc/bash_profile
-# Should be sourced from zshrc or bash_profile, and NOT commited to git
