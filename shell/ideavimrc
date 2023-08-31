@@ -100,14 +100,17 @@ nnoremap <leader>st :action GotoTest<CR>
 nnoremap <leader>tt :action SelectInProjectView<CR>
 
 " Git mappings
-nnoremap <leader>gd :action Git.CompareWithBranch<CR>  
-nnoremap <leader>gg :action Git.ContextMenu<CR>  
+nnoremap <leader>ga :action Git.Add<CR>
+nnoremap <leader>gd :action Git.CompareWithBranch<CR>
+nnoremap <leader>gg :action Git.ContextMenu<CR>
+vnoremap <leader>gg :action Git.ContextMenu<CR>
 nnoremap <leader>gu :action Vcs.RollbackChangedLines<CR>
 
 " g mappings
 nnoremap gD :action GotoTypeDeclaration<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gr :action FindUsages<CR>
+nnoremap gi :action GotoImplementation<CR>
 
 augroup vimrc-incsearch-highlight
     autocmd!
