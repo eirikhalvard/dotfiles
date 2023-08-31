@@ -6,9 +6,9 @@ export PATH=$PATH:$HOME/.config/scripts
 export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:$HOME/.krew/bin
 export PATH=$PATH:$HOME/.ghcup/bin
-# export PATH="$PATH:/opt/homebrew/opt/llvm@12/bin"
+export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 export PATH="$PATH:/opt/homebrew/Cellar/llvm@12/12.0.1_1/bin"
-export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi"
+export C_INCLUDE_PATH="$(xcrun --show-sdk-path)/usr/include/ffi"
 
 eval "$(cs java --jvm 11 --env)"
 
@@ -52,7 +52,7 @@ alias mantar='curl cheat.sh/tar'
 alias l='clear && exa --long --all --group-directories-first'
 alias ls='exa --group-directories-first'
 alias tree="clear && exa --tree --group-directories-first --git-ignore"
-for i in {1..6}; do 
+for i in {1..6}; do
   aliasContent="clear && exa --tree --level=${i} --group-directories-first --git-ignore"
   alias tree${i}=${aliasContent}
 done
@@ -245,5 +245,5 @@ echo;
 . "$HOME/.cargo/env"
 
 # >>> JVM installed by coursier >>>
-export JAVA_HOME="/Users/eirik.sather/Library/Caches/Coursier/arc/https/github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u292b10.tar.gz/jdk8u292-b10/Contents/Home"
+export JAVA_HOME="/Users/eirik.sather/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%252B7/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.19_7.tar.gz/jdk-11.0.19+7/Contents/Home"
 # <<< JVM installed by coursier <<<
