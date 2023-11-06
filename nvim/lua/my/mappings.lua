@@ -156,7 +156,6 @@ vim.api.nvim_set_keymap("x", "<leader>rss", "<Plug>SlimeRegionSend", { noremap =
 vim.api.nvim_set_keymap("n", "<leader>rss", "<Plug>SlimeParagraphSend", { noremap = false })
 
 -- " === General Mappings === "
-vim.api.nvim_set_keymap("i", "fd", "<esc>", { noremap = true })
 
 -- Move up/down editor lines
 vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
