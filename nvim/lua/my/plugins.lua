@@ -1,86 +1,88 @@
--- packer bootstrapping
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-if fn.empty(fn.glob(install_path)) > 0 then
-	fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
-	execute("packadd packer.nvim")
+-- lazyvim bootstrapping
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- packer packages
-return require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
 
+
+-- lazy packages
+
+require("lazy").setup({
 	-- === Core functionality ===--
-	use("tpope/vim-commentary")
-	use("tpope/vim-surround")
-	use("tpope/vim-repeat")
-	use("junegunn/vim-easy-align")
-	use("kana/vim-textobj-user")
-	use("kana/vim-textobj-entire")
-	use("michaeljsmith/vim-indent-object")
-	use("tommcdo/vim-exchange")
-	use("wellle/targets.vim")
-	use("chaoren/vim-wordmotion")
-	use("folke/which-key.nvim")
-	use("nvim-lua/plenary.nvim")
-	use("nvim-lua/popup.nvim")
-  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+	"tpope/vim-commentary",
+	"tpope/vim-surround",
+	"tpope/vim-repeat",
+	"junegunn/vim-easy-align",
+  { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
+	"michaeljsmith/vim-indent-object",
+	"tommcdo/vim-exchange",
+	"wellle/targets.vim",
+	"chaoren/vim-wordmotion",
+	"folke/which-key.nvim",
+	"nvim-lua/plenary.nvim",
+	"nvim-lua/popup.nvim",
+  { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
 
 	-- === Editor ===--
-	use({ "junegunn/fzf", dir = "~/.fzf", run = "./install --all" })
-	use("junegunn/fzf.vim")
-	use("nvim-telescope/telescope.nvim")
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-	use("nvim-telescope/telescope-z.nvim")
-  use("ryanoasis/vim-devicons")
-	use("scrooloose/nerdtree")
-	use("jpalardy/vim-slime")
-	use("vim-scripts/paredit.vim")
-	use("christoomey/vim-tmux-navigator")
-	use("wincent/terminus")
-	use("skywind3000/asyncrun.vim")
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
-	use({ "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons" })
+	{ "junegunn/fzf", dir = "~/.fzf", build = "./install --all" },
+	"junegunn/fzf.vim",
+	"nvim-telescope/telescope.nvim",
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	"nvim-telescope/telescope-z.nvim",
+  "ryanoasis/vim-devicons",
+	"scrooloose/nerdtree",
+	"jpalardy/vim-slime",
+	"vim-scripts/paredit.vim",
+	"christoomey/vim-tmux-navigator",
+	"wincent/terminus",
+	"skywind3000/asyncrun.vim",
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
+	{ "kyazdani42/nvim-tree.lua", dependencies = { "kyazdani42/nvim-web-devicons" } },
 
 	-- === Completion ===--
-	use("neovim/nvim-lspconfig")
-	use("hrsh7th/nvim-cmp")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-nvim-lsp-signature-help")
-  use("onsails/lspkind-nvim")
-	use("andersevenrud/compe-tmux")
-	use("saadparwaiz1/cmp_luasnip")
-	use("L3MON4D3/LuaSnip")
-  use("simrat39/rust-tools.nvim")
-  use("rafamadriz/friendly-snippets")
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("folke/trouble.nvim")
+	"neovim/nvim-lspconfig",
+	"hrsh7th/nvim-cmp",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-nvim-lua",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+  "hrsh7th/cmp-nvim-lsp-signature-help",
+  "onsails/lspkind-nvim",
+	"andersevenrud/compe-tmux",
+	"saadparwaiz1/cmp_luasnip",
+	"L3MON4D3/LuaSnip",
+  "simrat39/rust-tools.nvim",
+  "rafamadriz/friendly-snippets",
+	"jose-elias-alvarez/null-ls.nvim",
+	"folke/trouble.nvim",
 
-	-- === Filetype specific ===--
-	use("masukomi/vim-markdown-folding")
-	use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" })
-	use("neovimhaskell/haskell-vim")
-	use("lervag/vimtex")
-	use("elmcast/elm-vim")
-	use("pangloss/vim-javascript")
-  use("mustache/vim-mustache-handlebars")
+	-- === Filetype specific ===--,
+	"masukomi/vim-markdown-folding",
+	"neovimhaskell/haskell-vim",
+	"lervag/vimtex",
+	"elmcast/elm-vim",
+	"pangloss/vim-javascript",
+  "mustache/vim-mustache-handlebars",
 
-	-- === Visual ===--
-	use("luochen1990/rainbow")
-	use("airblade/vim-gitgutter")
-	use("gruvbox-community/gruvbox")
-	use("chriskempson/base16-vim")
-	use("junegunn/goyo.vim")
-	use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
-	use("nvim-lua/lsp-status.nvim")
-	use("folke/lsp-colors.nvim")
-  use("RRethy/vim-illuminate")
-end)
+	-- === Visual ===--,
+	"luochen1990/rainbow",
+	"airblade/vim-gitgutter",
+	"gruvbox-community/gruvbox",
+	"chriskempson/base16-vim",
+	"junegunn/goyo.vim",
+	{ "hoob3rt/lualine.nvim", dependencies = { { "kyazdani42/nvim-web-devicons", lazy = true } } },
+	"nvim-lua/lsp-status.nvim",
+	"folke/lsp-colors.nvim",
+  "RRethy/vim-illuminate"
+}
+)
