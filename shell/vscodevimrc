@@ -1,0 +1,35 @@
+" --------------------------------------------- "
+" ------------- VSCode Vim Config ------------- "
+" ----------   Eirik Halvard Sæther  ---------- "
+" --------------------------------------------- "
+
+" ---------- options ---------- "
+
+" set hidden
+set nohlsearch
+set showmode
+
+set incsearch
+" set inccommand
+
+set scrolloff=2
+set ignorecase
+set smartcase
+
+let mapleader=","
+
+" ---------- extensions ---------- "
+
+map <leader>w :w<CR>
+map <leader>q :q<CR>
+map <leader><leader> :e#<CR>
+
+map Y y$
+
+"vim.leader": "<Space>",
+" Edit mappings
+nnoremap <leader>eS yiw:%s/\<<C-r>"\>//g<Left><Left>
+nnoremap <leader>es :%s//g<Left><Left>
+vnoremap <leader>eS y:%s/\<<C-r>"\>//g<Left><Left>
+vnoremap <leader>es :s//g<Left><Left>
+
