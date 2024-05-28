@@ -69,6 +69,7 @@ alias grw='gh repo view --web'
 alias gpw='gh pr view --web'
 alias gpc='gh pr create --assignee @me'
 alias gpm='gh pr merge --rebase --delete-branch'
+alias gsm='git switch $(git_main_branch)'
 
 alias sbtc='sbt "Test / compile"'
 alias sbtt='sbt -mem 12000 test'
@@ -85,6 +86,10 @@ alias -g FF='$(fzf)'
 alias -g PF='| fzf'
 alias -g G='| grep'
 alias -g CC='| pbcopy'
+
+# Use git switch (gsw) instead
+unalias gcm
+unalias gco
 
 ##################### FUNCTIONS ###########################
 
