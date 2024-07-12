@@ -76,10 +76,6 @@ alias sbtt='sbt -mem 12000 test'
 alias sbtut='sbt unitTest'
 alias sbta='sbt -mem 12000 -jvm-debug 5005 api/run'
 
-alias sml='rlwrap sml'
-alias scm='clear && rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs'
-alias maude='$HOME/bin/maude/maude.darwin64'
-
 alias fujit='fuji createAndTransfer --all --name'
 
 alias -g FF='$(fzf)'
@@ -105,47 +101,16 @@ cdf() {
    file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
  }
 
-jc() {
-  if [ "$#" -eq 0 ]; then
-    javac ./*.java
-  else
-    javac ./*.java && java "$@"
-  fi
-}
-
 arun() {
   $(alias | grep -v "base16" | fzf | sed "s/.*=\(.*\)/\1/" | sed "s/'//g")
 }
 
+gfix() { 
+  git commit --fixup "${1}" && git rebase --interactive --autosquash "${1}~1" 
+}
+
 mekk() {
   gaa && gcmsg "$1" && gp
-}
-
-docs() {
-  livet=$1;
-  case $livet in
-    hoogle) open "https://hoogle.haskell.org/?hoogle=$2";;
-    *) open "http://www.google.com/search?q=docs+$livet";;
-  esac
-}
-
-hoogle() {
-  open "https://hoogle.haskell.org/?hoogle=$1"
-}
-
-google() {
-  argString=""
-  for a in "$@"; do
-    if [[ "${a:0:1}" != "-" ]] # Ignore flags (first character is -)
-    then
-      if [[ "$argString" != "" ]]
-      then
-        argString+="+" # Delimeter
-      fi
-      argString+="$a"
-    fi
-  done
-  open "http://www.google.com/search?q=$argString";
 }
 
 ghcid_script() {
@@ -198,18 +163,6 @@ untar() {
     return
   else
     tar -xzf "$@"
-  fi
-}
-
-stest() {
-  outputfile=$(mktemp)
-  sbt test --mem=8000 --color=true | tee "$outputfile"
-  if grep -q --regexp "TESTS\? FAILED" $outputfile ; then
-    rm $outputfile
-    return 1
-  else
-    rm $outputfile
-    return 0
   fi
 }
 
