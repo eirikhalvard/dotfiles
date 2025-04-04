@@ -1,0 +1,16 @@
+font-family = Fira Code Nerd Font Mono
+font-style = Regular
+font-style-bold = Light
+font-style-italic = Bold
+font-size = 18
+theme = catppuccin-latte
+keybind = cmd+shift+plus=increase_font_size:1
+custom-shader = "shaders/bettercrt.glsl"
+custom-shader = "shaders/bloom.glsl"
+# custom-shader = "shaders/sin-interference.glsl"
+# custom-shader = "shaders/glitchy.glsl"
+# custom-shader = "shaders/water.glsl"
+# custom-shader = "shaders/inside-the-matrix.glsl"
+# custom-shader = "shaders/retro-terminal.glsl"
+
+custom-shader-animation = true
