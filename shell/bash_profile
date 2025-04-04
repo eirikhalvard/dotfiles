@@ -10,8 +10,6 @@ export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 export PATH="$PATH:/opt/homebrew/Cellar/llvm@12/12.0.1_1/bin"
 export C_INCLUDE_PATH="$(xcrun --show-sdk-path)/usr/include/ffi"
 
-eval "$(cs java --jvm 11 --env)"
-
 export PATH=$PATH:$GOPATH/bin
 
 # export PATH=$PATH:"/Users/Eirik/bin/FDK/Tools/osx"
@@ -26,20 +24,12 @@ export PROSJEKTER=$SKOLE/Prosjekter
 export CONFIG=$HOME/.config
 export XDG_CONFIG_HOME=$CONFIG
 
-##################### ALIAS NAVIGATION ####################
-alias prosjekter="cd \$PROSJEKTER"
-alias skole="cd \$SKOLE"
-alias config="cd \$CONFIG"
-alias f22="cd /Volumes/EirikT5/Pictures/Fuji/2023"
-alias f23="cd /Volumes/EirikT5/Pictures/Fuji/2023"
-
 ##################### ALIAS COMMANDS ######################
 alias c='clear'
 alias pwdc='pwd | pbcopy'
 alias ifi='ssh eirikhsa@login.ifi.uio.no'
 alias pcat='ccat ~/.bash_profile'
 alias psrc='source ~/.zshrc'
-alias a='atom .'
 alias vim='nvim'
 alias v='nvim -c "Telescope find_files"'
 alias vg='nvim +Git +only'
@@ -53,10 +43,18 @@ alias l='clear && exa --long --all --group-directories-first'
 alias ls='exa --group-directories-first'
 alias tree="clear && exa --tree --group-directories-first --git-ignore"
 for i in {1..6}; do
-  aliasContent="clear && exa --tree --level=${i} --group-directories-first --git-ignore"
-  alias tree${i}=${aliasContent}
+    aliasContent="clear && exa --tree --level=${i} --group-directories-first --git-ignore"
+    alias tree${i}=${aliasContent}
 done
 
+
+alias ff="fzf --preview='
+if file --mime-type {} | grep -qF 'image/'; then
+    kitty icat --clear --transfer-mode=memory --stdin=no --place=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0 {}
+else
+    bat --color=always {}
+fi
+'"
 alias t='tmux'
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
@@ -64,7 +62,7 @@ alias ts='tmux swap-pane -U'
 alias tls='tmux ls'
 alias tkeys='tmux list-keys | fzf'
 
-alias gdm='git diff $(g merge-base --fork-point master)'
+alias gdm='git diff $(g merge-base --fork-point $(git_main_branch))'
 alias grw='gh repo view --web'
 alias gpw='gh pr view --web'
 alias gpc='gh pr create --assignee @me'
@@ -83,6 +81,32 @@ alias -g PF='| fzf'
 alias -g G='| grep'
 alias -g CC='| pbcopy'
 
+klogs2() {
+    while IFS= read -r line; do
+        echo "$line" | jq -r '
+      try "\u001b[36m\(.["@timestamp"])\u001b[0m " +
+          (if .level == "ERROR" then "\u001b[31m[ERROR]\u001b[0m"
+           elif .level == "WARN" then "\u001b[33m[WARN]\u001b[0m"
+           elif .level == "INFO" then "\u001b[32m[INFO]\u001b[0m"
+           else "[\(.level)]" end) +
+          " \(.message)"
+        catch .'
+    done
+}
+
+
+# Usage: kubectl logs POD | klogs
+klogs() {
+    grep -E "^\{.*\}$" | jq -r '
+  "\u001b[36m\(.["@timestamp"])\u001b[0m " +
+  (if .level == "ERROR" then "\u001b[31m[ERROR]\u001b[0m"
+   elif .level == "WARN" then "\u001b[33m[WARN]\u001b[0m"
+   elif .level == "INFO" then "\u001b[32m[INFO]\u001b[0m"
+   else "[\(.level)]" end) +
+  " \(.message)"
+    '
+}
+
 # Use git switch (gsw) instead
 unalias gcm
 unalias gco
@@ -91,117 +115,47 @@ unalias gco
 
 unalias z 2> /dev/null
 z() {
-  [ $# -gt 0 ] && zshz "$*" && return
-  cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+    [ $# -gt 0 ] && zshz "$*" && return
+    cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
-
-cdf() {
-   local file
-   local dir
-   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
- }
 
 arun() {
-  $(alias | grep -v "base16" | fzf | sed "s/.*=\(.*\)/\1/" | sed "s/'//g")
+    $(alias | grep -v "base16" | fzf | sed "s/.*=\(.*\)/\1/" | sed "s/'//g")
 }
 
-gfix() { 
-  git commit --fixup "${1}" && git rebase --interactive --autosquash "${1}~1" 
-}
-
-mekk() {
-  gaa && gcmsg "$1" && gp
-}
-
-ghcid_script() {
-    case "$3" in
-
-        "-l" | "--lines")
-        eval "ghcid $1 --reload=$2 --test=':cmd readFile \"$2\" >>= pure . unlines . fmap (\x -> if null x then \"putStrLn mempty\" else x) . lines'"
-        ;;
-
-        "-c" | "--clear")
-        eval "ghcid $1 --reload=$2 --test=':script $2'"
-        ;;
-
-        * )
-        eval "ghcid $1 --reload='$2' --test=':cmd readFile \"$2\" >>= pure . unlines . init . concatMap (\x -> [\"putStrLn (\" ++ show x ++ \")\", \"putStr \\\"==>    \\\"\", x,\"putStrLn mempty\"]) . filter (not . null) . lines'"
-        ;;
-    esac
-}
-
-make-zip() {
-  if [ "$#" -eq 0 ]; then
-    echo "You need to specify files to zip"
-    echo "Usage: make-zip [fileToZip]+"
-    return
-  fi
-  make-zip-name eirikhsa "$@"
-}
-
-make-zip-name() {
-  if [ "$#" -eq 0 ]; then
-    echo "You need to specify a foldername and files to zip"
-    echo "Usage: make-zip-name [foldername] [fileToZip]+"
-    return
-  elif [ "$#" -eq 1 ]; then
-    echo "You need at least one file to zip"
-    echo "Usage: make-zip-name [foldername] [fileToZip]+"
-    return
-  fi
-  foldername=$1
-  shift;
-  mkdir "${foldername}";
-  cp "$@" "${foldername}";
-  tar -czf "${foldername}.tgz" "${foldername}";
-  rm -rf "${foldername:?}";
-}
-
-untar() {
-  if [ "$#" -eq 0 ]; then
-    echo "You need to specify a file to untar"
-    return
-  else
-    tar -xzf "$@"
-  fi
+gfix() {
+    git commit --fixup "${1}" && git rebase --interactive --autosquash "${1}~1"
 }
 
 ################## NODE VERSION MANAGER ###################
 export NVM_DIR="$HOME/.nvm"
- [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
- [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 ######################### COLORS #########################
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
+[ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+source "$BASE16_SHELL/profile_helper.sh"
 
 isLight() {
-  grep -q "vim.g.color_is_light = true" ~/.config/nvim/lua/my/compiled_colortype.lua
+    grep -q "vim.g.color_is_light = true" ~/.config/nvim/lua/my/compiled_colortype.lua
 }
 
 light() {
-  echo "vim.g.color_is_light = true" > ~/.config/nvim/lua/my/compiled_colortype.lua
-  cat "$CONFIG/k9s/skin_light.yml" > "$CONFIG/k9s/skin.yml"
-  sed -i "" 's/dark = true/light = true/g' ~/.config/shell/gitconfig
-  base16_one-light
+    echo "vim.g.color_is_light = true" > ~/.config/nvim/lua/my/compiled_colortype.lua
+    cat "$CONFIG/k9s/skin_light.yml" > "$CONFIG/k9s/skin.yml"
+    sed -i "" 's/dark = true/light = true/g' ~/.config/shell/gitconfig
+    base16_one-light
 }
 
 dark() {
-  echo "vim.g.color_is_light = false" > ~/.config/nvim/lua/my/compiled_colortype.lua
-  cat "$CONFIG/k9s/skin_dark.yml" > "$CONFIG/k9s/skin.yml"
-  sed -i "" 's/light = true/dark = true/g' ~/.config/shell/gitconfig
-  base16_gruvbox-dark-hard
+    echo "vim.g.color_is_light = false" > ~/.config/nvim/lua/my/compiled_colortype.lua
+    cat "$CONFIG/k9s/skin_dark.yml" > "$CONFIG/k9s/skin.yml"
+    sed -i "" 's/light = true/dark = true/g' ~/.config/shell/gitconfig
+    base16_gruvbox-dark-hard
 }
 
 ##################### WELCOME MESSAGE #####################
 clear;
-echo Velkommen til terminalen Eirik!;
-echo `date '+%H:%M - %d.%m.%Y'`;
-echo;
 . "$HOME/.cargo/env"
-
-# >>> JVM installed by coursier >>>
-export JAVA_HOME="/Users/eirik.sather/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%252B7/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.19_7.tar.gz/jdk-11.0.19+7/Contents/Home"
-# <<< JVM installed by coursier <<<

@@ -8,12 +8,13 @@
 
 [core]
   pager = delta
+	symlinks = false
 
 [interactive]
   diffFilter = delta --color-only
 
 [delta]
-  light = true
+  dark = true
   side-by-side = true
 
 [merge]
