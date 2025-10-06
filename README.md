@@ -1,10 +1,10 @@
 # Dotfiles
 
-Welcome to my dotfiles 🌅 
+Welcome to my dotfiles 🌅
 
 ## About
 
-My current setup is only tested on MacOS. I use a combination of iTerm, neovim and tmux.
+My current setup is only tested on MacOS
 
 ### Structure
 
@@ -26,6 +26,8 @@ ln -s ~/.config/shell/zshrc ~/.zshrc
 ln -s ~/.config/shell/tmux.conf ~/.tmux.conf
 ln -s ~/.config/shell/ideavimrc ~/.ideavimrc
 ln -s ~/.config/shell/gitconfig ~/.gitconfig
+ln -s ~/.config/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+ln -s ~/.config/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 ```
 
 ### Dependencies
@@ -34,7 +36,6 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 #### Non-brew programs
 
-- `iTerm`
 - `ghc`. -> install via ghcup
 - `ohmyzsh/zsh` `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 - `base16` `git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell`
@@ -43,14 +44,12 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 Important:
 ```
-brew install --cask google-chrome spotify affinity-photo affinity-designer affinity-publisher amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio iterm2 google-cloud-sdk
+brew install --cask google-chrome spotify affinity-photo affinity-designer affinity-publisher amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio iterm2 google-cloud-sdk ghostty
 
 brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh exa zsh-syntax-highlighting coreutils tokei ccat git-delta bat sd ffmpeg rust
 
-brew tap homebrew/cask-fonts && brew install --cask font-fira-code 
+brew tap homebrew/cask-fonts && brew install --cask font-fira-code
 -- install nerd font patch
-
-pip3 install spotdl
 
 -- install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

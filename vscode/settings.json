@@ -1,0 +1,335 @@
+{
+  "haskell.manageHLS": "GHCup",
+  "haskell.formattingProvider": "fourmolu",
+  "workbench.colorTheme": "Default Light Modern",
+  "jupyter.interactiveWindow.creationMode": "perFile",
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
+  "python.languageServer": "Pylance",
+  "git.autofetch": true,
+  "window.zoomLevel": 2,
+  "vim.useSystemClipboard": true,
+  "vim.vimrc.path": "$HOME/.config/shell/vscodevimrc",
+  "vim.vimrc.enable": true,
+  "vim.leader": ",",
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "leader",
+        "f",
+        "f"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.quickOpen"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "f",
+        "a"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.showCommands"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "g",
+        "u"
+      ],
+      "commands": [
+        {
+          "command": "git.revertSelectedRanges",
+          "when": "isInDiffEditor && !operationInProgress"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "s",
+        "c"
+      ],
+      "commands": [
+        {
+          "command": "editor.action.commentLine",
+          "when": "editorTextFocus && !editorReadonly"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "g"
+      ],
+      "commands": [
+        {
+          "command": "workbench.view.scm",
+          "when": "workbench.scm.active"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "t"
+      ],
+      "commands": [
+        {
+          "command": "workbench.view.explorer",
+          "when": "viewContainer.workbench.view.explorer.enabled"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.openRecent"
+        }
+      ],
+    },
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "leader",
+        "f",
+        "f"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.quickOpen"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "f",
+        "a"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.showCommands"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "g",
+        "u"
+      ],
+      "commands": [
+        {
+          "command": "git.revertSelectedRanges",
+          "when": "isInDiffEditor && !operationInProgress"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "s",
+        "e"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.toggleEditorWidths"
+        }
+      ],
+    },
+    {
+      "before": [
+        "leader",
+        "s",
+        "c"
+      ],
+      "commands": [
+        {
+          "command": "editor.action.commentLine",
+          "when": "editorTextFocus && !editorReadonly"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "g"
+      ],
+      "commands": [
+        {
+          "command": "workbench.view.scm",
+          "when": "workbench.scm.active"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "t"
+      ],
+      "commands": [
+        {
+          "command": "workbench.view.explorer",
+          "when": "viewContainer.workbench.view.explorer.enabled"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.openRecent"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "s",
+        "r"
+      ],
+      "commands": [
+        {
+          "command": "editor.action.rename",
+          "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+        }
+      ],
+    },
+    {
+      "before": [
+        "<leader>",
+        "s",
+        "f"
+      ],
+      "commands": [
+        {
+          "command": "workbench.action.findInFiles"
+        }
+      ],
+    },
+    {
+      "before": [
+        "g",
+        "d"
+      ],
+      "commands": [
+        {
+          "command": "editor.action.revealDefinition",
+          "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+        }
+      ],
+    },
+    {
+      "before": [
+        "g",
+        "r"
+      ],
+      "commands": [
+        {
+          "command": "editor.action.goToReferences",
+          "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+        }
+      ],
+    },
+    {
+      "before": [
+        "K"
+      ],
+      "commands": [
+        {
+          "command": "editor.action.showDefinitionPreviewHover"
+        }
+      ],
+      "silent": true
+    }
+  ],
+  // "vim.handleKeys": {
+  //   "<C-a>": false,
+  //   "<C-f>": false
+  // },
+  // "// To improve performance",
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  "explorer.confirmDragAndDrop": false,
+  "svelte.enable-ts-plugin": true,
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "files.trimTrailingWhitespace": true,
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.formatOnType": true,
+    "editor.wordBasedSuggestions": "off",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.addMissingImports": "always",
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  },
+  "docker.extension.enableComposeLanguageServer": false,
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
+}
