@@ -159,3 +159,4 @@ dark() {
 ##################### WELCOME MESSAGE #####################
 clear;
 . "$HOME/.cargo/env"
+. "$HOME/.local/bin/env"
