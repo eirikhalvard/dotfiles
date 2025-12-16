@@ -30,4 +30,5 @@ shell/localrc
 k9s/config.yml
 k9s/skin.yml
 filezilla
+uv/
 .DS_Store

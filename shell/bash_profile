@@ -66,7 +66,7 @@ alias gdm='git diff $(g merge-base --fork-point $(git_main_branch))'
 alias grw='gh repo view --web'
 alias gpw='gh pr view --web'
 alias gpc='gh pr create --assignee @me'
-alias gpm='gh pr merge --rebase --delete-branch'
+alias gpm='gh pr merge --squash --delete-branch'
 alias gsm='git switch $(git_main_branch)'
 
 alias sbtc='sbt "Test / compile"'
