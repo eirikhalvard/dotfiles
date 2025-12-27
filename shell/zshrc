@@ -117,13 +117,10 @@ PROMPT='$(kube_ps1)'$PROMPT
 bindkey '^X' fzf-cd-widget
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 alias luamake="$HOME/Drive/Skole/Prosjekter/Lua/lua-language-server/3rd/luamake/luamake"
 
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 export ZSHCOMPDIR=$ZSH/completions
 
@@ -145,21 +142,5 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         source "$BASE16_SHELL/profile_helper.sh"
 
 
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE="/opt/homebrew/opt/micromamba/bin/micromamba";
-export MAMBA_ROOT_PREFIX="/Users/eirik.sather/micromamba";
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    if [ -f "/Users/eirik.sather/micromamba/etc/profile.d/micromamba.sh" ]; then
-        . "/Users/eirik.sather/micromamba/etc/profile.d/micromamba.sh"
-    else
-        export  PATH="/Users/eirik.sather/micromamba/bin:$PATH"  # extra space after export prevents interference from conda init
-    fi
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
-
-. "$HOME/.local/bin/env"
+[ -f "/Users/eirikhalvard/.ghcup/env" ] && . "/Users/eirikhalvard/.ghcup/env" # ghcup-env
+source <(fzf --zsh)

@@ -44,7 +44,7 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 Important:
 ```
-brew install --cask google-chrome spotify affinity-photo affinity-designer affinity-publisher amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio iterm2 google-cloud-sdk ghostty
+brew install --cask amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio google-cloud-sdk ghostty visual-studio-code karabiner-elements
 
 brew install fd fswatch fzf neovim tmux python3 node nvm readline wget tree ripgrep gh exa zsh-syntax-highlighting coreutils tokei ccat git-delta bat sd ffmpeg rust
 

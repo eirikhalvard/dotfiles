@@ -39,11 +39,11 @@ alias k='kubectl'
 alias mergepdfs='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 alias mantar='curl cheat.sh/tar'
 
-alias l='clear && exa --long --all --group-directories-first'
-alias ls='exa --group-directories-first'
-alias tree="clear && exa --tree --group-directories-first --git-ignore"
+alias l='clear && eza --long --all --group-directories-first'
+alias ls='eza --group-directories-first'
+alias tree="clear && eza --tree --group-directories-first --git-ignore"
 for i in {1..6}; do
-    aliasContent="clear && exa --tree --level=${i} --group-directories-first --git-ignore"
+    aliasContent="clear && eza --tree --level=${i} --group-directories-first --git-ignore"
     alias tree${i}=${aliasContent}
 done
 
@@ -159,4 +159,3 @@ dark() {
 ##################### WELCOME MESSAGE #####################
 clear;
 . "$HOME/.cargo/env"
-. "$HOME/.local/bin/env"
