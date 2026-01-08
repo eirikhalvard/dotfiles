@@ -1,4 +1,4 @@
-vim.g.color_is_light = false
+vim.g.color_is_light = vim.env.THEME_IS_LIGHT == "true"
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
@@ -246,34 +246,28 @@ require("lazy").setup({
 	},
 
 	-- Treesitter
-	{
-	  "nvim-treesitter/nvim-treesitter",
-	  build = ":TSUpdate",
-	  event = { "BufReadPost", "BufNewFile" },
-	  config = function()
-	    require("nvim-treesitter.configs").setup({
-	      ensure_installed = {
-	        "haskell", "elm", "lua", "python", "r", "scala",
-	        "json", "markdown", "dockerfile", "yaml",
-	        "bash", "vim", "css", "html",
-	      },
-	      highlight = {
-	        enable = true,
-	        additional_vim_regex_highlighting = false,
-	      },
-	      incremental_selection = {
-	        enable = true,
-	        keymaps = {
-	          init_selection = "øv",
-	          node_incremental = "øf",
-	          scope_incremental = "øg",
-	          node_decremental = "ød",
-	        },
-	      },
-	    })
-	  end,
-	},
-
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      ensure_installed = {
+        "haskell", "elm", "lua", "python", "r", "scala",
+        "json", "markdown", "dockerfile", "yaml",
+        "bash", "vim", "css", "html",
+      },
+      highlight = { enable = true, additional_vim_regex_highlighting = false },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "øv",
+          node_incremental = "øf",
+          scope_incremental = "øg",
+          node_decremental = "ød",
+        },
+      },
+    },
+  },
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {

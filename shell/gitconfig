@@ -13,7 +13,7 @@
   diffFilter = delta --color-only
 
 [delta]
-  dark = true
+  light = ${THEME_IS_LIGHT}
   side-by-side = true
 
 [merge]

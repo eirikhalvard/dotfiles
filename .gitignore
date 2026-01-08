@@ -25,7 +25,7 @@ base16-shell
 StardewValley
 gh/
 iterm2/
-nvim/lua/my/compiled_colortype.lua
+shell/theme-mode
 shell/localrc
 shell/localgitconfig
 k9s/*

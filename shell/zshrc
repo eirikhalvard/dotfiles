@@ -143,16 +143,30 @@ z() {
     cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
+THEME_STATE="$HOME/.config/shell/theme-mode"
+export THEME_MODE="$(cat "$THEME_STATE" 2>/dev/null || echo dark)"
+_apply_theme_env() {
+  export THEME_IS_LIGHT=false
+  export THEME_GHOSTTY_THEME="Cyberpunk"
+
+  if [[ "$THEME_MODE" == "light" ]]; then
+    export THEME_IS_LIGHT=true
+    export THEME_GHOSTTY_THEME="Flexoki Light"
+  fi
+  sed -i "" "s/^theme = .*/theme = $THEME_GHOSTTY_THEME/" ~/.config/ghostty/config
+}
+_apply_theme_env
+
 light() {
-    sed -i "" 's/vim.g.color_is_light = false/vim.g.color_is_light = true/g' ~/.config/nvim/init.lua
-    sed -i "" 's/theme = Cyberpunk/theme = Flexoki Light/g' ~/.config/ghostty/config
-    sed -i "" 's/light = false/light = true/g' ~/.gitconfig
+  export THEME_MODE=light
+  echo light > "$THEME_STATE"
+  _apply_theme_env
 }
 
 dark() {
-    sed -i "" 's/vim.g.color_is_light = true/vim.g.color_is_light = false/g' ~/.config/nvim/init.lua
-    sed -i "" 's/theme = Flexoki Light/theme = Cyberpunk/g' ~/.config/ghostty/config
-    sed -i "" 's/light = true/light = false/g' ~/.gitconfig
+  export THEME_MODE=dark
+  echo dark > "$THEME_STATE"
+  _apply_theme_env
 }
 
 ##################### WELCOME MESSAGE #####################
