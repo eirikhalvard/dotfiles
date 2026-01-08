@@ -138,22 +138,19 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
 source "$BASE16_SHELL/profile_helper.sh"
 
-isLight() {
-    grep -q "vim.g.color_is_light = true" ~/.config/nvim/lua/my/compiled_colortype.lua
-}
-
 light() {
     echo "vim.g.color_is_light = true" > ~/.config/nvim/lua/my/compiled_colortype.lua
     cat "$CONFIG/k9s/skin_light.yml" > "$CONFIG/k9s/skin.yml"
-    sed -i "" 's/dark = true/light = true/g' ~/.config/shell/gitconfig
-    base16_one-light
+    sed -i "" 's/theme = Cyberpunk/theme = Flexoki Light/g' ~/.config/ghostty/config
+    sed -i "" 's/light = false/light = true/g' ~/.gitconfig
 }
 
 dark() {
     echo "vim.g.color_is_light = false" > ~/.config/nvim/lua/my/compiled_colortype.lua
     cat "$CONFIG/k9s/skin_dark.yml" > "$CONFIG/k9s/skin.yml"
-    sed -i "" 's/light = true/dark = true/g' ~/.config/shell/gitconfig
-    base16_gruvbox-dark-hard
+    sed -i "" 's/theme = Flexoki Light/theme = Cyberpunk/g' ~/.config/ghostty/config
+    sed -i "" 's/light = true/light = false/g' ~/.gitconfig
+
 }
 
 ##################### WELCOME MESSAGE #####################
