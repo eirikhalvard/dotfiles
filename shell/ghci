@@ -1,9 +1,0 @@
-:set prompt "\n\ESC[1;91mλ \ESC[m"
-:set +t
-:m + Text.Show.Functions
-import Control.Lens
-import qualified Data.List as L
-import qualified Data.Map.Strict as M
-import qualified Data.Sequence as S
-import qualified Data.Char as C
-

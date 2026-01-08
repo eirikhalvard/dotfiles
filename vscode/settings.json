@@ -273,6 +273,9 @@
   "svelte.enable-ts-plugin": true,
   "python.defaultInterpreterPath": ".venv/bin/python",
   "files.trimTrailingWhitespace": true,
+  "[haskell]": {
+    "editor.formatOnSave": true
+  },
   "[python]": {
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.formatOnType": true,

@@ -20,8 +20,6 @@ My current setup is only tested on MacOS
 - [Symlink](https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/) the following list of files to the home directory. This will let you have a file on the home directory which is just soft linked to a file in this repository. Changes in one of the files will reflect on the other, since they reference the same file.
 
 ```bash
-ln -s ~/.config/shell/bash_profile ~/.bash_profile
-ln -s ~/.config/shell/ghci ~/.ghci
 ln -s ~/.config/shell/zshrc ~/.zshrc
 ln -s ~/.config/shell/tmux.conf ~/.tmux.conf
 ln -s ~/.config/shell/ideavimrc ~/.ideavimrc
@@ -38,7 +36,6 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 
 - `ghc`. -> install via ghcup
 - `ohmyzsh/zsh` `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-- `base16` `git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell`
 
 #### brew installed packages
 

@@ -1,59 +1,21 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.config/scripts
+export PATH=$PATH:$HOME/.ghcup/bin
+export PATH=$PATH:$HOME/.local/bin
+export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+export PATH="$PATH:/opt/homebrew/Cellar/llvm@12/12.0.1_1/bin"
+export C_INCLUDE_PATH="$(xcrun --show-sdk-path)/usr/include/ffi"
+export CONFIG=$HOME/.config
+export XDG_CONFIG_HOME=$CONFIG
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+export PATH=$PATH:$GOPATH/bin
+
+export LC_ALL=en_US.UTF-8
+export EDITOR="nvim"
+
 ZSH_THEME="robbyrussell"
-# ZSH_THEME="spaceship"
-# ZSH_THEME="eirikhalvard"
-# ZSH_THEME="tjkirch"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
   colored-man-pages
@@ -64,12 +26,7 @@ plugins=(
   z
 )
 
-# source "$ZSH_CUSTOM/plugins/zsh-history-substring-search"
-# bindkey '^P' history-substring-search-up
-# bindkey '^N' history-substring-search-down
-
 source $ZSH/oh-my-zsh.sh
-source ~/.bash_profile
 source ~/.config/shell/localrc
 # User configuration
 
@@ -94,24 +51,6 @@ RPS2=$RPS1
 source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 PROMPT='$(kube_ps1)'$PROMPT
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 bindkey '^X' fzf-cd-widget
@@ -126,25 +65,96 @@ export ZSHCOMPDIR=$ZSH/completions
 
 mkdir -p ~/.oh-my-zsh/completions
 
-if [ $commands[bw] ]; then
-  bw completion --shell zsh > "${ZSHCOMPDIR}/_bw"
-fi
-
 if [ $commands[fuji] ]; then
   fuji --zsh-completion-script $(which fuji) > "${ZSHCOMPDIR}/_fuji"
 fi
 
 autoload -U compinit && compinit -i
 
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
-
 
 [ -f "/Users/eirikhalvard/.ghcup/env" ] && . "/Users/eirikhalvard/.ghcup/env" # ghcup-env
 source <(fzf --zsh)
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 eval "$(~/.local/bin/mise activate zsh)"
+
+alias c='clear'
+alias pcat='bat ~/.zshrc'
+alias psrc='source ~/.zshrc'
+alias vim='nvim'
+alias o='open .'
+alias k='kubectl'
+
+alias l='clear && eza --long --all --group-directories-first'
+alias ls='eza --group-directories-first'
+alias tree="clear && eza --tree --group-directories-first --git-ignore"
+for i in {1..6}; do
+    aliasContent="clear && eza --tree --level=${i} --group-directories-first --git-ignore"
+    alias tree${i}=${aliasContent}
+done
+
+alias gdm='git diff $(g merge-base --fork-point $(git_main_branch))'
+alias grw='gh repo view --web'
+alias gpw='gh pr view --web'
+alias gpc='gh pr create --assignee @me'
+alias gpm='gh pr merge --squash --delete-branch'
+alias gsm='git switch $(git_main_branch)'
+
+alias fujit='fuji createAndTransfer --all --name'
+
+alias -g FF='$(fzf)'
+alias -g PF='| fzf'
+alias -g G='| grep'
+alias -g CC='| pbcopy'
+
+klogs2() {
+    while IFS= read -r line; do
+        echo "$line" | jq -r '
+      try "\u001b[36m\(.["@timestamp"])\u001b[0m " +
+          (if .level == "ERROR" then "\u001b[31m[ERROR]\u001b[0m"
+           elif .level == "WARN" then "\u001b[33m[WARN]\u001b[0m"
+           elif .level == "INFO" then "\u001b[32m[INFO]\u001b[0m"
+           else "[\(.level)]" end) +
+          " \(.message)"
+        catch .'
+    done
+}
+
+
+# Usage: kubectl logs POD | klogs
+klogs() {
+    grep -E "^\{.*\}$" | jq -r '
+  "\u001b[36m\(.["@timestamp"])\u001b[0m " +
+  (if .level == "ERROR" then "\u001b[31m[ERROR]\u001b[0m"
+   elif .level == "WARN" then "\u001b[33m[WARN]\u001b[0m"
+   elif .level == "INFO" then "\u001b[32m[INFO]\u001b[0m"
+   else "[\(.level)]" end) +
+  " \(.message)"
+    '
+}
+
+# Use git switch (gsw) instead
+unalias gcm
+unalias gco
+
+##################### FUNCTIONS ###########################
+
+unalias z 2> /dev/null
+z() {
+    [ $# -gt 0 ] && zshz "$*" && return
+    cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+light() {
+    sed -i "" 's/vim.g.color_is_light = false/vim.g.color_is_light = true/g' ~/.config/nvim/init.lua
+    sed -i "" 's/theme = Cyberpunk/theme = Flexoki Light/g' ~/.config/ghostty/config
+    sed -i "" 's/light = false/light = true/g' ~/.gitconfig
+}
+
+dark() {
+    sed -i "" 's/vim.g.color_is_light = true/vim.g.color_is_light = false/g' ~/.config/nvim/init.lua
+    sed -i "" 's/theme = Flexoki Light/theme = Cyberpunk/g' ~/.config/ghostty/config
+    sed -i "" 's/light = true/light = false/g' ~/.gitconfig
+}
+
+##################### WELCOME MESSAGE #####################
+clear;
+. "$HOME/.cargo/env"
