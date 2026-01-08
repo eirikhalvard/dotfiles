@@ -72,6 +72,15 @@ vim.o.completeopt = "menuone,noselect"
 -- Highlight on yank
 vim.cmd [[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}]]
 
+local theme
+if vim.g.color_is_light then
+  theme = require("colors.flexoki_light")
+else
+  theme = require("colors.cyberpunk")
+end
+
+theme.setup()
+
 -- lazyvim bootstrapping
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -337,8 +346,6 @@ require("lazy").setup({
 	-- === Visual ===--,
 	"luochen1990/rainbow",
 	"airblade/vim-gitgutter",
-	"gruvbox-community/gruvbox",
-	"chriskempson/base16-vim",
 	"junegunn/goyo.vim",
 	{
 	  "nvim-lualine/lualine.nvim",
@@ -346,17 +353,14 @@ require("lazy").setup({
 	  event = "VeryLazy",
 	  config = function()
 	    -- === Colors / UI ===
-	    vim.g.base16colorspace = 256
 	    vim.o.termguicolors = true
 	    vim.cmd([[ highlight Comment cterm=italic ]])
 
 	    local lualine_theme
 	    if vim.g.color_is_light then
 	      lualine_theme = "onelight"
-	      vim.cmd("colorscheme base16-one-light")
 	    else
 	      lualine_theme = "gruvbox"
-	      vim.cmd("colorscheme gruvbox")
 	    end
 
 	    vim.cmd([[hi LineNr guibg=NONE]])
