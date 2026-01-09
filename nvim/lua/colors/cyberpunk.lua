@@ -1,113 +1,115 @@
 local M = {}
 
+M.colors = {
+  bg             = "#332a57",  -- background
+  fg             = "#e5e5e5",  -- foreground
+  gray           = "#595959",  -- palette 8
+  red            = "#ff7092",  -- palette 1
+  green          = "#00fbac",  -- palette 2
+  yellow         = "#fffa6a",  -- palette 3
+  blue           = "#00bfff",  -- palette 4
+  magenta        = "#df95ff",  -- palette 5
+  cyan           = "#86cbfe",  -- palette 6
+  white          = "#ffffff",  -- palette 7
+  bright_red     = "#ff8aa4",  -- palette 9
+  bright_green   = "#21f6bc",  -- palette 10
+  bright_yellow  = "#fff787",  -- palette 11
+  bright_blue    = "#1bccfd",  -- palette 12
+  bright_magenta = "#e6aefe",  -- palette 13
+  bright_cyan    = "#99d6fc",  -- palette 14
+  bright_white   = "#ffffff",  -- palette 15
+  cursor         = "#21f6bc",
+  cursor_text    = "#999999",
+  selection_bg   = "#c1deff",
+  selection_fg   = "#000000",
+}
+
 M.setup = function()
   vim.cmd("highlight clear")
   vim.o.background = "dark"
   vim.o.termguicolors = true
 
-  local colors = {
-    bg             = "#332a57",  -- background
-    fg             = "#e5e5e5",  -- foreground
-    gray           = "#595959",  -- palette 8
-    red            = "#ff7092",  -- palette 1
-    green          = "#00fbac",  -- palette 2
-    yellow         = "#fffa6a",  -- palette 3
-    blue           = "#00bfff",  -- palette 4
-    magenta        = "#df95ff",  -- palette 5
-    cyan           = "#86cbfe",  -- palette 6
-    white          = "#ffffff",  -- palette 7
-    bright_red     = "#ff8aa4",  -- palette 9
-    bright_green   = "#21f6bc",  -- palette 10
-    bright_yellow  = "#fff787",  -- palette 11
-    bright_blue    = "#1bccfd",  -- palette 12
-    bright_magenta = "#e6aefe",  -- palette 13
-    bright_cyan    = "#99d6fc",  -- palette 14
-    bright_white   = "#ffffff",  -- palette 15
-    cursor         = "#21f6bc",
-    cursor_text    = "#999999",
-    selection_bg   = "#c1deff",
-    selection_fg   = "#000000",
-  }
+  local c = M.colors
 
   local function hl(group, opts)
     vim.api.nvim_set_hl(0, group, opts)
   end
 
   -- Core UI
-  hl("Normal",       { fg = colors.fg, bg = colors.bg })
-  hl("Cursor",       { fg = colors.cursor_text, bg = colors.cursor })
+  hl("Normal",       { fg = c.fg, bg = c.bg })
+  hl("Cursor",       { fg = c.cursor_text, bg = c.cursor })
   hl("CursorLine",   { bg = "#2a2a2a" })
-  hl("LineNr",       { fg = colors.gray })
-  hl("CursorLineNr", { fg = colors.yellow, bold = true })
-  hl("Visual",       { bg = colors.selection_bg })
-  hl("Search",       { fg = colors.selection_fg, bg = colors.selection_bg })
-  hl("IncSearch",    { fg = colors.selection_fg, bg = colors.selection_bg })
-  hl("MatchParen",   { bg = colors.blue, bold = true })
-  hl("VertSplit",    { fg = colors.gray })
-  hl("StatusLine",   { fg = colors.fg, bg = colors.gray })
-  hl("StatusLineNC", { fg = colors.gray, bg = colors.bg })
+  hl("LineNr",       { fg = c.gray })
+  hl("CursorLineNr", { fg = c.yellow, bold = true })
+  hl("Visual",       { bg = c.selection_bg })
+  hl("Search",       { fg = c.selection_fg, bg = c.selection_bg })
+  hl("IncSearch",    { fg = c.selection_fg, bg = c.selection_bg })
+  hl("MatchParen",   { bg = c.blue, bold = true })
+  hl("VertSplit",    { fg = c.gray })
+  hl("StatusLine",   { fg = c.fg, bg = c.gray })
+  hl("StatusLineNC", { fg = c.gray, bg = c.bg })
 
   -- Popup menus
-  hl("Pmenu",        { fg = colors.fg, bg = colors.bg })
-  hl("PmenuSel",     { fg = colors.bg, bg = colors.bright_blue })
-  hl("PmenuSbar",    { bg = colors.gray })
-  hl("PmenuThumb",   { bg = colors.blue })
+  hl("Pmenu",        { fg = c.fg, bg = c.bg })
+  hl("PmenuSel",     { fg = c.bg, bg = c.bright_blue })
+  hl("PmenuSbar",    { bg = c.gray })
+  hl("PmenuThumb",   { bg = c.blue })
 
   -- Syntax
   hl("Comment",      { fg = "#6272a4", italic = true })
-  hl("Constant",     { fg = colors.cyan })
-  hl("String",       { fg = colors.green })
-  hl("Character",    { fg = colors.yellow })
-  hl("Number",       { fg = colors.magenta })
-  hl("Boolean",      { fg = colors.red })
-  hl("Float",        { fg = colors.magenta })
-  hl("Identifier",   { fg = colors.blue })
-  hl("Function",     { fg = colors.bright_blue })
-  hl("Statement",    { fg = colors.red })
-  hl("Keyword",      { fg = colors.magenta })
-  hl("Error",        { fg = colors.bright_red, bold = true })
-  hl("Todo",         { fg = colors.bright_yellow, bg = "#44475a", bold = true })
+  hl("Constant",     { fg = c.cyan })
+  hl("String",       { fg = c.green })
+  hl("Character",    { fg = c.yellow })
+  hl("Number",       { fg = c.magenta })
+  hl("Boolean",      { fg = c.red })
+  hl("Float",        { fg = c.magenta })
+  hl("Identifier",   { fg = c.blue })
+  hl("Function",     { fg = c.bright_blue })
+  hl("Statement",    { fg = c.red })
+  hl("Keyword",      { fg = c.magenta })
+  hl("Error",        { fg = c.bright_red, bold = true })
+  hl("Todo",         { fg = c.bright_yellow, bg = "#44475a", bold = true })
 
   -- Tree-sitter
   hl("@comment",             { fg = "#6272a4", italic = true })
-  hl("@constant",            { fg = colors.cyan })
-  hl("@constant.builtin",    { fg = colors.magenta })
-  hl("@constant.macro",      { fg = colors.bright_magenta })
-  hl("@string",              { fg = colors.green })
-  hl("@string.escape",       { fg = colors.yellow })
-  hl("@character",           { fg = colors.yellow })
-  hl("@number",              { fg = colors.magenta })
-  hl("@boolean",             { fg = colors.red })
-  hl("@float",               { fg = colors.magenta })
-  hl("@function",            { fg = colors.bright_blue })
-  hl("@function.call",       { fg = colors.bright_blue })
-  hl("@function.macro",      { fg = colors.yellow })
-  hl("@parameter",           { fg = colors.fg })
-  hl("@keyword",             { fg = colors.magenta })
-  hl("@keyword.function",    { fg = colors.magenta })
-  hl("@keyword.operator",    { fg = colors.red })
-  hl("@operator",            { fg = colors.fg })
-  hl("@type",                { fg = colors.bright_magenta })
-  hl("@type.builtin",        { fg = colors.magenta })
-  hl("@variable",            { fg = colors.fg })
-  hl("@variable.builtin",    { fg = colors.yellow })
-  hl("@property",            { fg = colors.fg })
-  hl("@punctuation",         { fg = colors.fg })
-  hl("@punctuation.bracket", { fg = colors.gray })
-  hl("@tag",                 { fg = colors.red })
-  hl("@tag.attribute",       { fg = colors.yellow })
-  hl("@field",               { fg = colors.blue })
-  hl("@method",              { fg = colors.bright_blue })
-  hl("@constructor",         { fg = colors.bright_blue })
-  hl("@namespace",           { fg = colors.cyan })
-  hl("@label",               { fg = colors.yellow })
-  hl("@repeat",              { fg = colors.red })
-  hl("@conditional",         { fg = colors.red })
-  hl("@include",             { fg = colors.yellow })
-  hl("@exception",           { fg = colors.bright_red })
-  hl("@preproc",             { fg = colors.yellow })
-  hl("@macro",               { fg = colors.yellow })
-  hl("@storageclass",        { fg = colors.bright_magenta })
+  hl("@constant",            { fg = c.cyan })
+  hl("@constant.builtin",    { fg = c.magenta })
+  hl("@constant.macro",      { fg = c.bright_magenta })
+  hl("@string",              { fg = c.green })
+  hl("@string.escape",       { fg = c.yellow })
+  hl("@character",           { fg = c.yellow })
+  hl("@number",              { fg = c.magenta })
+  hl("@boolean",             { fg = c.red })
+  hl("@float",               { fg = c.magenta })
+  hl("@function",            { fg = c.bright_blue })
+  hl("@function.call",       { fg = c.bright_blue })
+  hl("@function.macro",      { fg = c.yellow })
+  hl("@parameter",           { fg = c.fg })
+  hl("@keyword",             { fg = c.magenta })
+  hl("@keyword.function",    { fg = c.magenta })
+  hl("@keyword.operator",    { fg = c.red })
+  hl("@operator",            { fg = c.fg })
+  hl("@type",                { fg = c.bright_magenta })
+  hl("@type.builtin",        { fg = c.magenta })
+  hl("@variable",            { fg = c.fg })
+  hl("@variable.builtin",    { fg = c.yellow })
+  hl("@property",            { fg = c.fg })
+  hl("@punctuation",         { fg = c.fg })
+  hl("@punctuation.bracket", { fg = c.gray })
+  hl("@tag",                 { fg = c.red })
+  hl("@tag.attribute",       { fg = c.yellow })
+  hl("@field",               { fg = c.blue })
+  hl("@method",              { fg = c.bright_blue })
+  hl("@constructor",         { fg = c.bright_blue })
+  hl("@namespace",           { fg = c.cyan })
+  hl("@label",               { fg = c.yellow })
+  hl("@repeat",              { fg = c.red })
+  hl("@conditional",         { fg = c.red })
+  hl("@include",             { fg = c.yellow })
+  hl("@exception",           { fg = c.bright_red })
+  hl("@preproc",             { fg = c.yellow })
+  hl("@macro",               { fg = c.yellow })
+  hl("@storageclass",        { fg = c.bright_magenta })
 end
 
 -- Apply the theme

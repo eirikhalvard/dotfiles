@@ -53,7 +53,7 @@ vim.opt.clipboard = "unnamed"
 
 function _G.dump(...)
 	local objects = vim.tbl_map(vim.inspect, { ... })
-	print(unpack(objects))
+	print(table.unpack(objects))
 	return ...
 end
 
@@ -72,14 +72,11 @@ vim.o.completeopt = "menuone,noselect"
 -- Highlight on yank
 vim.cmd [[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}]]
 
-local theme
 if vim.g.color_is_light then
-  theme = require("colors.flexoki_light")
+  require("colors").load("flexoki_light")
 else
-  theme = require("colors.cyberpunk")
+  require("colors").load("cyberpunk")
 end
-
-theme.setup()
 
 -- lazyvim bootstrapping
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -132,7 +129,7 @@ require("lazy").setup({
 	    require("luasnip.loaders.from_vscode").lazy_load()
 
 	    local has_words_before = function()
-	      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	      local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
 	      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 	    end
 
@@ -352,43 +349,60 @@ require("lazy").setup({
 	  dependencies = { "nvim-tree/nvim-web-devicons" },
 	  event = "VeryLazy",
 	  config = function()
-	    -- === Colors / UI ===
-	    vim.o.termguicolors = true
 	    vim.cmd([[ highlight Comment cterm=italic ]])
-
-	    local lualine_theme
-	    if vim.g.color_is_light then
-	      lualine_theme = "onelight"
-	    else
-	      lualine_theme = "gruvbox"
-	    end
-
 	    vim.cmd([[hi LineNr guibg=NONE]])
 	    vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
 
-	    -- === Lualine ===
-	    require("lualine").setup({
-	      options = {
-	        theme = lualine_theme,
-	        globalstatus = true,
-	      },
-	      sections = {
-	        lualine_c = {
-	          "filename",
-	          {
-	            "lsp_progress", -- built-in, no deprecations
-	          },
-	        },
-	        lualine_x = {
-	          {
-	            "lsp_clients",
-	            icon = "",
-	          },
-	          "encoding",
-	          "filetype",
-	        },
-	      },
-	    })
+    	require("lualine").setup({
+    	  options = {
+    	    theme = require("lualine.theme_from_colors"),
+    	    globalstatus = true,
+    	    section_separators = "",
+    	    component_separators = "",
+    	  },
+        sections = {
+          lualine_a = {
+            { "branch" },
+          },
+          lualine_b = {
+            { "diff" },
+            {
+              "diagnostics",
+              sources = { "nvim_diagnostic" },
+            },
+          },
+          lualine_c = {
+            { "filename", path = 1 },
+          },
+          lualine_x = {
+            { "encoding" },
+            { "filetype" },
+            {
+              function()
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                return clients[1] and clients[1].name or ""
+              end,
+            },
+          },
+          lualine_y = {
+            {
+              function()
+                local current = vim.fn.line(".")
+                local total = vim.fn.line("$")
+                local chars = { "▁","▂","▃","▄","▅","▆","▇","█" }
+                return chars[math.ceil(current / total * #chars)]
+              end,
+            },
+          },
+          lualine_z = {
+            {
+              function()
+                return ({ n = "N", i = "I", v = "V", c = "C" })[vim.fn.mode()] or ""
+              end,
+            },
+          },
+        }
+    	})
 	  end,
 	},
 	{
