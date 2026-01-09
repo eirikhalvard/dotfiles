@@ -260,7 +260,7 @@ require("lazy").setup({
       ensure_installed = {
         "haskell", "elm", "lua", "python", "r", "scala",
         "json", "markdown", "dockerfile", "yaml",
-        "bash", "vim", "css", "html",
+        "bash", "vim", "css", "html", "yaml", "toml"
       },
       highlight = { enable = true, additional_vim_regex_highlighting = false },
       incremental_selection = {
@@ -315,14 +315,27 @@ require("lazy").setup({
 
 
   	"ryanoasis/vim-devicons",
-	"scrooloose/nerdtree",
 	"jpalardy/vim-slime",
 	"vim-scripts/paredit.vim",
 	"christoomey/vim-tmux-navigator",
 	"skywind3000/asyncrun.vim",
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
-	{ "kyazdani42/nvim-tree.lua", dependencies = { "kyazdani42/nvim-web-devicons" } },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x", -- stable
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- optional icons
+        "MunifTanjim/nui.nvim"
+      },
+      opts = {
+        filesystem = {
+          follow_current_file = true,
+          hijack_netrw_behavior = "open_default",
+        }
+      }
+    },
 
 	"andersevenrud/compe-tmux",
 	"saadparwaiz1/cmp_luasnip",
@@ -433,13 +446,6 @@ vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
 -- " === Vim Wordmotion === "
 vim.g.wordmotion_prefix = "-"
 
--- " === Nvim Tree === "
-require("nvim-tree").setup {
-  git = {
-    ignore = true
-  }
-}
-
 -- " === Paredit === "
 vim.g.paredit_leader = "æ"
 vim.g.paredit_electric_return = 0
@@ -515,6 +521,7 @@ wk.add({
   { "<leader>t", group = "Toggles" },
   { "<leader>tg", "<cmd>Goyo<cr>", desc = "Goyo" },
   { "<leader>tw", "<cmd>set list!<cr>", desc = "Whitespace" },
+  { "<leader>tt", "<cmd>Neotree toggle<cr>", desc = "Neotree" },
 
   { "<leader>w", "<cmd>w<cr>", desc = "Write" },
   { "<leader>q", "<cmd>q<cr>", desc = "Quit" },
