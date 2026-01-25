@@ -27,7 +27,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.config/shell/localrc
 # User configuration
 
 export KEYTIMEOUT=1
@@ -169,6 +168,7 @@ dark() {
   _apply_theme_env
 }
 
-##################### WELCOME MESSAGE #####################
 clear;
 . "$HOME/.cargo/env"
+
+source ~/.config/shell/localrc
