@@ -1,0 +1,116 @@
+# Flexoki Cyberpunk theme for k9s
+# Combines Flexoki Light palette with cyberpunk styling
+# Based on Ghostty's Flexoki Light theme
+
+# Flexoki Light base colors
+foreground: &foreground "#100F0F"      # black (tx)
+background: &background default        # transparent/default
+paper: &paper "#FFFCF0"                # paper (bg)
+bg_secondary: &bg_secondary "#F2F0E5"  # base-50 (bg-2)
+
+# UI colors
+ui: &ui "#E6E4D9"                      # base-100 (ui)
+ui_hover: &ui_hover "#DAD8CE"          # base-150 (ui-2)
+ui_active: &ui_active "#CECDC3"        # base-200 (ui-3)
+
+# Text colors
+tx_muted: &tx_muted "#6F6E69"          # base-600 (tx-2)
+tx_faint: &tx_faint "#878580"          # base-500 (tx-3)
+
+# Flexoki Light accent colors (600 variants for light theme)
+red: &red "#AF3029"
+orange: &orange "#BC5215"
+yellow: &yellow "#AD8301"
+green: &green "#66800B"
+cyan: &cyan "#24837B"
+blue: &blue "#205EA6"
+purple: &purple "#5E409D"
+magenta: &magenta "#A02F6F"
+
+# Cyberpunk accent (using brighter 400 variants for highlights)
+neon_cyan: &neon_cyan "#3AA99F"
+neon_green: &neon_green "#879A39"
+neon_magenta: &neon_magenta "#CE5D97"
+neon_purple: &neon_purple "#8B7EC8"
+
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *cyan
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *orange
+  info:
+    fgColor: *magenta
+    sectionColor: *foreground
+  dialog:
+    fgColor: *foreground
+    bgColor: *paper
+    buttonFgColor: *paper
+    buttonBgColor: *purple
+    buttonFocusFgColor: *paper
+    buttonFocusBgColor: *neon_cyan
+    labelFgColor: *orange
+    fieldFgColor: *foreground
+  frame:
+    border:
+      fgColor: *ui_active
+      focusColor: *neon_cyan
+    menu:
+      fgColor: *foreground
+      keyColor: *magenta
+      numKeyColor: *magenta
+    crumbs:
+      fgColor: *paper
+      bgColor: *purple
+      activeColor: *neon_cyan
+    status:
+      newColor: *cyan
+      modifyColor: *blue
+      addColor: *green
+      errorColor: *red
+      highlightcolor: *orange
+      killColor: *tx_faint
+      completedColor: *tx_muted
+    title:
+      fgColor: *foreground
+      bgColor: *background
+      highlightColor: *orange
+      counterColor: *blue
+      filterColor: *magenta
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *cyan
+        - *red
+      defaultChartColors:
+        - *cyan
+        - *red
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      cursorFgColor: *paper
+      cursorBgColor: *neon_cyan
+      header:
+        fgColor: *tx_muted
+        bgColor: *background
+        sorterColor: *cyan
+    xray:
+      fgColor: *foreground
+      bgColor: *background
+      cursorColor: *neon_cyan
+      graphicColor: *blue
+      showIcons: false
+    yaml:
+      keyColor: *purple
+      colonColor: *cyan
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *foreground
+        bgColor: *background

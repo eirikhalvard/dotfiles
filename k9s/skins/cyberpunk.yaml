@@ -1,0 +1,95 @@
+# Cyberpunk theme for k9s - matches Ghostty Cyberpunk terminal theme
+# Colors extracted from Ghostty's Cyberpunk palette
+foreground: &foreground "#e5e5e5"
+background: &background default
+current_line: &current_line "#21f6bc"
+selection: &selection "#595959"
+comment: &comment "#595959"
+cyan: &cyan "#86cbfe"
+green: &green "#00fbac"
+orange: &orange "#fffa6a"
+magenta: &magenta "#df95ff"
+blue: &blue "#00bfff"
+red: &red "#ff7092"
+
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *cyan
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *orange
+  info:
+    fgColor: *magenta
+    sectionColor: *foreground
+  dialog:
+    fgColor: *foreground
+    bgColor: *background
+    buttonFgColor: *foreground
+    buttonBgColor: *magenta
+    buttonFocusFgColor: "#000000"
+    buttonFocusBgColor: *green
+    labelFgColor: *orange
+    fieldFgColor: *foreground
+  frame:
+    border:
+      fgColor: *selection
+      focusColor: *current_line
+    menu:
+      fgColor: *foreground
+      keyColor: *magenta
+      numKeyColor: *magenta
+    crumbs:
+      fgColor: "#000000"
+      bgColor: *magenta
+      activeColor: *green
+    status:
+      newColor: *cyan
+      modifyColor: *blue
+      addColor: *green
+      errorColor: *red
+      highlightcolor: *orange
+      killColor: *comment
+      completedColor: *comment
+    title:
+      fgColor: *foreground
+      bgColor: *background
+      highlightColor: *orange
+      counterColor: *blue
+      filterColor: *magenta
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *cyan
+        - *red
+      defaultChartColors:
+        - *cyan
+        - *red
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      cursorFgColor: "#000000"
+      cursorBgColor: *current_line
+      header:
+        fgColor: *foreground
+        bgColor: *background
+        sorterColor: *cyan
+    xray:
+      fgColor: *foreground
+      bgColor: *background
+      cursorColor: *current_line
+      graphicColor: *blue
+      showIcons: false
+    yaml:
+      keyColor: *magenta
+      colonColor: *cyan
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *foreground
+        bgColor: *background
