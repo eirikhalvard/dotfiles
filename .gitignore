@@ -29,6 +29,8 @@ shell/theme-mode
 shell/localrc
 shell/localgitconfig
 k9s/*
+mise/*
+containers
 filezilla
 uv/
 .DS_Store

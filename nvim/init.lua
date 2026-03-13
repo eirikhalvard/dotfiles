@@ -102,7 +102,6 @@ require("lazy").setup({
 	"michaeljsmith/vim-indent-object",
 	"tommcdo/vim-exchange",
 	"wellle/targets.vim",
-	"chaoren/vim-wordmotion",
 	"folke/which-key.nvim",
 	"nvim-lua/plenary.nvim",
 	"nvim-lua/popup.nvim",
@@ -442,9 +441,6 @@ vim.cmd([[au BufRead,BufNewFile *.y set syntax=haskell]])
 -- " === Vim Align === "
 vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", { noremap = false })
 vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", { noremap = false })
-
--- " === Vim Wordmotion === "
-vim.g.wordmotion_prefix = "-"
 
 -- " === Paredit === "
 vim.g.paredit_leader = "æ"
