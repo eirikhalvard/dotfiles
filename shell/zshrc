@@ -148,14 +148,17 @@ _apply_theme_env() {
   export THEME_IS_LIGHT=false
   export THEME_GHOSTTY_THEME="Cyberpunk"
   local k9s_skin="cyberpunk"
+  local opencode_theme="cyberpunk"
 
   if [[ "$THEME_MODE" == "light" ]]; then
     export THEME_IS_LIGHT=true
     export THEME_GHOSTTY_THEME="Flexoki Light"
     k9s_skin="flexoki-cyberpunk"
+    opencode_theme="flexoki-light"
   fi
   sed -i "" "s/^theme = .*/theme = $THEME_GHOSTTY_THEME/" ~/.config/ghostty/config
   sed -i "" "s/^    skin: .*/    skin: $k9s_skin/" ~/.config/k9s/config.yaml
+  sed -i "" 's/"theme": ".*"/"theme": "'"$opencode_theme"'"/' ~/.config/opencode/tui.json
 }
 _apply_theme_env
 
