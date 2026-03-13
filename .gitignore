@@ -33,3 +33,8 @@ containers
 filezilla
 uv/
 .DS_Store
+
+# Theme symlinks (actual configs are .dark/.light variants)
+ghostty/config
+k9s/config.yaml
+opencode/tui.json

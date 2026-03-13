@@ -3,7 +3,7 @@ font-style = Regular
 font-style-bold = Light
 font-style-italic = Bold
 font-size = 18
-theme = Cyberpunk
+theme = Flexoki Light
 keybind = cmd+shift+plus=increase_font_size:1
 # custom-shader = "shaders/bettercrt.glsl"
 # custom-shader = "shaders/bloom.glsl"
