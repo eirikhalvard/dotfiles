@@ -38,3 +38,6 @@ uv/
 ghostty/config
 k9s/config.yaml
 opencode/tui.json
+github-copilot/
+zed/settings.local.json
+zed/prompts/prompts-library-db.*.mdb/
