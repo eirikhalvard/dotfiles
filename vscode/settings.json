@@ -1,7 +1,7 @@
 {
   "haskell.manageHLS": "GHCup",
   "haskell.formattingProvider": "fourmolu",
-  "workbench.colorTheme": "Default Light Modern",
+  "workbench.colorTheme": "Visual Studio Dark",
   "jupyter.interactiveWindow.creationMode": "perFile",
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "python.languageServer": "Pylance",
