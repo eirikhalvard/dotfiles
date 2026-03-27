@@ -66,11 +66,17 @@
       "g shift-d": "editor::GoToTypeDefinition",
       "g r": "editor::FindAllReferences",
       "g i": "editor::GoToImplementation",
+
+      // ---------- AI mappings (<leader>a_) ----------
+      ", a": "assistant::InlineAssist",
     },
   },
   {
     "context": "vim_mode == visual && !menu",
     "bindings": {
+      // ---------- AI mappings (<leader>a_) ----------
+      ", a": "assistant::InlineAssist",
+
       ", e s": "buffer_search::DeployReplace",
       ", d f": "editor::Format",
       ", s f": ["pane::DeploySearch", { "replace_enabled": false }],
