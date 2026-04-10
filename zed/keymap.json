@@ -14,15 +14,12 @@
   {
     "context": "vim_mode == normal && !menu",
     "bindings": {
-      // ---------- Basic mappings (matches ideavimrc) ----------
       ", w": "workspace::Save",
       ", q": "pane::CloseActiveItem",
       ", ,": "pane::AlternateFile",
 
-      // Y to yank to end of line (like ideavimrc)
       "shift-y": "vim::YankToEndOfLine",
 
-      // ---------- Pane navigation ----------
       "shift-h": "workspace::ActivatePaneLeft",
       "shift-l": "workspace::ActivatePaneRight",
       "ctrl-h": "workspace::ActivatePaneLeft",
@@ -30,51 +27,43 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
 
-      // ---------- Tab navigation ----------
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem",
 
-      // ---------- Recent/switch ----------
       ", r": "projects::OpenRecent",
 
-      // ---------- Find mappings (<leader>f_) ----------
       ", f f": "file_finder::Toggle",
       ", f s": "project_symbols::Toggle",
       ", f a": "command_palette::Toggle",
 
-      // ---------- Edit mappings (<leader>e_) ----------
       ", e s": "buffer_search::DeployReplace",
 
-      // ---------- Do mappings (<leader>d_) ----------
       ", d f": "editor::Format",
 
-      // ---------- Smart mappings (<leader>s_) ----------
       ", s e": "editor::GoToDiagnostic",
       ", s f": "pane::DeploySearch",
       ", s r": ["pane::DeploySearch", { "replace_enabled": true }],
       ", s s": "editor::ToggleCodeActions",
       ", s t": "project_symbols::Toggle",
 
-      // ---------- Toggle mappings (<leader>t_) ----------
       ", t t": "project_panel::ToggleFocus",
 
-      // ---------- Git mappings (<leader>g_) ----------
       ", g u": "git::Restore",
 
-      // ---------- g mappings (LSP navigation) ----------
       "g d": "editor::GoToDefinition",
       "g shift-d": "editor::GoToTypeDefinition",
       "g r": "editor::FindAllReferences",
       "g i": "editor::GoToImplementation",
 
-      // ---------- AI mappings (<leader>a_) ----------
       ", a": "assistant::InlineAssist",
+
+      ", c c": ["task::Spawn", { "task_name": "build" }],
+      ", c t": ["task::Spawn", { "task_name": "test" }],
     },
   },
   {
     "context": "vim_mode == visual && !menu",
     "bindings": {
-      // ---------- AI mappings (<leader>a_) ----------
       ", a": "assistant::InlineAssist",
 
       ", e s": "buffer_search::DeployReplace",
@@ -83,6 +72,9 @@
       ", s r": ["pane::DeploySearch", { "replace_enabled": true }],
       ", s s": "editor::ToggleCodeActions",
       ", g u": "git::Restore",
+
+      ", c c": ["task::Spawn", { "task_name": "build" }],
+      ", c t": ["task::Spawn", { "task_name": "test" }],
     },
   },
 ]
