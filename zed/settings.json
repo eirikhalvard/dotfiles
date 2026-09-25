@@ -61,6 +61,42 @@
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Macchiato",
   },
+  "format_on_save": "on",
+  "languages": {
+    "JSON": {
+      "formatter": "prettier",
+    },
+    "JSONC": {
+      "formatter": "prettier",
+    },
+    "YAML": {
+      "formatter": "prettier",
+    },
+    "Markdown": {
+      "formatter": "prettier",
+    },
+    "Lua": {
+      "formatter": {
+        "external": {
+          "command": "stylua",
+          "arguments": [
+            "--search-parent-directories",
+            "--stdin-filepath",
+            "{buffer_path}",
+            "-",
+          ],
+        },
+      },
+    },
+    "Shell Script": {
+      "formatter": {
+        "external": {
+          "command": "shfmt",
+          "arguments": ["--filename", "{buffer_path}"],
+        },
+      },
+    },
+  },
   "lsp": {
     "lua-language-server": {
       "settings": {
