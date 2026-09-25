@@ -28,13 +28,11 @@ ln -s ~/.config/vscode/settings.json ~/Library/Application\ Support/Code/User/se
 ln -s ~/.config/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 ```
 
-- Enable the pre-commit hook, which verifies that staged JSON files are formatted with Prettier (requires `node`/`npx`):
+- Enable the pre-commit:
 
 ```bash
-git -C ~/.config config core.hooksPath .githooks
+pre-commit install
 ```
-
-To fix formatting, run `npx prettier@3 --write <file>` (or `npx prettier@3 --write "**/*.json"` for all JSON files). Rules live in `.prettierrc.json` and `.prettierignore`.
 
 ### Dependencies
 
