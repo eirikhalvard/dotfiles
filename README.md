@@ -46,6 +46,7 @@ An incomplete list of packages, programs, etc is located below. Some things migh
 #### brew installed packages
 
 Important:
+
 ```
 brew install --cask amethyst contexts bitwarden docker google-drive intellij-idea microsoft-teams slack todoist vlc spitfire-audio google-cloud-sdk ghostty visual-studio-code karabiner-elements
 

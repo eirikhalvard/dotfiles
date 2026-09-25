@@ -3,19 +3,19 @@
 # Based on Ghostty's Flexoki Light theme
 
 # Flexoki Light base colors
-foreground: &foreground "#100F0F"      # black (tx)
-background: &background default        # transparent/default
-paper: &paper "#FFFCF0"                # paper (bg)
-bg_secondary: &bg_secondary "#F2F0E5"  # base-50 (bg-2)
+foreground: &foreground "#100F0F" # black (tx)
+background: &background default # transparent/default
+paper: &paper "#FFFCF0" # paper (bg)
+bg_secondary: &bg_secondary "#F2F0E5" # base-50 (bg-2)
 
 # UI colors
-ui: &ui "#E6E4D9"                      # base-100 (ui)
-ui_hover: &ui_hover "#DAD8CE"          # base-150 (ui-2)
-ui_active: &ui_active "#CECDC3"        # base-200 (ui-3)
+ui: &ui "#E6E4D9" # base-100 (ui)
+ui_hover: &ui_hover "#DAD8CE" # base-150 (ui-2)
+ui_active: &ui_active "#CECDC3" # base-200 (ui-3)
 
 # Text colors
-tx_muted: &tx_muted "#6F6E69"          # base-600 (tx-2)
-tx_faint: &tx_faint "#878580"          # base-500 (tx-3)
+tx_muted: &tx_muted "#6F6E69" # base-600 (tx-2)
+tx_faint: &tx_faint "#878580" # base-500 (tx-3)
 
 # Flexoki Light accent colors (600 variants for light theme)
 red: &red "#AF3029"

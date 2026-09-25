@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# This script will set up a file watcher 
-# that automaticly compiles/runs on save. 
+# This script will set up a file watcher
+# that automaticly compiles/runs on save.
 
 file=$(greadlink -f "$1")
 dir=$(dirname "$file")
 # base="${file%.*}"
 
 function watchMaude() {
-  fswatch -o --event Updated "$file" | while read num ; do
+  fswatch -o --event Updated "$file" | while read num; do
     clear
     echo "running maude program ($1)"
     content=$(<"$1")
@@ -20,7 +20,7 @@ EOF
 }
 
 function watchMarkdown() {
-  fswatch -o --event Updated "$1" | while read num ; do
+  fswatch -o --event Updated "$1" | while read num; do
     clear
     echo "compiling to pdf ($1)"
     compiler "$1"
@@ -28,7 +28,7 @@ function watchMarkdown() {
 }
 
 function watchPython() {
-  fswatch -o --event Updated "$1" | while read num ; do
+  fswatch -o --event Updated "$1" | while read num; do
     clear
     echo "running python program ($1)"
     python3 "$1"
@@ -36,27 +36,27 @@ function watchPython() {
 }
 
 function watchScheme() {
-  fswatch -o --event Updated "$1" | while read num ; do
+  fswatch -o --event Updated "$1" | while read num; do
     clear
     rlwrap /Applications/Racket\ v7.4/bin/plt-r5rs "$1"
   done
 }
 
 function watchTex() {
-  fswatch -o --event Updated "$1" | while read num ; do
+  fswatch -o --event Updated "$1" | while read num; do
     clear
-     compiler "$1"
+    compiler "$1"
   done
 }
 
 cd "$dir" || exit
 
 case "$file" in
-	*\.py) watchPython "$file" ;;
-	*\.hs) ghcid "$file" --test=main ;;
-	*\.md) watchMarkdown "$file" ;;
+  *\.py) watchPython "$file" ;;
+  *\.hs) ghcid "$file" --test=main ;;
+  *\.md) watchMarkdown "$file" ;;
   *\.maude) watchMaude "$file" ;;
   *\.scm) watchScheme "$file" ;;
   *\.tex) watchTex "$file" ;;
-	*) printf "filetype not supported\n" ;;
+  *) printf "filetype not supported\n" ;;
 esac

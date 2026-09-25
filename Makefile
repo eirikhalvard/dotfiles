@@ -4,6 +4,11 @@
 
 .DEFAULT_GOAL := help
 
+# Only format tracked files
+PRETTIER_FILES = $(shell git ls-files '*.json' '*.yaml' '*.yml' '*.md')
+LUA_FILES      = $(shell git ls-files '*.lua')
+SHELL_FILES    = $(shell shfmt --find $$(git ls-files))
+
 # ---------------------------------------------------------------------------
 # Help
 # ---------------------------------------------------------------------------
@@ -18,8 +23,27 @@ help: ## Show this help
 # ---------------------------------------------------------------------------
 
 .PHONY: format
-format: ## Format all JSON files with prettier
-	npx --yes prettier@3 --write '**/*.json'
+format: format-prettier format-lua format-sh ## Format everything
+
+.PHONY: format-prettier
+format-prettier: ## Format JSON, YAML and Markdown with prettier
+	npx --yes prettier@3 --write $(PRETTIER_FILES)
+
+.PHONY: format-lua
+format-lua: ## Format Lua with stylua
+	stylua $(LUA_FILES)
+
+.PHONY: format-sh
+format-sh: ## Format shell scripts with shfmt
+	shfmt --write $(SHELL_FILES)
+
+# ---------------------------------------------------------------------------
+# Setup
+# ---------------------------------------------------------------------------
+
+.PHONY: deps
+deps: ## Install formatter dependencies
+	brew install stylua shfmt pre-commit
 
 # ---------------------------------------------------------------------------
 # Verification

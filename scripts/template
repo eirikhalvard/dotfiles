@@ -20,7 +20,8 @@ cd "$dir" || exit
 
 pyTemplate='print("insert code...")'
 
-hsTemplate=$(cat <<-EOF
+hsTemplate=$(
+  cat <<-EOF
 module $filename where
 
 main :: IO ()
@@ -32,18 +33,18 @@ EOF
 maudeTemplate='red 2 + 3 .'
 
 makeTemplate() {
-  if test -f "$file" ; then
+  if test -f "$file"; then
     echo "file already exist! Please try another file name"
     exit 1
   fi
 
   touch "$file"
-  echo "$1" >> "$file"
+  echo "$1" >>"$file"
 }
 
 case "$file" in
   *\.py) makeTemplate "$pyTemplate" ;;
-	*\.hs) makeTemplate "$hsTemplate" ;;
-	*\.maude) makeTemplate "$maudeTemplate" ;;
-	*) printf "filetype not supported\n" && exit 1;;
+  *\.hs) makeTemplate "$hsTemplate" ;;
+  *\.maude) makeTemplate "$maudeTemplate" ;;
+  *) printf "filetype not supported\n" && exit 1 ;;
 esac
