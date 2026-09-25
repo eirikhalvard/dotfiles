@@ -534,6 +534,45 @@
                 "type": "basic"
               }
             ]
+          },
+          {
+            "description": "Simultaneously press s + d to enter",
+            "manipulators": [
+              {
+                "from": {
+                  "modifiers": { "optional": ["any"] },
+                  "simultaneous": [{ "key_code": "s" }, { "key_code": "d" }]
+                },
+                "to": [{ "key_code": "return_or_enter" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Simultaneously press w + e to tab",
+            "manipulators": [
+              {
+                "from": {
+                  "modifiers": { "optional": ["any"] },
+                  "simultaneous": [{ "key_code": "w" }, { "key_code": "e" }]
+                },
+                "to": [{ "key_code": "tab" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Simultaneously press e + r to backspace",
+            "manipulators": [
+              {
+                "from": {
+                  "modifiers": { "optional": ["any"] },
+                  "simultaneous": [{ "key_code": "e" }, { "key_code": "r" }]
+                },
+                "to": [{ "key_code": "delete_or_backspace" }],
+                "type": "basic"
+              }
+            ]
           }
         ]
       },
