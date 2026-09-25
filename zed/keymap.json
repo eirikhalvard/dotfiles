@@ -8,8 +8,8 @@
 [
   {
     "bindings": {
-      "cmd-o": "file_finder::Toggle",
-    },
+      "cmd-o": "file_finder::Toggle"
+    }
   },
   {
     "context": "vim_mode == normal && !menu",
@@ -63,8 +63,8 @@
 
       ", a": "assistant::InlineAssist",
 
-      ", c t": ["task::Spawn", { "task_name": "test" }],
-    },
+      ", c t": ["task::Spawn", { "task_name": "test" }]
+    }
   },
   {
     "context": "vim_mode == visual && !menu",
@@ -80,7 +80,7 @@
       ", g u": "git::Restore",
 
       ", c c": ["task::Spawn", { "task_name": "build" }],
-      ", c t": ["task::Spawn", { "task_name": "test" }],
-    },
-  },
+      ", c t": ["task::Spawn", { "task_name": "test" }]
+    }
+  }
 ]

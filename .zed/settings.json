@@ -1,0 +1,19 @@
+// Project-local Zed settings for ~/.config
+{
+  "languages": {
+    "JSON": {
+      "format_on_save": "on",
+      "formatter": "prettier",
+      "prettier": { "allowed": true }
+    },
+    "JSONC": {
+      "format_on_save": "on",
+      "formatter": "prettier",
+      "prettier": {
+        "allowed": true,
+        "parser": "jsonc",
+        "trailingComma": "none"
+      }
+    }
+  }
+}
