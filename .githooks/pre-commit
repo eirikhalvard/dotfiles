@@ -1,0 +1,30 @@
+#!/bin/sh
+# Verify that staged JSON files are formatted with Prettier.
+# Checks the staged content, not the working tree.
+
+files=$(git diff --cached --name-only --diff-filter=ACMR -- '*.json')
+[ -z "$files" ] && exit 0
+
+if ! command -v npx >/dev/null 2>&1; then
+  echo "pre-commit: npx not found, cannot verify JSON formatting" >&2
+  exit 1
+fi
+
+failed=0
+for f in $files; do
+  staged=$(git show ":$f")
+  formatted=$(printf '%s\n' "$staged" | npx --yes prettier@3 --stdin-filepath "$f") || {
+    echo "  invalid: $f" >&2
+    failed=1
+    continue
+  }
+  if [ "$staged" != "$formatted" ]; then
+    echo "  unformatted: $f" >&2
+    failed=1
+  fi
+done
+
+if [ $failed -ne 0 ]; then
+  echo "pre-commit: fix with: npx prettier@3 --write <file> && git add <file>" >&2
+  exit 1
+fi

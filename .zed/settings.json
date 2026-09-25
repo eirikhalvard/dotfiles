@@ -4,7 +4,7 @@
     "JSON": {
       "format_on_save": "on",
       "formatter": "prettier",
-      "prettier": { "allowed": true }
+      "prettier": { "allowed": true },
     },
     "JSONC": {
       "format_on_save": "on",
@@ -12,8 +12,7 @@
       "prettier": {
         "allowed": true,
         "parser": "jsonc",
-        "trailingComma": "none"
-      }
-    }
-  }
+      },
+    },
+  },
 }

@@ -1,0 +1,8 @@
+{
+  "overrides": [
+    {
+      "files": ["zed/*.json", ".zed/*.json", "vscode/*.json", ".vscode/*.json"],
+      "options": { "parser": "jsonc" }
+    }
+  ]
+}
