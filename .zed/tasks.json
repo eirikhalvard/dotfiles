@@ -1,0 +1,7 @@
+[
+  {
+    "label": "precommit",
+    "command": "pre-commit run --all-files",
+    "use_new_terminal": false,
+  },
+]
