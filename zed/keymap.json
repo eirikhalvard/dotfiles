@@ -42,7 +42,8 @@
 
       ", s e": "editor::GoToDiagnostic",
       ", s f": "pane::DeploySearch",
-      ", s r": ["pane::DeploySearch", { "replace_enabled": true }],
+      ", s F": ["pane::DeploySearch", { "replace_enabled": true }],
+      ", s r": "editor::Rename",
       ", s s": "editor::ToggleCodeActions",
       ", s t": "project_symbols::Toggle",
 
@@ -50,6 +51,11 @@
 
       ", g u": "git::Restore",
 
+      // ---------- Check/task mappings (<leader>c_) ----------
+      ", c c": ["task::Spawn", { "task_name": "precommit" }],
+      // ", c c": ["task::Spawn", { "task_name": "build" }],
+
+      // ---------- g mappings (LSP navigation) ----------
       "g d": "editor::GoToDefinition",
       "g shift-d": "editor::GoToTypeDefinition",
       "g r": "editor::FindAllReferences",
@@ -57,7 +63,6 @@
 
       ", a": "assistant::InlineAssist",
 
-      ", c c": ["task::Spawn", { "task_name": "build" }],
       ", c t": ["task::Spawn", { "task_name": "test" }],
     },
   },
@@ -69,7 +74,8 @@
       ", e s": "buffer_search::DeployReplace",
       ", d f": "editor::Format",
       ", s f": ["pane::DeploySearch", { "replace_enabled": false }],
-      ", s r": ["pane::DeploySearch", { "replace_enabled": true }],
+      ", s F": ["pane::DeploySearch", { "replace_enabled": true }],
+      ", s r": "editor::Rename",
       ", s s": "editor::ToggleCodeActions",
       ", g u": "git::Restore",
 

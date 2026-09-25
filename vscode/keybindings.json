@@ -65,5 +65,5 @@
     "key": "escape",
     "command": "extension.vim_escape",
     "when": "editorTextFocus && vim.active && !inDebugRepl"
-  },
+  }
 ]

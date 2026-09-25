@@ -147,3 +147,7 @@ clear;
 . "$HOME/.cargo/env"
 
 source ~/.config/shell/localrc
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select

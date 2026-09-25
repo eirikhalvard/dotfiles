@@ -20,17 +20,19 @@
     "dock": "left"
   },
   "agent": {
+    "default_profile": "ask",
     "dock": "right",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-opus-4.5",
+      "effort": "high",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6",
       "enable_thinking": true,
     },
     "favorite_models": [],
     "model_parameters": [],
   },
   "edit_predictions": {
-    "provider": "copilot",
+    "provider": "zed",
   },
   "agent_servers": {
     "opencode": {
@@ -38,7 +40,7 @@
     },
   },
   "icon_theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Macchiato",
   },
@@ -55,7 +57,7 @@
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Macchiato",
   },
