@@ -334,7 +334,7 @@
       "complex_modifications": {
         "rules": [
           {
-            "description": "Hold space to mirror right hand keys onto left hand",
+            "description": "Hold space to enable mirror layer",
             "manipulators": [
               {
                 "from": {
@@ -349,29 +349,12 @@
                 ],
                 "to_if_alone": [{ "key_code": "spacebar" }],
                 "type": "basic"
-              },
-              {
-                "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
-                ],
-                "from": {
-                  "key_code": "non_us_backslash",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "key_code": "hyphen" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
-                ],
-                "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "key_code": "quote" }],
-                "type": "basic"
-              },
+              }
+            ]
+          },
+          {
+            "description": "Mirror: keys shared by both keyboards",
+            "manipulators": [
               {
                 "conditions": [
                   { "type": "variable_if", "name": "space_mirror", "value": 1 }
@@ -432,17 +415,6 @@
                   { "type": "variable_if", "name": "space_mirror", "value": 1 }
                 ],
                 "from": {
-                  "key_code": "tab",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "key_code": "open_bracket" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
-                ],
-                "from": {
                   "key_code": "q",
                   "modifiers": { "optional": ["any"] }
                 },
@@ -491,17 +463,6 @@
                   "modifiers": { "optional": ["any"] }
                 },
                 "to": [{ "key_code": "y" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
-                ],
-                "from": {
-                  "key_code": "a",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "key_code": "semicolon" }],
                 "type": "basic"
               },
               {
@@ -601,6 +562,121 @@
                   "modifiers": { "optional": ["any"] }
                 },
                 "to": [{ "key_code": "n" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Mirror: Apple/Norwegian keyboard (Norwegian input source)",
+            "manipulators": [
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_unless",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "non_us_backslash",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "hyphen" }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_unless",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "quote" }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_unless",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "open_bracket" }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_unless",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "a",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "semicolon" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Mirror: ErgoDox (ABC input source)",
+            "manipulators": [
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_if",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "quote", "modifiers": ["left_alt"] }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_if",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "a", "modifiers": ["left_alt"] }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
+                  {
+                    "type": "device_if",
+                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                  }
+                ],
+                "from": {
+                  "key_code": "a",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "o", "modifiers": ["left_alt"] }],
                 "type": "basic"
               }
             ]
@@ -720,67 +796,6 @@
             "vendor_id": 1133
           },
           "ignore": true
-        },
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 18805,
-            "vendor_id": 12951
-          },
-          "complex_modifications": {
-            "rules": [
-              {
-                "description": "øæå when space is held",
-                "manipulators": [
-                  {
-                    "conditions": [
-                      {
-                        "type": "variable_if",
-                        "name": "space_mirror",
-                        "value": 1
-                      }
-                    ],
-                    "from": {
-                      "key_code": "caps_lock",
-                      "modifiers": { "optional": ["any"] }
-                    },
-                    "to": [{ "key_code": "quote", "modifiers": ["left_alt"] }],
-                    "type": "basic"
-                  },
-                  {
-                    "conditions": [
-                      {
-                        "type": "variable_if",
-                        "name": "space_mirror",
-                        "value": 1
-                      }
-                    ],
-                    "from": {
-                      "key_code": "tab",
-                      "modifiers": { "optional": ["any"] }
-                    },
-                    "to": [{ "key_code": "a", "modifiers": ["left_alt"] }],
-                    "type": "basic"
-                  },
-                  {
-                    "conditions": [
-                      {
-                        "type": "variable_if",
-                        "name": "space_mirror",
-                        "value": 1
-                      }
-                    ],
-                    "from": {
-                      "key_code": "a",
-                      "modifiers": { "optional": ["any"] }
-                    },
-                    "to": [{ "key_code": "o", "modifiers": ["left_alt"] }],
-                    "type": "basic"
-                  }
-                ]
-              }
-            ]
-          }
         },
         {
           "identifiers": {
