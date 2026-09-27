@@ -355,10 +355,10 @@
                   { "type": "variable_if", "name": "space_mirror", "value": 1 }
                 ],
                 "from": {
-                  "key_code": "grave_accent",
+                  "key_code": "non_us_backslash",
                   "modifiers": { "optional": ["any"] }
                 },
-                "to": [{ "key_code": "equal_sign" }],
+                "to": [{ "key_code": "hyphen" }],
                 "type": "basic"
               },
               {
@@ -606,7 +606,7 @@
             ]
           },
           {
-            "description": "Caps lock: control when held, colon when tapped",
+            "description": "Caps lock: control when held",
             "manipulators": [
               {
                 "from": {
@@ -614,6 +614,19 @@
                   "modifiers": { "optional": ["any"] }
                 },
                 "to": [{ "key_code": "left_control" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Ergodox rightside capslock",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "f20",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "caps_lock" }],
                 "type": "basic"
               }
             ]
