@@ -724,6 +724,67 @@
         {
           "identifiers": {
             "is_keyboard": true,
+            "product_id": 18805,
+            "vendor_id": 12951
+          },
+          "complex_modifications": {
+            "rules": [
+              {
+                "description": "øæå when space is held",
+                "manipulators": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "variable_if",
+                        "name": "space_mirror",
+                        "value": 1
+                      }
+                    ],
+                    "from": {
+                      "key_code": "caps_lock",
+                      "modifiers": { "optional": ["any"] }
+                    },
+                    "to": [{ "key_code": "quote", "modifiers": ["left_alt"] }],
+                    "type": "basic"
+                  },
+                  {
+                    "conditions": [
+                      {
+                        "type": "variable_if",
+                        "name": "space_mirror",
+                        "value": 1
+                      }
+                    ],
+                    "from": {
+                      "key_code": "tab",
+                      "modifiers": { "optional": ["any"] }
+                    },
+                    "to": [{ "key_code": "a", "modifiers": ["left_alt"] }],
+                    "type": "basic"
+                  },
+                  {
+                    "conditions": [
+                      {
+                        "type": "variable_if",
+                        "name": "space_mirror",
+                        "value": 1
+                      }
+                    ],
+                    "from": {
+                      "key_code": "a",
+                      "modifiers": { "optional": ["any"] }
+                    },
+                    "to": [{ "key_code": "o", "modifiers": ["left_alt"] }],
+                    "type": "basic"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
             "product_id": 834,
             "vendor_id": 1452
           },
