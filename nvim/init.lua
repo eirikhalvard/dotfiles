@@ -372,7 +372,7 @@ require("lazy").setup({
 	"L3MON4D3/LuaSnip",
 	"simrat39/rust-tools.nvim",
 	"rafamadriz/friendly-snippets",
-	"jose-elias-alvarez/null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 	"folke/trouble.nvim",
 
 	-- === Filetype specific ===--,
