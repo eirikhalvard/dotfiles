@@ -193,7 +193,7 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "shell_command": "open -a 'Arc'" }],
+                "to": [{ "shell_command": "open -a 'Zen'" }],
                 "type": "basic"
               },
               {
@@ -325,6 +325,7 @@
         }
       ],
       "name": "Eirik Profile",
+      "selected": true,
       "virtual_hid_keyboard": {
         "country_code": 0,
         "keyboard_type_v2": "ansi"
@@ -342,10 +343,20 @@
                   "modifiers": { "optional": ["any"] }
                 },
                 "to": [
-                  { "set_variable": { "name": "space_mirror", "value": 1 } }
+                  {
+                    "set_variable": {
+                      "name": "space_mirror",
+                      "value": 1
+                    }
+                  }
                 ],
                 "to_after_key_up": [
-                  { "set_variable": { "name": "space_mirror", "value": 0 } }
+                  {
+                    "set_variable": {
+                      "name": "space_mirror",
+                      "value": 0
+                    }
+                  }
                 ],
                 "to_if_alone": [{ "key_code": "spacebar" }],
                 "type": "basic"
@@ -357,7 +368,11 @@
             "manipulators": [
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "1",
@@ -368,7 +383,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "2",
@@ -379,7 +398,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "3",
@@ -390,7 +413,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "4",
@@ -401,7 +428,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "5",
@@ -412,7 +443,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "q",
@@ -423,7 +458,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "w",
@@ -434,7 +473,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "e",
@@ -445,7 +488,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "r",
@@ -456,7 +503,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "t",
@@ -467,7 +518,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "s",
@@ -478,7 +533,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "d",
@@ -489,7 +548,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "f",
@@ -500,7 +563,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "g",
@@ -511,7 +578,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "v",
@@ -522,7 +593,11 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 }
+                  {
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  }
                 ],
                 "from": {
                   "key_code": "b",
@@ -538,10 +613,19 @@
             "manipulators": [
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -553,10 +637,19 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -568,10 +661,19 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -583,10 +685,19 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -598,10 +709,19 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -613,10 +733,19 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -628,10 +757,19 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_unless",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_unless"
                   }
                 ],
                 "from": {
@@ -648,55 +786,106 @@
             "manipulators": [
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
                   "key_code": "caps_lock",
                   "modifiers": { "optional": ["any"] }
                 },
-                "to": [{ "key_code": "quote", "modifiers": ["left_alt"] }],
+                "to": [
+                  {
+                    "key_code": "quote",
+                    "modifiers": ["left_alt"]
+                  }
+                ],
                 "type": "basic"
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
                   "key_code": "tab",
                   "modifiers": { "optional": ["any"] }
                 },
-                "to": [{ "key_code": "a", "modifiers": ["left_alt"] }],
+                "to": [
+                  {
+                    "key_code": "a",
+                    "modifiers": ["left_alt"]
+                  }
+                ],
                 "type": "basic"
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
                   "key_code": "a",
                   "modifiers": { "optional": ["any"] }
                 },
-                "to": [{ "key_code": "o", "modifiers": ["left_alt"] }],
+                "to": [
+                  {
+                    "key_code": "o",
+                    "modifiers": ["left_alt"]
+                  }
+                ],
                 "type": "basic"
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
@@ -708,27 +897,51 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
                   "key_code": "x",
-                  "modifiers": { "mandatory": ["shift"], "optional": ["any"] }
+                  "modifiers": {
+                    "mandatory": ["shift"],
+                    "optional": ["any"]
+                  }
                 },
                 "to": [
-                  { "key_code": "semicolon", "modifiers": ["left_shift"] }
+                  {
+                    "key_code": "semicolon",
+                    "modifiers": ["left_shift"]
+                  }
                 ],
                 "type": "basic"
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
@@ -740,25 +953,46 @@
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
                   "key_code": "c",
-                  "modifiers": { "mandatory": ["shift"], "optional": ["any"] }
+                  "modifiers": {
+                    "mandatory": ["shift"],
+                    "optional": ["any"]
+                  }
                 },
                 "to": [{ "key_code": "semicolon" }],
                 "type": "basic"
               },
               {
                 "conditions": [
-                  { "type": "variable_if", "name": "space_mirror", "value": 1 },
                   {
-                    "type": "device_if",
-                    "identifiers": [{ "vendor_id": 12951, "product_id": 18805 }]
+                    "name": "space_mirror",
+                    "type": "variable_if",
+                    "value": 1
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "product_id": 18805,
+                        "vendor_id": 12951
+                      }
+                    ],
+                    "type": "device_if"
                   }
                 ],
                 "from": {
@@ -923,7 +1157,6 @@
         }
       ],
       "name": "handicap",
-      "selected": true,
       "virtual_hid_keyboard": {
         "country_code": 0,
         "keyboard_type_v2": "ansi"
