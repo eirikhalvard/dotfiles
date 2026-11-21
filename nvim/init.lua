@@ -259,13 +259,7 @@ require("lazy").setup({
 			})
 
 			-- Auto-start LSPs
-			vim.api.nvim_create_autocmd("FileType", {
-				callback = function()
-					lsp.start({
-						name = vim.bo.filetype,
-					})
-				end,
-			})
+			lsp.enable({ "hls", "tsserver", "pylsp", "jsonls", "bashls" })
 		end,
 	},
 
